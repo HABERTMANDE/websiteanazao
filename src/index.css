@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand Colors */
+  --black: #000000;
+  --gold: #D4AF37;
+  --light-gold: #E6C76A;
+  --dark-gold: #B8860B;
+  --white: #FFFFFF;
+  --gray: #B8B8B8;
+
+  /* Typography */
+  --heading-font: 'Cormorant Garamond', serif;
+  --body-font: 'Montserrat', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body-font);
+  background-color: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+/* Hero Title Example */
+h1 {
+  font-size: clamp(3rem, 7vw, 6rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+/* Body Text */
+p,
+span,
+li,
+a,
+button,
+input,
+textarea {
+  font-family: var(--body-font);
+}
+
+/* Paragraph Styling */
+p {
+  color: var(--white);
+  line-height: 1.8;
+}
+
+/* Links */
+a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+a:hover {
+  color: var(--light-gold);
+}
+
+/* Lists */
+ul {
+  list-style: none;
+}
+
+/* Buttons */
+button {
+  font-family: var(--body-font);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inputs */
+input,
+textarea {
+  outline: none;
+}
+
+/* Selection Color */
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--light-gold);
+}
