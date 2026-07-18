@@ -113,7 +113,7 @@ function UpcomingEvent() {
             }}
           >
             <img
-              src={flyer}
+              src={prayerCamp}
               alt="Prayer Camp Season 3"
               style={{
                 width: "100%",
@@ -266,9 +266,12 @@ function UpcomingEvent() {
                     margin: 0,
                   }}
                 >
-                  {event.focus}
+                  {event.theme}
                 </h4>
               </div>
+  <p>Focus</p>
+  <h4>{event.focus}</h4>
+</div>
             </div>
 
             <p
