@@ -11,8 +11,9 @@ function Navbar() {
   const navLinkStyle = {
     color: colors.white,
     textDecoration: "none",
-    fontWeight: "500",
+    fontWeight: "600",
     fontSize: "1rem",
+    letterSpacing: ".5px",
     transition: "0.3s ease",
   };
 
@@ -25,6 +26,8 @@ function Navbar() {
         top: 0,
         zIndex: 9999,
         width: "100%",
+        boxShadow: "0 4px 18px rgba(0,0,0,.55)",
+    transition: "all .35s ease",
       }}
     >
       <div
@@ -47,7 +50,7 @@ function Navbar() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "14px",
+            gap: "18px",
             textDecoration: "none",
             flexShrink: 0,
             overflow: "hidden",
@@ -58,8 +61,8 @@ function Navbar() {
             src={logo}
             alt="ANAZAO Logo"
             style={{
-              width: "58px",
-              height: "58px",
+              width: "72px",
+              height: "72px",
               objectFit: "contain",
               flexShrink: 0,
             }}
@@ -71,7 +74,7 @@ function Navbar() {
                 margin: 0,
                 fontFamily: "'Cormorant Garamond', serif",
                 fontWeight: "700",
-                fontSize: "clamp(1.8rem,3vw,2.6rem)",
+                fontSize: "clamp(2.3rem,4vw,3.2rem)",
                 letterSpacing: "4px",
                 lineHeight: 1,
                 color: "#FFD700",
@@ -109,7 +112,7 @@ function Navbar() {
           className="desktop-menu"
           style={{
             display: "flex",
-            gap: "28px",
+            gap: "40px",
             listStyle: "none",
             margin: 0,
             padding: 0,
