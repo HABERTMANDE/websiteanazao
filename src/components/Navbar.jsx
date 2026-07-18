@@ -19,7 +19,7 @@ function Navbar() {
   return (
     <nav
       style={{
-        background: "#05122D",
+        background: "#000000",
         borderBottom: `1px solid ${colors.gold}`,
         position: "sticky",
         top: 0,
@@ -184,7 +184,7 @@ function Navbar() {
       {menuOpen && (
         <div
           style={{
-            background: "#05122D",
+            background: "#000000",
             borderTop: `1px solid ${colors.gold}`,
             display: "flex",
             flexDirection: "column",
