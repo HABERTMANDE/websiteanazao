@@ -19,58 +19,60 @@ function Navbar() {
   return (
     <nav
       style={{
-        backgroundColor: colors.black,
+        background: "#000",
         borderBottom: `1px solid ${colors.gold}`,
         position: "sticky",
         top: 0,
-        zIndex: 1000,
+        zIndex: 9999,
       }}
     >
       <div
         style={{
           maxWidth: "1400px",
           margin: "0 auto",
-          padding: "25px 40px",
+          padding: "16px 20px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        {/* Logo Section */}
+        {/* LOGO */}
         <Link
           to="/"
           style={{
-            textDecoration: "none",
             display: "flex",
             alignItems: "center",
-            gap: "20px",
+            gap: "14px",
+            textDecoration: "none",
+            flex: 1,
+            minWidth: 0,
           }}
         >
           <img
             src={logo}
-            alt="ANAZAO Logo"
+            alt="ANAZAO"
             style={{
-              height: "110px",
-              width: "auto",
+              width: "58px",
+              height: "58px",
               objectFit: "contain",
+              flexShrink: 0,
             }}
           />
 
-          <div>
+          <div style={{ minWidth: 0 }}>
             <h1
               style={{
                 margin: 0,
-                fontSize: "2.5rem",
-                fontFamily: "'Cormorant Garamond', serif",
-                fontWeight: "700",
-                letterSpacing: "5px",
-                lineHeight: 1,
                 color: "#FFD700",
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: "clamp(1.8rem,3vw,2.6rem)",
+                letterSpacing: "4px",
+                lineHeight: 1,
+                whiteSpace: "nowrap",
                 textShadow: `
-                  0 0 5px rgba(255,215,0,0.9),
-                  0 0 10px rgba(255,215,0,0.8),
-                  0 0 20px rgba(255,215,0,0.7),
-                  0 0 35px rgba(255,215,0,0.5)
+                  0 0 6px rgba(255,215,0,.9),
+                  0 0 15px rgba(255,215,0,.6),
+                  0 0 30px rgba(255,215,0,.4)
                 `,
               }}
             >
@@ -79,13 +81,12 @@ function Navbar() {
 
             <p
               style={{
-                margin: 0,
+                margin: "4px 0 0",
                 color: colors.white,
-                fontSize: "0.8rem",
+                fontSize: "0.85rem",
                 letterSpacing: "3px",
                 textTransform: "uppercase",
-                marginTop: "6px",
-                fontWeight: "500",
+                whiteSpace: "nowrap",
               }}
             >
               The Family of Grace
@@ -93,12 +94,12 @@ function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Menu */}
+        {/* DESKTOP MENU */}
         <ul
           className="desktop-menu"
           style={{
             display: "flex",
-            gap: "30px",
+            gap: "28px",
             listStyle: "none",
             margin: 0,
             padding: 0,
@@ -113,62 +114,43 @@ function Navbar() {
           <li><Link to="/contact" style={navLinkStyle}>Contact</Link></li>
         </ul>
 
-        {/* Hamburger Button */}
+        {/* MOBILE BUTTON */}
         <button
           className="menu-button"
           onClick={() => setMenuOpen(!menuOpen)}
           style={{
-            background: "none",
+            background: "transparent",
             border: "none",
             color: "#FFD700",
             fontSize: "2rem",
             cursor: "pointer",
+            marginLeft: "15px",
           }}
         >
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU */}
       {menuOpen && (
         <div
           style={{
-            backgroundColor: "#111111",
+            background: "#050505",
             borderTop: `1px solid ${colors.gold}`,
             display: "flex",
             flexDirection: "column",
-            gap: "20px",
-            padding: "25px",
             textAlign: "center",
+            padding: "25px",
+            gap: "22px",
           }}
         >
-          <Link to="/about" style={navLinkStyle} onClick={() => setMenuOpen(false)}>
-            About
-          </Link>
-
-          <Link to="/leadership" style={navLinkStyle} onClick={() => setMenuOpen(false)}>
-            Leadership
-          </Link>
-
-          <Link to="/departments" style={navLinkStyle} onClick={() => setMenuOpen(false)}>
-            Departments
-          </Link>
-
-          <Link to="/media" style={navLinkStyle} onClick={() => setMenuOpen(false)}>
-            Media Center
-          </Link>
-
-          <Link to="/partnership" style={navLinkStyle} onClick={() => setMenuOpen(false)}>
-            Partnership
-          </Link>
-
-          <Link to="/give" style={navLinkStyle} onClick={() => setMenuOpen(false)}>
-            Give
-          </Link>
-
-          <Link to="/contact" style={navLinkStyle} onClick={() => setMenuOpen(false)}>
-            Contact
-          </Link>
+          <Link to="/about" style={navLinkStyle} onClick={() => setMenuOpen(false)}>About</Link>
+          <Link to="/leadership" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Leadership</Link>
+          <Link to="/departments" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Departments</Link>
+          <Link to="/media" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Media Center</Link>
+          <Link to="/partnership" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Partnership</Link>
+          <Link to="/give" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Give</Link>
+          <Link to="/contact" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Contact</Link>
         </div>
       )}
     </nav>

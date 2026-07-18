@@ -21,7 +21,7 @@ function Hero() {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        padding: "100px 2rem 60px",
+        padding: "120px 1.2rem 60px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -59,10 +59,10 @@ function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 1 }}
           style={{
-            fontSize: "clamp(5rem, 12vw, 9rem)",
+            fontSize: "clamp(3.2rem, 12vw, 7rem)",
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: "700",
-            letterSpacing: "14px",
+            letterSpacing: "6px",
             marginBottom: "25px",
             lineHeight: "1",
 
@@ -89,7 +89,7 @@ function Hero() {
           transition={{ delay: 0.7, duration: 1 }}
           style={{
             color: colors.white,
-            fontSize: "clamp(1.7rem, 4vw, 2.5rem)",
+            fontSize: "clamp(1.3rem, 5vw, 2.4rem)",
             marginBottom: "30px",
             fontFamily: "Montserrat, sans-serif",
             fontWeight: "500",
@@ -107,7 +107,7 @@ function Hero() {
           transition={{ delay: 1, duration: 1 }}
           style={{
             color: "#E0E0E0",
-            fontSize: "1.15rem",
+            fontSize: "clamp(.95rem,3vw,1.1rem)",
             lineHeight: "2",
             maxWidth: "760px",
             margin: "0 auto 50px",
@@ -149,7 +149,7 @@ function Hero() {
                 background:
                   "linear-gradient(135deg,#FFD700,#F5C542,#D4AF37)",
                 color: "#000000",
-                padding: "18px 42px",
+                padding: "16px 32px",
                 borderRadius: "50px",
                 fontWeight: "700",
                 fontSize: "1rem",
