@@ -23,13 +23,14 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/leadership" element={<Leadership />} />
         <Route path="/departments" element={<Departments />} />
+        <Route path="/events" element={<Events />} />
         <Route path="/media" element={<Media />} />
         <Route path="/partnership" element={<Partnership />} />
         <Route path="/give" element={<Give />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
 
-     <Footer />
+      <Footer />
     </BrowserRouter>
   );
 }

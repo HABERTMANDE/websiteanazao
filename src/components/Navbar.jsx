@@ -19,11 +19,12 @@ function Navbar() {
   return (
     <nav
       style={{
-        background: "#000",
+        background: "#05122D",
         borderBottom: `1px solid ${colors.gold}`,
         position: "sticky",
         top: 0,
         zIndex: 9999,
+        width: "100%",
       }}
     >
       <div
@@ -34,9 +35,13 @@ function Navbar() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          flexWrap: "nowrap",
+          width: "100%",
+          boxSizing: "border-box",
         }}
       >
-        {/* LOGO */}
+        {/* ================= LOGO ================= */}
+
         <Link
           to="/"
           style={{
@@ -44,13 +49,14 @@ function Navbar() {
             alignItems: "center",
             gap: "14px",
             textDecoration: "none",
-            flex: 1,
+            flexShrink: 0,
+            overflow: "hidden",
             minWidth: 0,
           }}
         >
           <img
             src={logo}
-            alt="ANAZAO"
+            alt="ANAZAO Logo"
             style={{
               width: "58px",
               height: "58px",
@@ -63,16 +69,19 @@ function Navbar() {
             <h1
               style={{
                 margin: 0,
-                color: "#FFD700",
                 fontFamily: "'Cormorant Garamond', serif",
+                fontWeight: "700",
                 fontSize: "clamp(1.8rem,3vw,2.6rem)",
                 letterSpacing: "4px",
                 lineHeight: 1,
+                color: "#FFD700",
                 whiteSpace: "nowrap",
+
                 textShadow: `
-                  0 0 6px rgba(255,215,0,.9),
-                  0 0 15px rgba(255,215,0,.6),
-                  0 0 30px rgba(255,215,0,.4)
+                  0 0 6px rgba(255,215,0,.95),
+                  0 0 15px rgba(255,215,0,.75),
+                  0 0 30px rgba(255,215,0,.55),
+                  0 0 45px rgba(255,215,0,.35)
                 `,
               }}
             >
@@ -94,7 +103,8 @@ function Navbar() {
           </div>
         </Link>
 
-        {/* DESKTOP MENU */}
+        {/* ================= DESKTOP MENU ================= */}
+
         <ul
           className="desktop-menu"
           style={{
@@ -103,20 +113,57 @@ function Navbar() {
             listStyle: "none",
             margin: 0,
             padding: 0,
+            alignItems: "center",
           }}
         >
-          <li><Link to="/about" style={navLinkStyle}>About</Link></li>
-          <li><Link to="/leadership" style={navLinkStyle}>Leadership</Link></li>
-          <li><Link to="/departments" style={navLinkStyle}>Departments</Link></li>
-          <li><Link to="/media" style={navLinkStyle}>Media Center</Link></li>
-          <li><Link to="/partnership" style={navLinkStyle}>Partnership</Link></li>
-          <li><Link to="/give" style={navLinkStyle}>Give</Link></li>
-          <li><Link to="/contact" style={navLinkStyle}>Contact</Link></li>
+          <li>
+            <Link to="/about" style={navLinkStyle}>
+              About
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/leadership" style={navLinkStyle}>
+              Leadership
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/departments" style={navLinkStyle}>
+              Departments
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/media" style={navLinkStyle}>
+              Media Center
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/partnership" style={navLinkStyle}>
+              Partnership
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/give" style={navLinkStyle}>
+              Give
+            </Link>
+          </li>
+
+          <li>
+            <Link to="/contact" style={navLinkStyle}>
+              Contact
+            </Link>
+          </li>
         </ul>
 
-        {/* MOBILE BUTTON */}
+        {/* ================= MOBILE MENU BUTTON ================= */}
+
         <button
           className="menu-button"
+          aria-label="Toggle Menu"
           onClick={() => setMenuOpen(!menuOpen)}
           style={{
             background: "transparent",
@@ -125,32 +172,82 @@ function Navbar() {
             fontSize: "2rem",
             cursor: "pointer",
             marginLeft: "15px",
+            flexShrink: 0,
           }}
         >
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* ================= MOBILE MENU ================= */}
+
       {menuOpen && (
         <div
           style={{
-            background: "#050505",
+            background: "#05122D",
             borderTop: `1px solid ${colors.gold}`,
             display: "flex",
             flexDirection: "column",
-            textAlign: "center",
-            padding: "25px",
             gap: "22px",
+            padding: "25px",
+            textAlign: "center",
           }}
         >
-          <Link to="/about" style={navLinkStyle} onClick={() => setMenuOpen(false)}>About</Link>
-          <Link to="/leadership" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Leadership</Link>
-          <Link to="/departments" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Departments</Link>
-          <Link to="/media" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Media Center</Link>
-          <Link to="/partnership" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Partnership</Link>
-          <Link to="/give" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Give</Link>
-          <Link to="/contact" style={navLinkStyle} onClick={() => setMenuOpen(false)}>Contact</Link>
+          <Link
+            to="/about"
+            style={navLinkStyle}
+            onClick={() => setMenuOpen(false)}
+          >
+            About
+          </Link>
+
+          <Link
+            to="/leadership"
+            style={navLinkStyle}
+            onClick={() => setMenuOpen(false)}
+          >
+            Leadership
+          </Link>
+
+          <Link
+            to="/departments"
+            style={navLinkStyle}
+            onClick={() => setMenuOpen(false)}
+          >
+            Departments
+          </Link>
+
+          <Link
+            to="/media"
+            style={navLinkStyle}
+            onClick={() => setMenuOpen(false)}
+          >
+            Media Center
+          </Link>
+
+          <Link
+            to="/partnership"
+            style={navLinkStyle}
+            onClick={() => setMenuOpen(false)}
+          >
+            Partnership
+          </Link>
+
+          <Link
+            to="/give"
+            style={navLinkStyle}
+            onClick={() => setMenuOpen(false)}
+          >
+            Give
+          </Link>
+
+          <Link
+            to="/contact"
+            style={navLinkStyle}
+            onClick={() => setMenuOpen(false)}
+          >
+            Contact
+          </Link>
         </div>
       )}
     </nav>

@@ -1,58 +1,165 @@
-.desktop-menu {
-  display: flex;
+/* =====================================
+   ANAZAO NAVBAR
+===================================== */
+
+nav{
+    width:100%;
+    position:sticky;
+    top:0;
+    z-index:9999;
+    transition:.35s ease;
 }
 
-.menu-button {
-  display: none;
+/* =====================================
+   DESKTOP MENU
+===================================== */
+
+.desktop-menu{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:28px;
 }
 
-.desktop-menu a:hover {
-  color: #FFD700 !important;
+.desktop-menu li{
+    list-style:none;
 }
 
-/* Tablet */
-@media (max-width: 1024px) {
-  .desktop-menu {
-    display: none !important;
-  }
-
-  .menu-button {
-    display: block !important;
-  }
+.desktop-menu a{
+    position:relative;
+    color:#fff;
+    transition:.3s ease;
+    font-weight:500;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  nav img {
-    width: 48px !important;
-    height: 48px !important;
-  }
-
-  nav h1 {
-    font-size: 1.9rem !important;
-    letter-spacing: 2px !important;
-  }
-
-  nav p {
-    font-size: 0.72rem !important;
-    letter-spacing: 2px !important;
-  }
+.desktop-menu a:hover{
+    color:#FFD700 !important;
 }
 
-/* Small phones */
-@media (max-width: 480px) {
-  nav img {
-    width: 42px !important;
-    height: 42px !important;
-  }
+.desktop-menu a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:2px;
+    background:#FFD700;
+    transition:.3s ease;
+}
 
-  nav h1 {
-    font-size: 1.55rem !important;
-    letter-spacing: 1px !important;
-  }
+.desktop-menu a:hover::after{
+    width:100%;
+}
 
-  nav p {
-    font-size: 0.62rem !important;
-    letter-spacing: 1.5px !important;
-  }
+/* =====================================
+   HAMBURGER BUTTON
+===================================== */
+
+.menu-button{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:50px;
+    height:50px;
+    cursor:pointer;
+}
+
+/* =====================================
+   LARGE TABLETS
+===================================== */
+
+@media (max-width:1200px){
+
+.desktop-menu{
+    gap:20px !important;
+}
+
+}
+
+/* =====================================
+   TABLETS
+===================================== */
+
+@media (max-width:992px){
+
+.desktop-menu{
+    display:none !important;
+}
+
+.menu-button{
+    display:flex !important;
+}
+
+}
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width:768px){
+
+nav img{
+    width:52px !important;
+    height:52px !important;
+}
+
+nav h1{
+    font-size:1.8rem !important;
+    letter-spacing:3px !important;
+}
+
+nav p{
+    font-size:.70rem !important;
+    letter-spacing:2px !important;
+}
+
+}
+
+/* =====================================
+   SMALL PHONES
+===================================== */
+
+@media (max-width:576px){
+
+nav{
+    overflow:hidden;
+}
+
+nav img{
+    width:46px !important;
+    height:46px !important;
+}
+
+nav h1{
+    font-size:1.55rem !important;
+    letter-spacing:2px !important;
+}
+
+nav p{
+    font-size:.58rem !important;
+    letter-spacing:1px !important;
+}
+
+}
+
+/* =====================================
+   EXTRA SMALL DEVICES
+===================================== */
+
+@media (max-width:400px){
+
+nav img{
+    width:42px !important;
+    height:42px !important;
+}
+
+nav h1{
+    font-size:1.35rem !important;
+    letter-spacing:1px !important;
+}
+
+nav p{
+    font-size:.50rem !important;
+}
+
 }
