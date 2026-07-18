@@ -1,202 +1,201 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { colors } from "../data/colors";
 
-function Leadership() {
-  const cardStyle = {
-    backgroundColor: "#111111",
-    border: `1px solid ${colors.gold}`,
-    borderRadius: "20px",
-    padding: "30px",
-    marginBottom: "30px",
-    transition: "0.3s ease",
-  };
-
-  const titleStyle = {
-    color: colors.gold,
-    fontSize: "2rem",
-    marginBottom: "20px",
-  };
-
-  const roleStyle = {
-    color: colors.gold,
-    marginBottom: "5px",
-  };
-
-  const cardAnimation = {
-    initial: { opacity: 0, y: 50 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.7 },
-    whileHover: {
-      y: -8,
-      boxShadow: "0 15px 40px rgba(212,175,55,0.2)",
+function LeadershipPreview() {
+  const leaders = [
+    {
+      role: "Overseer",
+      name: "Prophet Habert Murunga",
+      desc: "Provides apostolic oversight, guards the vision, and gives prophetic direction to the ministry.",
     },
-  };
+    {
+      role: "Vision Bearer",
+      name: "Pastor Grace Onjula",
+      desc: "Champions the ministry vision and ensures every department advances the mission of ANAZAO.",
+    },
+    {
+      role: "Administrator",
+      name: "Min. Grace Ngari",
+      desc: "Coordinates ministry operations, administration, communication, and organizational excellence.",
+    },
+  ];
 
   return (
-    <div
+    <section
       style={{
-        backgroundColor: colors.black,
-        color: colors.white,
-        minHeight: "100vh",
-        padding: "120px 40px 80px",
+        background: colors.black,
+        padding: "110px 20px",
       }}
     >
-      {/* Hero Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        style={{
-          textAlign: "center",
-          maxWidth: "900px",
-          margin: "0 auto 60px",
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "4rem",
-            color: colors.gold,
-            marginBottom: "20px",
-          }}
-        >
-          ANAZAO Leadership
-        </h1>
-
-        <p
-          style={{
-            color: "#C5C5C5",
-            lineHeight: "1.8",
-            fontSize: "1.1rem",
-          }}
-        >
-          Spiritual Leadership, Shared Responsibility, and Collaborative
-          Stewardship.
-        </p>
-      </motion.div>
-
       <div
         style={{
-          maxWidth: "1100px",
+          maxWidth: "1250px",
           margin: "0 auto",
         }}
       >
-        {/* Spiritual Oversight */}
-        <motion.div style={cardStyle} {...cardAnimation}>
-          <h2 style={titleStyle}>Spiritual Oversight</h2>
-
-          <h3 style={roleStyle}>Prophet Habert Murunga</h3>
-          <p><strong>Overseer</strong></p>
-
-          <ul style={{ marginTop: "20px", paddingLeft: "20px", lineHeight: "1.8" }}>
-            <li>Provides spiritual oversight and direction.</li>
-            <li>Guards the vision, doctrine, and prophetic mandate of ANAZAO.</li>
-            <li>Oversees leadership development and strategic growth.</li>
-            <li>Provides apostolic and prophetic guidance for the ministry.</li>
-          </ul>
-        </motion.div>
-
-        {/* Vision */}
-        <motion.div style={cardStyle} {...cardAnimation}>
-          <h2 style={titleStyle}>Vision and Strategic Direction</h2>
-
-          <h3 style={roleStyle}>Pastor Grace Onjula</h3>
-          <p><strong>Vision Bearer</strong></p>
-
-          <ul style={{ marginTop: "20px", paddingLeft: "20px", lineHeight: "1.8" }}>
-            <li>Preserves and communicates the ministry vision.</li>
-            <li>Ensures all programs align with the vision and mission.</li>
-            <li>Works closely with the Overseer in strategic planning and implementation.</li>
-          </ul>
-        </motion.div>
-
-        {/* Administration */}
-        <motion.div style={cardStyle} {...cardAnimation}>
-          <h2 style={titleStyle}>Administration & Operations</h2>
-
-          <div style={{ marginBottom: "30px" }}>
-            <h3 style={roleStyle}>Minister Grace Ngari</h3>
-            <p><strong>Administrator</strong></p>
-
-            <ul style={{ marginTop: "15px", paddingLeft: "20px", lineHeight: "1.8" }}>
-              <li>Coordinates ministry operations.</li>
-              <li>Oversees planning and implementation of programs.</li>
-              <li>Supports departmental coordination and communication.</li>
-            </ul>
-          </div>
-
-          <div
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: .8 }}
+          style={{
+            textAlign: "center",
+            marginBottom: "70px",
+          }}
+        >
+          <p
             style={{
-              borderTop: `1px solid ${colors.gold}`,
-              paddingTop: "25px",
+              color: colors.gold,
+              letterSpacing: "5px",
+              textTransform: "uppercase",
+              fontWeight: "700",
+              marginBottom: "18px",
             }}
           >
-            <h3 style={roleStyle}>Counselor Esther Kevin</h3>
-            <p><strong>Administrator</strong></p>
+            OUR LEADERSHIP
+          </p>
 
-            <ul style={{ marginTop: "15px", paddingLeft: "20px", lineHeight: "1.8" }}>
-              <li>Oversees member care and counseling support.</li>
-              <li>Assists with organizational systems and administration.</li>
-              <li>Supports discipleship and pastoral care initiatives.</li>
-            </ul>
-          </div>
+          <h2
+            style={{
+              color: colors.white,
+              fontSize: "clamp(2.2rem,5vw,3.8rem)",
+              fontFamily: "'Cormorant Garamond', serif",
+              marginBottom: "25px",
+            }}
+          >
+            Shepherding With Truth & Grace
+          </h2>
+
+          <p
+            style={{
+              color: "#CFCFCF",
+              maxWidth: "760px",
+              margin: "0 auto",
+              lineHeight: "2",
+              fontSize: "1.05rem",
+            }}
+          >
+            ANAZAO is guided by servant leaders committed to sound doctrine,
+            spiritual growth, and raising a generation that transforms
+            communities and nations through Kingdom leadership.
+          </p>
         </motion.div>
 
-        {/* Finance */}
-        <motion.div style={cardStyle} {...cardAnimation}>
-          <h2 style={titleStyle}>Finance and Stewardship</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(320px,1fr))",
+            gap: "30px",
+          }}
+        >
+          {leaders.map((leader, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: .8,
+                delay: index * .2,
+              }}
+              whileHover={{
+                y: -10,
+              }}
+              style={{
+                background: "rgba(255,255,255,.03)",
+                border: "1px solid rgba(255,215,0,.25)",
+                borderRadius: "22px",
+                padding: "40px 35px",
+                backdropFilter: "blur(12px)",
+                transition: ".35s",
+              }}
+            >
+              <div
+                style={{
+                  width: "85px",
+                  height: "85px",
+                  borderRadius: "50%",
+                  background:
+                    "linear-gradient(135deg,#FFD700,#D4AF37)",
+                  marginBottom: "28px",
+                }}
+              />
 
-          <h3 style={roleStyle}>Minister Lavendar Otieno</h3>
-          <p><strong>Treasurer</strong></p>
+              <p
+                style={{
+                  color: colors.gold,
+                  fontWeight: "700",
+                  letterSpacing: "2px",
+                  marginBottom: "8px",
+                }}
+              >
+                {leader.role}
+              </p>
 
-          <ul style={{ marginTop: "20px", paddingLeft: "20px", lineHeight: "1.8" }}>
-            <li>Oversees ministry finances and accountability.</li>
-            <li>Maintains financial records and reports.</li>
-            <li>Coordinates giving channels and stewardship initiatives.</li>
-            <li>Supports budgeting for events and projects.</li>
-          </ul>
-        </motion.div>
+              <h3
+                style={{
+                  color: colors.white,
+                  marginBottom: "18px",
+                  fontSize: "1.55rem",
+                }}
+              >
+                {leader.name}
+              </h3>
 
-        {/* Governance */}
-        <motion.div style={cardStyle} {...cardAnimation}>
-          <h2 style={titleStyle}>Governance and Records</h2>
+              <p
+                style={{
+                  color: "#D5D5D5",
+                  lineHeight: "1.9",
+                }}
+              >
+                {leader.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
 
-          <h3 style={roleStyle}>Minister Eunice Wambale</h3>
-          <p><strong>Secretary</strong></p>
-
-          <ul style={{ marginTop: "20px", paddingLeft: "20px", lineHeight: "1.8" }}>
-            <li>Maintains ministry records and documentation.</li>
-            <li>Records meetings and resolutions.</li>
-            <li>Coordinates official correspondence and scheduling.</li>
-          </ul>
-        </motion.div>
-
-        {/* Communications */}
-        <motion.div style={cardStyle} {...cardAnimation}>
-          <h2 style={titleStyle}>Communications and Public Relations</h2>
-
-          <h3 style={roleStyle}>Minister Samson Elim</h3>
-          <p><strong>Communications Director</strong></p>
-        </motion.div>
-
-        {/* Media */}
-        <motion.div style={cardStyle} {...cardAnimation}>
-          <h2 style={titleStyle}>Media Department</h2>
-
-          <h3 style={roleStyle}>Minister Simon Peter</h3>
-          <p><strong>Media Director</strong></p>
-        </motion.div>
-
-        {/* Hospitality */}
-        <motion.div style={cardStyle} {...cardAnimation}>
-          <h2 style={titleStyle}>Hospitality and Member Experience</h2>
-
-          <h3 style={roleStyle}>Minister Mercy Atieno</h3>
-          <p><strong>Hospitality Director</strong></p>
-        </motion.div>
+        <div
+          style={{
+            marginTop: "70px",
+            textAlign: "center",
+          }}
+        >
+          <Link
+            to="/leadership"
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+                y: -3,
+              }}
+              whileTap={{
+                scale: .95,
+              }}
+              style={{
+                background:
+                  "linear-gradient(135deg,#FFD700,#D4AF37)",
+                color: "#000",
+                border: "none",
+                padding: "18px 45px",
+                borderRadius: "50px",
+                cursor: "pointer",
+                fontWeight: "700",
+                fontSize: "1rem",
+                boxShadow:
+                  "0 0 30px rgba(255,215,0,.35)",
+              }}
+            >
+              View Full Leadership →
+            </motion.button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-export default Leadership;
+export default LeadershipPreview;
