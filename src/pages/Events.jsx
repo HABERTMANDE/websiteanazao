@@ -16,6 +16,36 @@ function Events() {
     fontSize: "1.8rem",
   };
 
+  // MODIFICATION: Button styles for Alive card
+  const goldBtn = {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "14px 30px",
+    borderRadius: "50px",
+    background: "linear-gradient(135deg,#FFD700,#D4AF37)",
+    color: "#000",
+    textDecoration: "none",
+    fontSize: "0.85rem",
+    fontWeight: 800,
+    letterSpacing: "1px",
+    boxShadow: "0 0 25px rgba(255,215,0,.35)",
+  };
+
+  const outlineBtn = {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "14px 30px",
+    borderRadius: "50px",
+    border: "1px solid #FFD700",
+    color: "#FFD700",
+    textDecoration: "none",
+    fontSize: "0.85rem",
+    fontWeight: 800,
+    letterSpacing: "1px",
+  };
+
   return (
     <div
       style={{
@@ -61,6 +91,44 @@ function Events() {
           margin: "0 auto",
         }}
       >
+        {/* ===== MODIFICATION: UPCOMING EVENTS HEADER - DECENT ORDER STARTS HERE ===== */}
+        <div style={{ textAlign: "center", marginBottom: "30px" }}>
+          <p style={{ color: colors.gold, letterSpacing: "4px", textTransform: "uppercase", fontSize: "0.75rem", fontWeight: 700, marginBottom: "8px" }}>
+            Upcoming Events • Every Year
+          </p>
+          <h2 style={{ color: "white", fontSize: "2rem", margin: 0 }}>Don't Miss What God Is Doing</h2>
+        </div>
+
+        {/* ===== MODIFICATION 1: NEW CARD - ALIVE YOUTH CONFERENCE 2027 - ADDED FIRST ===== */}
+        <div style={cardStyle}>
+          <p style={{ color: colors.gold, letterSpacing: "4px", textTransform: "uppercase", fontSize: "0.75rem", fontWeight: 700, marginBottom: "12px" }}>
+            Featured Event • January 2027
+          </p>
+
+          <h2 style={titleStyle}>Alive Youth Conference 2027</h2>
+
+          <p style={{ color: colors.gold, fontFamily: "'Cormorant Garamond', serif", fontSize: "1.3rem", fontStyle: "italic", marginBottom: "15px" }}>
+            Theme: HAGIAZO — Set Apart for God's Purpose
+          </p>
+
+          <p style={{ marginBottom: "8px", fontWeight: 700 }}>📅 Date: 13th - 16th January 2027</p>
+          <p style={{ marginBottom: "8px", fontWeight: 700 }}>📍 Location: Mityana, Uganda</p>
+          <p style={{ marginBottom: "15px", color: "#AAAAAA" }}>Scripture: 1 Peter 2:9 • All Day</p>
+
+          <p style={{ color: "#C5C5C5", lineHeight: 1.8, marginBottom: "25px" }}>
+            Alive Youth Conference 2027 is a life-changing gathering for the youth — set apart for God's purpose. Four days of worship, prayer, the Word, discipleship and encounters that will mark a generation for Kingdom assignment. Come ready to be separated, sanctified and sent.
+          </p>
+
+          <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
+            <Link to="/contact" onClick={() => window.scrollTo(0, 0)} style={goldBtn}>
+              VIEW EVENT →
+            </Link>
+            <Link to="/contact" onClick={() => window.scrollTo(0, 0)} style={outlineBtn}>
+              REGISTER INTEREST
+            </Link>
+          </div>
+        </div>
+
         {/* ===== UPCOMING EVENTS - ANNUAL PRAYER CAMP - TIMELESS ===== */}
         <div style={cardStyle}>
           <p
