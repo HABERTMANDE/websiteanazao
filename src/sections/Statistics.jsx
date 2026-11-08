@@ -6,25 +6,25 @@ function Statistics() {
     {
       value: "01",
       label: "Generation",
-      description: "Raising a generation grounded in truth.",
+      description: "Raising a generation grounded in The Truth.",
+    },
+    {
+      value: "02",
+      label: "Departments",
+      description:
+        "Equipping people through diverse expressions of ministry through The Way of Christ.",
     },
     {
       value: "03",
-      label: "Departments",
-      description:
-        "Equipping people through diverse expressions of ministry.",
-    },
-    {
-      value: "∞",
       label: "Impact",
       description:
-        "Cohorting diverse talents, abilities, gifts and skills individually together.",
+        "Uniting diverse talents, abilities, gifts and skills individually together to serving purpose in our generational mandate.",
     },
     {
-      value: "01",
+      value: "04",
       label: "Vision",
       description:
-        "One unified vision raising a transformed generation blessed with unlimited potential.",
+        "One unified vision raising a transformed generation with a life blessed with unlimited potential.",
     },
   ];
 
@@ -75,14 +75,10 @@ function Statistics() {
               }}
               whileHover={{ y: -8 }}
             >
-              {/* CARD TOP */}
+              {/* CARD TOP - ONLY ONE NUMBER NOW, NO DUPLICATE */}
               <div className="statistics-card-top">
                 <span className="statistics-number">
                   {stat.value}
-                </span>
-
-                <span className="statistics-index">
-                  {String(index + 1).padStart(2, "0")}
                 </span>
               </div>
 
@@ -113,7 +109,7 @@ function Statistics() {
           <span className="statistics-footer-line" />
 
           <p>
-            WE ARE A GENERATION TRANSFORMED BY TRUTH
+            WE ARE A GENERATION TRANSFORMED BY THE TRUTH
             <span> — JOHN 6:63</span>
           </p>
 
