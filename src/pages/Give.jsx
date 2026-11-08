@@ -28,7 +28,8 @@ function Give() {
   const [customAmount, setCustomAmount] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [method, setMethod] = useState("stk");
+  // ✅ CHANGED FOR NOW: Default is TILL, not STK. STK disabled until Safaricom enables 8192090
+  const [method, setMethod] = useState("till");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [copied, setCopied] = useState("");
@@ -46,33 +47,19 @@ function Give() {
     catch { setCopied("Copy manually: " + text); }
   };
 
+  // ✅ CHANGED FOR NOW: STK disabled - show Till instructions instead of calling API
   const handleMpesaPush = async () => {
-    if (!finalAmount || finalAmount < 1) { setStatus("⚠️ Please select an amount first."); return; }
-    if (!phone || phone.replace(/\D/g,"").length < 10) {
-      setStatus("⚠️ Please enter YOUR M-Pesa number in Step 2 above first — e.g. 0719... — that's the number that will receive the prompt.");
-      document.getElementById("mpesa-phone-input")?.scrollIntoView({ behavior: "smooth", block: "center" });
-      document.getElementById("mpesa-phone-input")?.focus();
-      return;
-    }
-    setLoading(true);
-    setStatus("Sending M-Pesa prompt to " + phone + "... Check your phone");
-    try {
-      const res = await fetch("/api/mpesa/stk-push", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: formatPhone(phone), amount: finalAmount, accountReference: campaign, transactionDesc: `Anazao Give - ${selected.title}` }),
-      });
-      const data = await res.json();
-      if (data.success) setStatus("✅ Prompt sent! Enter your M-Pesa PIN on your phone to complete.");
-      else setStatus("❌ Failed: " + (data.message || "Try again - or use Till method below"));
-    } catch (e) { setStatus("❌ STK backend not connected yet. Please use Till / Direct M-Pesa below - they work now."); }
-    setLoading(false);
+    setStatus("⏳ M-Pesa Prompt is coming soon. For now, please use M-PESA TILL 8192090 below - it works right now.");
+    setMethod("till");
+    document.getElementById("give-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const cardStyle = { backgroundColor: "#111111", border: `1px solid ${colors.gold}`, borderRadius: "20px", padding: "40px", maxWidth: "900px", margin: "0 auto", textAlign: "center" };
   const buttonStyle = { background: `linear-gradient(135deg, ${colors.gold}, #F4D03F)`, color: colors.black, border: "none", padding: "18px 45px", borderRadius: "50px", fontSize: "1rem", fontWeight: "700", cursor: "pointer", boxShadow: `0 8px 25px rgba(212,175,55,0.35)`, transition: "all 0.3s ease", letterSpacing: "1px" };
   const inputStyle = { width: "100%", padding: "14px 16px", borderRadius: "12px", border: "1px solid #333", background: "#000", color: "#fff", fontSize: "15px", outline: "none", boxSizing: "border-box" };
   const methodBtn = (active) => ({ flex: 1, padding: "12px 8px", borderRadius: "12px", border: active ? `2px solid ${colors.gold}` : "1px solid #333", background: active ? "#222" : "#000", color: "#fff", fontWeight: "700", cursor: "pointer", fontSize: "13px" });
+  // ✅ ADDED: Disabled style for STK button
+  const methodBtnDisabled = { flex: 1, padding: "12px 8px", borderRadius: "12px", border: "1px solid #333", background: "#111", color: "#777", fontWeight: "700", cursor: "not-allowed", fontSize: "13px", opacity: 0.6 };
   const whatsappBtnStyle = { display: "inline-flex", alignItems: "center", justifyContent: "center", gap: "8px", background: "#25D366", color: "#fff", border: "none", padding: "15px 28px", borderRadius: "50px", fontSize: "14px", fontWeight: "800", cursor: "pointer", textDecoration: "none", marginTop: "14px", width: "100%", boxSizing: "border-box" };
 
   const finalAmount = customAmount ? Number(customAmount) : amount;
@@ -108,6 +95,10 @@ function Give() {
         <div style={{ textAlign: "center" }}>
           <h2 style={{ color: colors.gold, fontSize: "26px", margin: "0 0 6px" }}>Give To: {selected.title}</h2>
           <p style={{ color: "#999", fontSize: "14px" }}>{selected.desc}</p>
+          {/* ✅ ADDED: Temporary notice */}
+          <p style={{ background: "#2a1e00", border: `1px solid ${colors.gold}`, color: "#FFD700", padding: "12px", borderRadius: "10px", fontSize: "13px", lineHeight: "1.6", marginTop: "14px" }}>
+            ⏳ Automatic M-Pesa Prompt coming soon. For now, please use <b>M-Pesa Till 8192090</b> below — it works right now.
+          </p>
         </div>
 
         <p style={{ color: "#fff", fontWeight: "700", margin: "28px 0 12px" }}>1. Select Amount (KES)</p>
@@ -121,23 +112,26 @@ function Give() {
         <p style={{ color: "#fff", fontWeight: "700", margin: "24px 0 12px" }}>2. Your Details</p>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
           <input style={inputStyle} placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
-          <input id="mpesa-phone-input" style={{ ...inputStyle, border: method === "stk" && (!phone || phone.replace(/\D/g,"").length < 10) && status ? "2px solid #ff4444" : "1px solid #333" }} placeholder="Your M-Pesa Number e.g. 0712... *Required for STK Prompt" value={phone} onChange={(e) => { setPhone(e.target.value); setStatus(""); }} />
+          {/* ✅ CHANGED: Phone no longer required for STK */}
+          <input id="mpesa-phone-input" style={{ ...inputStyle }} placeholder="Your Phone Number (optional)" value={phone} onChange={(e) => { setPhone(e.target.value); setStatus(""); }} />
         </div>
 
         <p style={{ color: "#fff", fontWeight: "700", margin: "24px 0 12px" }}>3. Payment Method</p>
         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          <button onClick={() => { setMethod("stk"); setStatus(""); }} style={methodBtn(method === "stk")}>M-PESA PROMPT</button>
-          <button onClick={() => { setMethod("till"); setStatus(""); }} style={methodBtn(method === "till")}>M-PESA TILL</button>
+          {/* ✅ CHANGED: STK button disabled, shows COMING SOON */}
+          <button disabled title="Coming soon - Safaricom approval pending" style={methodBtnDisabled}>M-PESA PROMPT ⏳<br /><span style={{ fontSize: "10px" }}>COMING SOON</span></button>
+          <button onClick={() => { setMethod("till"); setStatus(""); }} style={methodBtn(method === "till")}>M-PESA TILL ✅</button>
           <button onClick={() => { setMethod("direct"); setStatus(""); }} style={methodBtn(method === "direct")}>DIRECT M-PESA</button>
           <button onClick={() => { setMethod("bank"); setStatus(""); }} style={methodBtn(method === "bank")}>BANK</button>
         </div>
 
+        {/* ✅ CHANGED: STK section now shows Coming Soon + Till button */}
         {method === "stk" && (
-          <>
-            <button onClick={handleMpesaPush} disabled={loading} style={{ ...buttonStyle, width: "100%", marginTop: "28px", opacity: loading ? 0.6 : 1 }}>{loading ? "SENDING PROMPT..." : `GIVE KES ${finalAmount?.toLocaleString() || 0} VIA M-PESA →`}</button>
-            {status && <p style={{ textAlign: "center", color: "#fff", marginTop: "14px", lineHeight: "1.6", background: "#000", border: `1px solid ${colors.gold}`, padding: "14px", borderRadius: "12px" }}>{status}</p>}
-            <p style={{ textAlign: "center", color: "#888", fontSize: "12px", marginTop: "10px" }}>You will receive a prompt on {phone || "your phone"} to enter your M-Pesa PIN</p>
-          </>
+          <div style={{ background: "#000", border: `1px dashed ${colors.gold}`, borderRadius: "14px", padding: "22px", marginTop: "22px", textAlign: "center" }}>
+            <p style={{ color: colors.gold, fontWeight: "800" }}>M-PESA PROMPT - COMING SOON ⏳</p>
+            <p style={{ color: "#C5C5C5", fontSize: "14px", lineHeight: "1.6" }}>Automatic prompt is awaiting Safaricom approval for Till 8192090.<br />Please use Till method for now - it works instantly.</p>
+            <button onClick={() => setMethod("till")} style={{ ...buttonStyle, padding: "12px 28px", fontSize: "13px", marginTop: "10px" }}>USE TILL 8192090 →</button>
+          </div>
         )}
 
         {method === "till" && (
@@ -145,8 +139,18 @@ function Give() {
             <p style={{ color: colors.gold, fontWeight: "800", margin: "0 0 8px" }}>M-PESA - BUY GOODS TILL</p>
             <p style={{ fontSize: "32px", fontWeight: "800", letterSpacing: "2px", margin: "6px 0" }}>{TILL_NUMBER}</p>
             <p style={{ color: "#C5C5C5", fontSize: "14px", lineHeight: "1.6" }}>M-Pesa → Buy Goods → Enter Till <b>{TILL_NUMBER}</b><br />Amount: <b>KES {finalAmount?.toLocaleString()}</b><br />For: <b>{selected.title}</b></p>
-            <button onClick={() => copyText(TILL_NUMBER, "Till")} style={{ ...buttonStyle, padding: "12px 28px", fontSize: "13px", marginTop: "10px" }}>COPY TILL NUMBER</button>
+            <div style={{ textAlign: "left", background: "#111", padding: "14px", borderRadius: "10px", marginTop: "12px", fontSize: "13px", lineHeight: "1.8", color: "#C5C5C5" }}>
+              <b style={{ color: "#fff" }}>How to Give:</b><br />
+              1. Go to M-PESA<br />
+              2. Lipa na M-PESA<br />
+              3. Buy Goods and Services<br />
+              4. Enter Till: <b style={{ color: "#fff" }}>8192090</b><br />
+              5. Enter Amount: <b style={{ color: "#fff" }}>KES {finalAmount?.toLocaleString()}</b><br />
+              6. Enter PIN & Send
+            </div>
+            <button onClick={() => copyText(TILL_NUMBER, "Till")} style={{ ...buttonStyle, padding: "12px 28px", fontSize: "13px", marginTop: "14px" }}>COPY TILL NUMBER</button>
             {copied && <p style={{ color: colors.gold, fontSize: "13px", marginTop: "8px" }}>{copied}</p>}
+            {status && <p style={{ color: "#fff", marginTop: "14px", lineHeight: "1.6", background: "#111", border: `1px solid ${colors.gold}`, padding: "14px", borderRadius: "12px" }}>{status}</p>}
           </div>
         )}
 
