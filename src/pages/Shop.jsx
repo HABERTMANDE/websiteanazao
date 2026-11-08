@@ -2,14 +2,14 @@ export default function Shop() {
   const whatsapp = "254782233163"; // <-- PUT YOUR REAL NUMBER HERE AGAIN
 
   const products = [
-    { name: "ANAZAO T-Shirt", desc: "Black premium tee • Gold & White logo • Unisex", price: "KSh 1,000", tag: "BEST SELLER", img: "/merch/tee.jpg" },
+    { name: "ANAZAO T-Shirt", desc: "Black premium tee • Gold & White logo • Unisex", price: "KSh 1,200", tag: "BEST SELLER", img: "/merch/tee.jpg" },
     { name: "ANAZAO Tee + Cap Set", desc: "T-Shirt + Cap • Perfect combo", price: "KSh 1,500", tag: "COMBO", img: "/merch/teecap.jpg" },
     { name: "ANAZAO Cap", desc: "Adjustable black cap • Embroidered logo", price: "KSh 500", tag: "NEW", img: "/merch/poster.jpg" },
-    { name: "ANAZAO Tracksuit - Eagle Black", desc: "Hoodie + Joggers • Black / Gold Eagle • John 17:21", price: "KSh 4,500", tag: "BEST SELLER", img: "/merch/eagle-set-black.jpg" },
-    { name: "ANAZAO Tracksuit - Black", desc: "Hoodie + Joggers • Black / Gold", price: "KSh 4,500", tag: "NEW", img: "/merch/pair.jpg" },
-    { name: "ANAZAO Tracksuit - Navy", desc: "Hoodie + Joggers • Navy / Gold", price: "KSh 4,500", tag: "NEW", img: "/merch/pair-navy.jpg" },
-    { name: "ANAZAO Tracksuit - White", desc: "Hoodie + Joggers • White / Gold", price: "KSh 4,500", tag: "LIMITED", img: "/merch/pair-white.jpg" },
-    { name: "ANAZAO Bomber / Varsity Jacket", desc: "Black, Navy & Maroon • Leather Sleeves", price: "KSh 5,500", tag: "PREMIUM", img: "/merch/bomber.jpg" },
+    { name: "ANAZAO Tracksuit - Eagle Black", desc: "Hoodie + Joggers • Black / Gold Eagle • John 17:21", price: "KSh 5,500", tag: "BEST SELLER", img: "/merch/eagle-set-black.jpg" },
+    { name: "ANAZAO Tracksuit - Black", desc: "Hoodie + Joggers • Black / Gold", price: "KSh 5,500", tag: "NEW", img: "/merch/pair.jpg" },
+    { name: "ANAZAO Tracksuit - Navy", desc: "Hoodie + Joggers • Navy / Gold", price: "KSh 5,500", tag: "NEW", img: "/merch/pair-navy.jpg" },
+    { name: "ANAZAO Tracksuit - White", desc: "Hoodie + Joggers • White / Gold", price: "KSh 5,500", tag: "LIMITED", img: "/merch/pair-white.jpg" },
+    { name: "ANAZAO Bomber / Varsity Jacket", desc: "Black, Navy & Maroon • Leather Sleeves", price: "KSh 5,000", tag: "PREMIUM", img: "/merch/bomber.jpg" },
     { name: "ANAZAO Mug + Flask Set", desc: "Black & Gold • The Family of Grace", price: "KSh 2,500", tag: "GIFT SET", img: "/merch/mug-and-flask.jpg" },
     { name: "ANAZAO Collection", desc: "T-Shirts, Sweatshirts & Hoodies • 4 Colours", price: "From KSh 1,000", tag: "4 COLOURS", img: "/merch/slide-a.jpg" },
     { name: "ANAZAO Collection - Slide 2", desc: "More colours & styles • Full collection", price: "From KSh 1,000", tag: "COLLECTION", img: "/merch/slide-b.jpg" },
