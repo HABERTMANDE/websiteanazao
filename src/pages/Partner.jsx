@@ -96,7 +96,7 @@ export default function Partner() {
         </p>
       </div>
 
-      {/* ✅ MODIFIED: PROJECTS - Replaced Placeholder */}
+      {/* ✅ MODIFIED: PROJECTS - 5000 BIBLES ANNUALLY */}
       <div id="projects" style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 20px 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "35px" }}>
           <p style={{ color: "#B9975B", letterSpacing: "4px", fontWeight: 800, fontSize: "0.8rem" }}>BUILDING THE VISION TOGETHER</p>
@@ -109,7 +109,8 @@ export default function Partner() {
         {[
           { slug: "land-acquisition", title: "SECURING THE FOUNDATION — 8 ACRES OF LAND", desc: "Eight acres to establish a lasting foundation for the ministry's vision, activities and future development.", target: 12000000, raised: 0, img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" },
           { slug: "media-equipment", title: "ADVANCING THE MESSAGE — MEDIA INFRASTRUCTURE", desc: "Media and communication equipment to broadcast teachings, document ministry and extend reach through digital platforms.", target: 2000000, raised: 0, img: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=800&q=80" },
-          { slug: "bible-distribution", title: "PUTTING THE WORD INTO HANDS", desc: "Acquire and distribute Bibles for evangelism, discipleship, outreach and spiritual growth.", target: 0, raised: 0, img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&q=80", tbd: true },
+          // ✅ MODIFIED: 5000 BIBLES ANNUALLY
+          { slug: "bible-distribution", title: "PUTTING THE WORD INTO HANDS — 5,000 BIBLES ANNUALLY", desc: "Acquire and distribute 5,000 Bibles every year for evangelism, discipleship, outreach and spiritual growth in communities.", target: 0, raised: 0, biblesTarget: 5000, biblesGiven: 0, img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&q=80", tbd: true },
           { slug: "merchandise", title: "CARRYING THE MESSAGE — MERCHANDISE & PUBLICATIONS", desc: "Merchandise and publications to communicate identity, strengthen engagement and extend the message.", target: 2400000, raised: 0, img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80" },
         ].map(p => {
           const pct = p.target > 0 ? Math.round((p.raised / p.target) * 100) : 0;
@@ -121,7 +122,16 @@ export default function Partner() {
                 <h3 style={{ fontSize: "1.15rem", lineHeight: 1.4, margin: "0 0 10px" }}>{p.title}</h3>
                 <p style={{ color: "#666", lineHeight: 1.8, margin: "0 0 16px" }}>{p.desc}</p>
                 {p.tbd ? (
-                  <p style={{ background: "#FFF8E1", padding: "10px 14px", borderRadius: "10px", fontWeight: 700, fontSize: "0.9rem" }}>📖 Target: To Be Determined — Admin will set Bible budget soon</p>
+                  // ✅ MODIFIED: Bible card now shows 5000 Bibles progress
+                  <div>
+                    <p style={{ background: "#FFF8E1", padding: "12px 14px", borderRadius: "10px", fontWeight: 700, fontSize: "0.9rem", margin: "0 0 10px" }}>
+                      📖 Annual Goal: 5,000 Bibles • {(p.biblesGiven || 0).toLocaleString()} given • {(p.biblesTarget - (p.biblesGiven || 0)).toLocaleString()} remaining
+                    </p>
+                    <div style={{ background: "#EEE", height: "10px", borderRadius: "20px", overflow: "hidden" }}>
+                      <div style={{ width: `${Math.round(((p.biblesGiven || 0) / p.biblesTarget) * 100)}%`, background: "#D4AF37", height: "100%" }} />
+                    </div>
+                    <p style={{ fontSize: "0.9rem", color: "#666", margin: "10px 0 0" }}>Financial Target: To Be Determined — Set once cost per Bible is confirmed.</p>
+                  </div>
                 ) : (
                   <>
                     <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", fontWeight: 700, marginBottom: "8px", flexWrap: "wrap", gap: "8px" }}>
