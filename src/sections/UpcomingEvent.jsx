@@ -170,7 +170,7 @@ function UpcomingEvent() {
                   letterSpacing: "0.5px",
                 }}
               >
-                VIEW EVENT →
+                MORE →
               </Link>
 
               <Link
