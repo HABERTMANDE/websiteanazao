@@ -276,25 +276,21 @@ function Hero() {
           </motion.button>
         </div>
 
-        {/* ✅ ADDED: Sunday Card - fills bottom space */}
+        {/* ✅ MODIFIED: Weekly Sessions + Word of the Season - REPLACES Sunday Card, no big box */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
           style={{
-            background: "rgba(0,0,0,0.55)",
-            border: `1px solid ${colors.gold}`,
-            borderRadius: "16px",
-            padding: "16px 20px",
             margin: isMobile ? "28px auto 0" : "40px auto 0",
-            maxWidth: "620px",
-            backdropFilter: "blur(5px)",
+            maxWidth: "640px",
+            textAlign: "center",
           }}
         >
-          <p style={{ color: colors.gold, fontSize: "11px", letterSpacing: "3px", fontWeight: "800", margin: 0 }}>JOIN US THIS SUNDAY</p>
-          <p style={{ color: "#fff", margin: "8px 0 0", fontWeight: "700", fontSize: "15px" }}>Sunday Service | 10:00 AM | Eldoret</p>
-          <p style={{ color: "#aaa", fontSize: "13px", margin: "6px 0 0", lineHeight: "1.6" }}>
-            They shall mount up with wings like eagles. — Isaiah 40:31
+          <p style={{ color: colors.gold, fontSize: "11px", letterSpacing: "3px", fontWeight: "800", margin: 0 }}>JOIN US MON - FRI • 10:00 PM - MIDNIGHT</p>
+          <p style={{ color: "#fff", margin: "8px 0 0", fontWeight: "700", fontSize: isMobile ? "15px" : "17px" }}>Weekly Sessions on Google Meet</p>
+          <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "13px", margin: "10px 0 0", lineHeight: "1.6", fontStyle: "italic", textShadow: "0 0 10px rgba(0,0,0,.8)" }}>
+            The Word of the Season — The Days of Jacob&apos;s Trouble <span style={{ fontStyle: "normal", color: colors.gold, fontWeight: "700" }}>(Jeremiah 30:7)</span>
           </p>
         </motion.div>
       </motion.div>
