@@ -19,17 +19,7 @@ function Hero() {
         // LAPTOP: stays exactly as before - 100vh
         // PHONE: auto height - no more huge gaps
         minHeight: isMobile ? "auto" : "100vh",
-        backgroundImage: `
-          linear-gradient(
-            rgba(0,0,0,.72),
-            rgba(5,18,45,.84),
-            rgba(0,0,0,.92)
-          ),
-          url(${heroBg})
-        `,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        backgroundColor: "#000",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -40,7 +30,37 @@ function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* Animated Background Zoom */}
+      {/* ✅ ADDED: EAGLE VIDEO BACKGROUND - replaces heroBg image */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster={heroBg}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 0,
+        }}
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+
+      {/* ✅ MODIFIED: LIGHT overlay - was .72/.84/.92, now .35/.35/.60 so video shows */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(rgba(0,0,0,.35), rgba(5,18,45,.35), rgba(0,0,0,.60))",
+          zIndex: 1,
+        }}
+      />
+
+      {/* Animated Background Zoom - KEPT, now subtle glow pulse over video */}
       <motion.div
         animate={{
           scale: [1, 1.08, 1],
@@ -53,17 +73,9 @@ function Hero() {
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `
-          linear-gradient(
-            rgba(0,0,0,.72),
-            rgba(5,18,45,.84),
-            rgba(0,0,0,.92)
-          ),
-          url(${heroBg})
-        `,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          zIndex: 0,
+          background: "radial-gradient(circle at center, rgba(255,215,0,0.08) 0%, transparent 60%)",
+          zIndex: 1,
+          pointerEvents: "none",
         }}
       />
 
@@ -80,7 +92,7 @@ function Hero() {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          zIndex: 1,
+          zIndex: 2,
           pointerEvents: "none",
         }}
       />
@@ -106,7 +118,7 @@ function Hero() {
             left: `${8 + i * 7}%`,
             top: `${20 + (i % 5) * 15}%`,
             filter: "blur(1px)",
-            zIndex: 1,
+            zIndex: 2,
           }}
         />
       ))}
@@ -263,6 +275,28 @@ function Hero() {
             Partner With Us
           </motion.button>
         </div>
+
+        {/* ✅ ADDED: Sunday Card - fills bottom space */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          style={{
+            background: "rgba(0,0,0,0.55)",
+            border: `1px solid ${colors.gold}`,
+            borderRadius: "16px",
+            padding: "16px 20px",
+            margin: isMobile ? "28px auto 0" : "40px auto 0",
+            maxWidth: "620px",
+            backdropFilter: "blur(5px)",
+          }}
+        >
+          <p style={{ color: colors.gold, fontSize: "11px", letterSpacing: "3px", fontWeight: "800", margin: 0 }}>JOIN US THIS SUNDAY</p>
+          <p style={{ color: "#fff", margin: "8px 0 0", fontWeight: "700", fontSize: "15px" }}>Sunday Service | 10:00 AM | Eldoret</p>
+          <p style={{ color: "#aaa", fontSize: "13px", margin: "6px 0 0", lineHeight: "1.6" }}>
+            They shall mount up with wings like eagles. — Isaiah 40:31
+          </p>
+        </motion.div>
       </motion.div>
 
       {/* Scroll Indicator - Hide on phone, it was adding to the bottom gap */}
