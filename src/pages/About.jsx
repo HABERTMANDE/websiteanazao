@@ -41,7 +41,7 @@ function About() {
             `,
           }}
         >
-          ANAZAO
+          WHO WE ARE
         </h1>
 
         <p
