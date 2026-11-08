@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { colors } from "../data/colors";
 
 function Partnership() {
@@ -84,16 +85,22 @@ function Partnership() {
             </p>
           </div>
 
-          <div style={cardStyle}>
-            <h3 style={{ color: colors.gold }}>
-              Financial Partnership
-            </h3>
+          {/* ✅ MODIFIED: Financial Partnership now links to new Partner page */}
+          <Link to="/partner" style={{ textDecoration: "none" }}>
+            <div style={{ ...cardStyle, cursor: "pointer", border: `2px solid ${colors.gold}` }}>
+              <h3 style={{ color: colors.gold }}>
+                Financial Partnership →
+              </h3>
 
-            <p style={{ color: "#C5C5C5", lineHeight: "1.8" }}>
-              Support discipleship programs, leadership training,
-              missions, media outreach, and transformational initiatives.
-            </p>
-          </div>
+              <p style={{ color: "#C5C5C5", lineHeight: "1.8" }}>
+                Support discipleship programs, leadership training,
+                missions, media outreach, and transformational initiatives.
+              </p>
+              <p style={{ color: colors.gold, fontWeight: "700", marginTop: "15px" }}>
+                Become a Monthly Partner →
+              </p>
+            </div>
+          </Link>
 
           <div style={cardStyle}>
             <h3 style={{ color: colors.gold }}>
@@ -178,20 +185,23 @@ function Partnership() {
             marginTop: "60px",
           }}
         >
-          <button
-            style={{
-              backgroundColor: colors.gold,
-              color: colors.black,
-              border: "none",
-              padding: "16px 40px",
-              borderRadius: "50px",
-              fontSize: "1rem",
-              fontWeight: "600",
-              cursor: "pointer",
-            }}
-          >
-            Become A Partner
-          </button>
+          {/* ✅ MODIFIED: Dead button now links to /partner */}
+          <Link to="/partner" style={{ textDecoration: "none" }}>
+            <button
+              style={{
+                backgroundColor: colors.gold,
+                color: colors.black,
+                border: "none",
+                padding: "16px 40px",
+                borderRadius: "50px",
+                fontSize: "1rem",
+                fontWeight: "600",
+                cursor: "pointer",
+              }}
+            >
+              Become A Partner →
+            </button>
+          </Link>
         </div>
       </div>
     </div>

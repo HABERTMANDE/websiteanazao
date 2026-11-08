@@ -11,6 +11,7 @@ import Departments from "./pages/Departments";
 import Events from "./pages/Events";
 import Media from "./pages/Media";
 import Partnership from "./pages/Partnership";
+import Partner from "./pages/Partner";
 import Give from "./pages/Give";
 import Contact from "./pages/Contact";
 import Shop from "./pages/Shop";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/media" element={<Media />} />
         <Route path="/partnership" element={<Partnership />} />
+        <Route path="/partner" element={<Partner />} />
         <Route path="/give" element={<Give />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/shop" element={<Shop />} />

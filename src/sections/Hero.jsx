@@ -22,7 +22,7 @@ function Hero() {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-       padding: isMobile ? "55px 1.2rem 25px" : "140px 2rem 90px",
+        padding: isMobile ? "55px 1.2rem 25px" : "140px 2rem 90px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -131,10 +131,9 @@ function Hero() {
           transition={{ duration: 1 }}
           style={{
             fontSize: "clamp(3.6rem,14vw,11rem)",
-letterSpacing: "12px",
+            letterSpacing: "12px",
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: "800",
-            letterSpacing: "8px",
             marginBottom: "18px",
             lineHeight: "1",
             background: "linear-gradient(180deg,#FFFBE6 0%,#FFE873 15%,#FFD700 35%,#F5C542 60%,#D4AF37 80%,#B8860B 100%)",
@@ -170,8 +169,8 @@ letterSpacing: "12px",
           style={{
             color: "#ECECEC",
             fontSize: "clamp(.95rem,2vw,1.35rem)",
-lineHeight: "1.9",
-maxWidth: "950px",
+            lineHeight: "1.9",
+            maxWidth: "950px",
             margin: isMobile ? "0 auto 35px" : "0 auto 60px",
             textShadow: "0 0 12px rgba(0,0,0,.7)",
           }}
@@ -200,24 +199,28 @@ maxWidth: "950px",
               Join The Movement
             </motion.button>
           </Link>
-          <motion.button
-            whileHover={{ scale: 1.08, y: -6 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              background: "linear-gradient(135deg,#7A0000,#B11226,#D7263D)",
-              color: "#FFF",
-              padding: "18px 42px",
-              borderRadius: "50px",
-              border: "none",
-              cursor: "pointer",
-              fontWeight: "700",
-              fontSize: "1.05rem",
-              boxShadow: "0 15px 40px rgba(193,18,31,.45)",
-              fontFamily: "Montserrat, sans-serif",
-            }}
-          >
-            Partner With Us
-          </motion.button>
+
+          {/* ✅ MODIFIED: Partner With Us now links to /partner */}
+          <Link to="/partner" style={{ textDecoration: "none" }}>
+            <motion.button
+              whileHover={{ scale: 1.08, y: -6 }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                background: "linear-gradient(135deg,#7A0000,#B11226,#D7263D)",
+                color: "#FFF",
+                padding: "18px 42px",
+                borderRadius: "50px",
+                border: "none",
+                cursor: "pointer",
+                fontWeight: "700",
+                fontSize: "1.05rem",
+                boxShadow: "0 15px 40px rgba(193,18,31,.45)",
+                fontFamily: "Montserrat, sans-serif",
+              }}
+            >
+              Partner With Us
+            </motion.button>
+          </Link>
         </div>
 
         {/* ✅ REMOVED: Weekly Sessions block - was duplicate of next section */}
