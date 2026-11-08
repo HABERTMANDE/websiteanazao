@@ -2,11 +2,12 @@
 import { useSearchParams } from "react-router-dom";
 import { colors } from "../data/colors";
 
-// === FILL THESE LOCALLY IN VS CODE ONLY - DO NOT SHARE IN CHAT ===
-const TILL_NUMBER = "YOUR_TILL_NUMBER";
-const DIRECT_MPESA_NUMBER = "YOUR_DIRECT_MPESA";
-const BANK_ACCOUNT_LAST4 = "XXXX"; // only last 4
-const WHATSAPP_NUMBER = "YOUR_WHATSAPP_NUMBER"; // format: 2547XXXXXXXX, no + , no spaces
+// === FILL LOCALLY IN VS CODE ONLY ===
+const TILL_NUMBER = "8192090"; // ✅ PUBLIC - OK to show
+const DIRECT_MPESA_NUMBER = "YOUR_DIRECT_MPESA"; // ✅ OK to show - fill your Direct M-Pesa 07xx... here
+const WHATSAPP_NUMBER = "YOUR_WHATSAPP_NUMBER"; // ✅ OK to show - fill your Contact in 2547xxxxxxxx format
+const BANK_ACCOUNT_LAST4 = "YOUR_LAST_4"; // ✅ ONLY last 4 shown
+const BANK_ACCOUNT_FULL = "YOUR_FULL_ACCOUNT"; // 🔒 HIDDEN - only shown when user taps SHOW
 
 const categories = [
   { id: "missions", title: "MISSIONS & EVANGELISM", desc: "Gospel outreach, evangelistic missions, discipleship and advancement of the Christian faith." },
@@ -31,6 +32,7 @@ function Give() {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [copied, setCopied] = useState("");
+  const [showFullAccount, setShowFullAccount] = useState(false);
 
   const formatPhone = (p) => {
     let cleaned = (p || "").replace(/\D/g, "");
@@ -45,8 +47,13 @@ function Give() {
   };
 
   const handleMpesaPush = async () => {
-    if (!finalAmount || finalAmount < 1) return alert("Enter a valid amount");
-    if (phone.length < 10) return alert("Enter a valid M-Pesa number e.g. 0719...");
+    if (!finalAmount || finalAmount < 1) { setStatus("⚠️ Please select an amount first."); return; }
+    if (!phone || phone.replace(/\D/g,"").length < 10) {
+      setStatus("⚠️ Please enter YOUR M-Pesa number in Step 2 above first — e.g. 0719... — that's the number that will receive the prompt.");
+      document.getElementById("mpesa-phone-input")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      document.getElementById("mpesa-phone-input")?.focus();
+      return;
+    }
     setLoading(true);
     setStatus("Sending M-Pesa prompt to " + phone + "... Check your phone");
     try {
@@ -58,7 +65,7 @@ function Give() {
       const data = await res.json();
       if (data.success) setStatus("✅ Prompt sent! Enter your M-Pesa PIN on your phone to complete.");
       else setStatus("❌ Failed: " + (data.message || "Try again - or use Till method below"));
-    } catch (e) { setStatus("❌ Network error. Use Till method below - backend not connected yet."); }
+    } catch (e) { setStatus("❌ STK backend not connected yet. Please use Till / Direct M-Pesa below - they work now."); }
     setLoading(false);
   };
 
@@ -71,7 +78,6 @@ function Give() {
   const finalAmount = customAmount ? Number(customAmount) : amount;
   const selected = categories.find(c => c.id === campaign) || categories[4];
 
-  // WhatsApp message - auto fills amount + category + name
   const whatsappMessage = `Hello Anazao, I want to give KES ${finalAmount?.toLocaleString()} for ${selected.title}${name ? ` - My name is ${name}` : ""}. Please send me the bank account details. Thank you!`;
   const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -115,7 +121,7 @@ function Give() {
         <p style={{ color: "#fff", fontWeight: "700", margin: "24px 0 12px" }}>2. Your Details</p>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
           <input style={inputStyle} placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
-          <input style={inputStyle} placeholder="Your M-Pesa Number e.g. 0712..." value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <input id="mpesa-phone-input" style={{ ...inputStyle, border: method === "stk" && (!phone || phone.replace(/\D/g,"").length < 10) && status ? "2px solid #ff4444" : "1px solid #333" }} placeholder="Your M-Pesa Number e.g. 0712... *Required for STK Prompt" value={phone} onChange={(e) => { setPhone(e.target.value); setStatus(""); }} />
         </div>
 
         <p style={{ color: "#fff", fontWeight: "700", margin: "24px 0 12px" }}>3. Payment Method</p>
@@ -157,22 +163,18 @@ function Give() {
         {method === "bank" && (
           <div style={{ background: "#000", border: `1px dashed ${colors.gold}`, borderRadius: "14px", padding: "22px", marginTop: "22px", textAlign: "center" }}>
             <p style={{ color: colors.gold, fontWeight: "800", margin: "0 0 8px" }}>BANK TRANSFER - KCB BANK KENYA</p>
-            <p style={{ color: "#fff", lineHeight: "2" }}>Bank: <b>KCB Bank Kenya</b><br />Account Name: <b>HABERT MURUNGA</b><br />Branch: <b>Kencom Branch</b><br />Account Number: <b>**** {BANK_ACCOUNT_LAST4}</b><br /><span style={{ color: "#999", fontSize: "13px" }}>Full account number shared privately on WhatsApp for security</span></p>
-            <p style={{ color: "#999", fontSize: "13px", marginTop: "10px" }}>Use Reference: <b>{selected.title}</b> - Amount: <b>KES {finalAmount?.toLocaleString()}</b></p>
-
-            {/* NEW WHATSAPP BUTTON */}
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={whatsappBtnStyle}>
-              💬 REQUEST BANK DETAILS ON WHATSAPP
-            </a>
-            <p style={{ color: "#888", fontSize: "12px", marginTop: "10px", lineHeight: "1.5" }}>Tap to open WhatsApp — message is already written for you with your amount & category.<br />We will reply with the full account number privately.</p>
+            <p style={{ color: "#fff", lineHeight: "2" }}>Bank: <b>KCB Bank Kenya</b><br />Account Name: <b>HABERT MURUNGA</b><br />Branch: <b>Kencom Branch</b><br />Account Number: <b>{showFullAccount ? BANK_ACCOUNT_FULL : `**** ${BANK_ACCOUNT_LAST4}`}</b></p>
+            <button onClick={() => setShowFullAccount(!showFullAccount)} style={{ background: "transparent", color: colors.gold, border: `1px solid ${colors.gold}`, padding: "10px 20px", borderRadius: "50px", cursor: "pointer", fontWeight: "700", fontSize: "13px" }}>{showFullAccount ? "HIDE ACCOUNT NUMBER ↑" : "SHOW FULL ACCOUNT NUMBER ↓"}</button>
+            <button onClick={() => copyText(BANK_ACCOUNT_FULL, "Account")} style={{ ...buttonStyle, padding: "12px 28px", fontSize: "13px", marginTop: "10px", marginLeft: "8px" }}>COPY ACCOUNT</button>
+            <p style={{ color: "#999", fontSize: "13px", marginTop: "12px" }}>Use Reference: <b>{selected.title}</b> - Amount: <b>KES {finalAmount?.toLocaleString()}</b></p>
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={whatsappBtnStyle}>💬 REQUEST BANK DETAILS ON WHATSAPP</a>
+            <p style={{ color: "#888", fontSize: "12px", marginTop: "10px", lineHeight: "1.5" }}>Tap to open WhatsApp — message is already written for you.<br />Contact via WhatsApp below.</p>
           </div>
         )}
 
-        {/* WhatsApp help link - shows for ALL methods at bottom */}
         <div style={{ textAlign: "center", marginTop: "22px" }}>
           <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ color: "#25D366", fontSize: "13px", fontWeight: "700", textDecoration: "none" }}>Need help giving? Chat on WhatsApp →</a>
         </div>
-
         <p style={{ textAlign: "center", color: "#777", fontSize: "12.5px", marginTop: "16px", lineHeight: "1.6" }}>We are committed to responsible stewardship, transparency and accountability. Every gift is recorded and used for its intended purpose.</p>
       </div>
     </div>
