@@ -237,9 +237,8 @@ function Hero() {
               }}
             >
               Join The Movement
-            </motion.button>
-          </a>
-
+           </motion.button>
+</Link>
           <motion.button
             whileHover={{
               scale: 1.08,
