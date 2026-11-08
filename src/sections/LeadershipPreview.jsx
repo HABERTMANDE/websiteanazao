@@ -1,46 +1,6 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { colors } from "../data/colors";
-
-const leaders = [
-  {
-    role: "Overseer",
-    name: "Prophet Habert Murunga",
-    initials: "HM",
-    desc: "Provides spiritual oversight, guards the vision and doctrine, and gives prophetic direction to ANAZAO.",
-  },
-  {
-    role: "Vision Bearer",
-    name: "Pastor Grace Onjula",
-    initials: "GO",
-    desc: "Champions the ministry vision and guides the team in advancing the mission of ANAZAO.",
-  },
-  {
-    role: "Administrator",
-    name: "Minister Grace Ngari",
-    initials: "GN",
-    desc: "Coordinates ministry operations, administration, communication, and organizational excellence.",
-  },
-  {
-    role: "Counselor and Administrator",
-    name: "Counselor Esther Kevin",
-    initials: "EK",
-    desc: "Supports counseling, administration, discipleship, and the care of ministry members.",
-  },
-  {
-    role: "Treasurer",
-    name: "Minister Lavendar Otieno",
-    initials: "LO",
-    desc: "Oversees financial stewardship, accountability, and responsible management of ministry resources.",
-  },
-  {
-    role: "Secretary",
-    name: "Minister Eunice Wambale",
-    initials: "EW",
-    desc: "Coordinates records, official communications, documentation, and organizational follow-up.",
-  },
-
-];
 
 function LeadershipPreview() {
   return (
@@ -127,147 +87,7 @@ function LeadershipPreview() {
           </p>
         </motion.div>
 
-        {/* Nine leadership cards */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
-            gap: "25px",
-            alignItems: "stretch",
-          }}
-        >
-          {leaders.map((leader, index) => (
-            <motion.article
-              key={leader.name}
-              initial={{ opacity: 0, y: 35 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{
-                duration: 0.65,
-                delay: (index % 3) * 0.1,
-              }}
-              whileHover={{
-                y: -8,
-                boxShadow: "0 22px 45px rgba(212,175,55,0.12)",
-              }}
-              style={{
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                padding: "38px 25px",
-                minWidth: 0,
-                background:
-                  "linear-gradient(145deg, #151515, #090909)",
-                border: "1px solid rgba(212,175,55,0.3)",
-                borderRadius: "16px",
-                boxSizing: "border-box",
-                transition: "box-shadow 0.3s ease",
-              }}
-            >
-              {/* Card number */}
-              <span
-                style={{
-                  position: "absolute",
-                  top: "15px",
-                  right: "18px",
-                  color: "rgba(212,175,55,0.65)",
-                  fontSize: "0.7rem",
-                  letterSpacing: "2px",
-                }}
-              >
-                {String(index + 1).padStart(2, "0")}
-              </span>
-
-              {/* Initial badge */}
-              <div
-                style={{
-                  width: "85px",
-                  height: "85px",
-                  padding: "2px",
-                  borderRadius: "50%",
-                  background:
-                    "linear-gradient(135deg, #FFD700, #D4AF37, #8B6B00)",
-                  marginBottom: "25px",
-                  boxSizing: "border-box",
-                  boxShadow: "0 0 25px rgba(212,175,55,0.12)",
-                  flexShrink: 0,
-                }}
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "50%",
-                    background: "#101010",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: colors.gold,
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: "2rem",
-                    fontWeight: 700,
-                  }}
-                >
-                  {leader.initials}
-                </div>
-              </div>
-
-              {/* Role */}
-              <p
-                style={{
-                  color: colors.gold,
-                  textTransform: "uppercase",
-                  letterSpacing: "1.5px",
-                  fontSize: "0.73rem",
-                  fontWeight: 700,
-                  lineHeight: 1.7,
-                  margin: "0 0 12px",
-                }}
-              >
-                {leader.role}
-              </p>
-
-              {/* Name */}
-              <h3
-                style={{
-                  color: colors.white,
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.6rem",
-                  fontWeight: 600,
-                  lineHeight: 1.35,
-                  margin: "0 0 20px",
-                  overflowWrap: "anywhere",
-                }}
-              >
-                {leader.name}
-              </h3>
-
-              <div
-                style={{
-                  width: "45px",
-                  height: "2px",
-                  background: colors.gold,
-                  marginBottom: "20px",
-                }}
-              />
-
-              {/* Description */}
-              <p
-                style={{
-                  color: "#BDBDBD",
-                  fontSize: "0.91rem",
-                  lineHeight: 1.9,
-                  margin: 0,
-                }}
-              >
-                {leader.desc}
-              </p>
-            </motion.article>
-          ))}
-        </div>
+        {/* LEADER CARDS REMOVED FROM HOME - LEADERS ONLY ON /leadership PAGE */}
 
         {/* Full leadership button */}
         <motion.div
@@ -276,7 +96,7 @@ function LeadershipPreview() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
           style={{
-            marginTop: "70px",
+            marginTop: "10px",
             textAlign: "center",
           }}
         >
@@ -301,6 +121,7 @@ function LeadershipPreview() {
           >
             <Link
               to="/leadership"
+              onClick={() => window.scrollTo(0, 0)}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -321,7 +142,7 @@ function LeadershipPreview() {
               }}
             >
               VIEW FULL LEADERSHIP
-              <span style={{ fontSize: "1.3rem" }}>?</span>
+              <span style={{ fontSize: "1.3rem" }}>→</span>
             </Link>
           </motion.div>
         </motion.div>
@@ -345,4 +166,3 @@ function LeadershipPreview() {
 }
 
 export default LeadershipPreview;
-
