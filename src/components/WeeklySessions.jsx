@@ -16,7 +16,7 @@ function WeeklySessions() {
         <a href={meetLink} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
           <motion.button whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.95 }} style={{ background: "linear-gradient(135deg,#FFD700,#F5C542,#D4AF37)", color: "#000", padding: "18px 42px", borderRadius: "50px", border: "none", cursor: "pointer", fontWeight: "800", fontSize: "1.05rem", boxShadow: "0 15px 40px rgba(255,215,0,.45)", fontFamily: "Montserrat, sans-serif" }}>Join Google Meet → Mon - Fri • 10 PM</motion.button>
         </a>
-        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px", margin: "18px 0 0" }}>Mon - Fri • 10:00 PM - Midnight • On Google Meet</p>
+        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px", margin: "18px 0 0" }}>JEREMIAH 30:7 "Alas! for that day is great, so that none is like it: it is even the time of Jacob's trouble; but he shall be saved out of it."</p>
       </motion.div>
     </section>
   );
