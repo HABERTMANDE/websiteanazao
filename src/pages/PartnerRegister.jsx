@@ -10,6 +10,9 @@ const TIERS = {
   custom: { name: "CUSTOM PARTNERSHIP", kes: 0, usd: 0 },
 };
 
+// ✅ ADDED: Google Sheets API - Your live Web App URL
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbx6n0DRUOTnHICrDH3939yaT1MW8iU92W1gMil3nxzCSb0yuSScUkpWmljLKLWph9n-QQ/exec";
+
 export default function PartnerRegister() {
   const [params] = useSearchParams();
   const [done, setDone] = useState(null);
@@ -40,7 +43,8 @@ export default function PartnerRegister() {
 
   const update = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
-  const submit = (e) => {
+  // ✅ MODIFIED: Now saves locally + sends to Google Sheets
+  const submit = async (e) => {
     e.preventDefault();
     if (!form.consent) return alert("Please tick the WhatsApp consent box to continue.");
     if (!form.fullName || !form.email || !form.whatsapp || !form.amount) return alert("Please fill Name, Email, WhatsApp and Amount.");
@@ -48,10 +52,22 @@ export default function PartnerRegister() {
     const partnerId = "ANZ-" + new Date().getFullYear() + "-" + Math.floor(1000 + Math.random() * 9000);
     const record = { ...form, partnerId, status: "Active", createdAt: new Date().toISOString(), paid: 0 };
 
-    // Save locally for now - Step 7 will move this to Admin Dashboard / Database
+    // 1. Save locally (for Admin on THIS browser)
     const all = JSON.parse(localStorage.getItem("anazao_partners") || "[]");
     all.push(record);
     localStorage.setItem("anazao_partners", JSON.stringify(all));
+
+    // 2. Send to Google Sheets (for ALL devices)
+    try {
+      await fetch(SHEETS_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(record),
+      });
+    } catch (err) {
+      console.log("Sheets sync failed, but local save worked", err);
+    }
 
     setDone(record);
     window.scrollTo(0, 0);
@@ -160,7 +176,6 @@ export default function PartnerRegister() {
             </div>
           </div>
 
-          {/* ✅ MODIFIED: Circled region - now high contrast */}
           <div>
             <label style={label}>Additional Information (Optional)</label>
             <textarea
@@ -171,7 +186,6 @@ export default function PartnerRegister() {
             />
           </div>
 
-          {/* ✅ MODIFIED: Was #F2F2F2 grey + faint text - now white box + dark border + dark text + big checkbox */}
           <label style={{ display: "flex", gap: "12px", alignItems: "flex-start", background: "#fff", border: "2px solid #051224", padding: "18px", borderRadius: "12px", cursor: "pointer", fontSize: "0.95rem", lineHeight: 1.7, color: "#1A1A1A" }}>
             <input
               type="checkbox"
@@ -185,7 +199,6 @@ export default function PartnerRegister() {
             </span>
           </label>
 
-          {/* ✅ MODIFIED: Button + note made bolder / darker */}
           <button type="submit" style={{ background: "#051224", color: "#fff", border: "none", padding: "18px", borderRadius: "50px", fontWeight: 800, fontSize: "1.1rem", cursor: "pointer", boxShadow: "0 6px 20px rgba(5,18,36,0.25)" }}>
             Complete Registration →
           </button>
