@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { colors } from "../data/colors";
 
 function Events() {
@@ -50,7 +51,7 @@ function Events() {
           }}
         >
           Gatherings designed to disciple generations,
-          equip leaders, and transform nations through truth.
+          equip leaders, and transform nations through The Truth.
         </p>
       </div>
 
@@ -60,22 +61,100 @@ function Events() {
           margin: "0 auto",
         }}
       >
-        {/* Upcoming Events */}
+        {/* ===== UPCOMING EVENTS - ANNUAL PRAYER CAMP - TIMELESS ===== */}
         <div style={cardStyle}>
-          <h2 style={titleStyle}>Upcoming Events</h2>
-
-          <h3 style={{ color: colors.gold }}>
-            Kingdom Leadership Summit
-          </h3>
-
-          <p style={{ marginBottom: "10px" }}>
-            Date: Coming Soon
+          <p
+            style={{
+              color: colors.gold,
+              letterSpacing: "4px",
+              textTransform: "uppercase",
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              marginBottom: "12px",
+            }}
+          >
+            Upcoming Events • Every Year
           </p>
 
-          <p style={{ color: "#C5C5C5" }}>
-            A gathering focused on equipping emerging
+          <h2 style={titleStyle}>Annual Prayer Camp</h2>
+
+          <p
+            style={{
+              color: colors.gold,
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "1.3rem",
+              fontStyle: "italic",
+              marginBottom: "15px",
+            }}
+          >
+            A Yearly Gathering Of Believers
+          </p>
+
+          <p style={{ marginBottom: "15px", fontWeight: 700 }}>
+            Date: LAST WEEK OF APRIL ANNUALLY
+          </p>
+
+          <p style={{ color: "#C5C5C5", lineHeight: 1.8, marginBottom: "20px" }}>
+            Every year, we come together as one family to seek God in
+            prayer, worship, and the Word — a divine gathering for
+            revival, restoration, healing, prophetic direction and a
+            deeper encounter with God for Kingdom assignment.
+          </p>
+
+          <p style={{ color: "#C5C5C5", lineHeight: 1.8, marginBottom: "25px" }}>
+            A gathering focused on equipping sons and daughters of God to be intercessors and
             leaders for transformational impact.
           </p>
+
+          {/* 3 Pillars */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+              gap: "15px",
+              marginBottom: "25px",
+            }}
+          >
+            <div style={{ background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.25)", borderRadius: "14px", padding: "16px", textAlign: "center" }}>
+              <p style={{ color: "#fff", fontWeight: 700, margin: "0 0 6px" }}>🙏 Prayer</p>
+              <p style={{ color: "#C5C5C5", fontSize: "0.85rem", margin: 0, lineHeight: 1.6 }}>Deep intercession & seeking God</p>
+            </div>
+            <div style={{ background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.25)", borderRadius: "14px", padding: "16px", textAlign: "center" }}>
+              <p style={{ color: "#fff", fontWeight: 700, margin: "0 0 6px" }}>🔥 Worship</p>
+              <p style={{ color: "#C5C5C5", fontSize: "0.85rem", margin: 0, lineHeight: 1.6 }}>Worship, praise & consecration</p>
+            </div>
+            <div style={{ background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.25)", borderRadius: "14px", padding: "16px", textAlign: "center" }}>
+              <p style={{ color: "#fff", fontWeight: 700, margin: "0 0 6px" }}>📖 Word</p>
+              <p style={{ color: "#C5C5C5", fontSize: "0.85rem", margin: 0, lineHeight: 1.6 }}>Teaching, prophecy & direction</p>
+            </div>
+          </div>
+
+          <p style={{ color: "#AAAAAA", fontSize: "0.9rem", fontStyle: "italic", marginBottom: "20px", textAlign: "center" }}>
+            Join us every year — all are welcome.
+          </p>
+
+          <div style={{ textAlign: "center" }}>
+            <Link
+              to="/contact"
+              onClick={() => window.scrollTo(0, 0)}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "14px 30px",
+                borderRadius: "50px",
+                background: "linear-gradient(135deg,#FFD700,#D4AF37)",
+                color: "#000",
+                textDecoration: "none",
+                fontSize: "0.85rem",
+                fontWeight: 800,
+                letterSpacing: "1px",
+                boxShadow: "0 0 25px rgba(255,215,0,.35)",
+              }}
+            >
+              REGISTER INTEREST →
+            </Link>
+          </div>
         </div>
 
         {/* Weekly Gatherings */}
@@ -88,10 +167,10 @@ function Events() {
               lineHeight: "2",
             }}
           >
-            <li>Prayer and Intercession Meetings</li>
+            <li>The School of Prayer and Intercession</li>
             <li>Discipleship Classes</li>
             <li>Leadership Development Sessions</li>
-            <li>Community Fellowship Gatherings</li>
+            <li>Family and Community Fellowship</li>
           </ul>
         </div>
 
@@ -117,7 +196,7 @@ function Events() {
           </p>
         </div>
 
-        {/* CTA */}
+        {/* CTA - CONTACT US ACTIVATED */}
         <div
           style={{
             ...cardStyle,
@@ -136,19 +215,29 @@ function Events() {
             conference, or leadership training?
           </p>
 
-          <button
+          <Link
+            to="/contact"
+            onClick={() => window.scrollTo(0, 0)}
             style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
               backgroundColor: colors.gold,
+              background: "linear-gradient(135deg,#FFD700,#D4AF37)",
               color: colors.black,
               border: "none",
               padding: "15px 35px",
               borderRadius: "50px",
-              fontWeight: "600",
+              fontWeight: "800",
+              fontSize: "0.9rem",
+              letterSpacing: "0.5px",
               cursor: "pointer",
+              textDecoration: "none",
+              boxShadow: "0 0 25px rgba(255,215,0,.35)",
             }}
           >
             Contact Us
-          </button>
+          </Link>
         </div>
       </div>
     </div>
