@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { colors } from "../data/colors";
@@ -9,15 +10,29 @@ import {
 } from "react-icons/fa";
 
 function About() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const cardStyle = {
     background: "rgba(255,255,255,0.05)",
     backdropFilter: "blur(12px)",
     border: "1px solid rgba(255,215,0,.18)",
     borderRadius: "24px",
-    padding: "35px",
+    padding: isMobile ? "28px 22px" : "35px",
     transition: ".35s ease",
     cursor: "pointer",
     boxShadow: "0 10px 30px rgba(0,0,0,.25)",
+    // FIX: Centre everything inside cards
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
   return (
@@ -26,7 +41,7 @@ function About() {
         background:
           "linear-gradient(180deg,#05122D 0%,#071A40 50%,#05122D 100%)",
         color: colors.white,
-        padding: "120px 20px",
+        padding: isMobile ? "90px 16px 60px" : "120px 20px",
         overflow: "hidden",
         position: "relative",
       }}
@@ -62,7 +77,7 @@ function About() {
           viewport={{ once: true }}
           style={{
             textAlign: "center",
-            marginBottom: "70px",
+            marginBottom: isMobile ? "45px" : "70px",
           }}
         >
           <p
@@ -90,9 +105,12 @@ function About() {
           <h2
             style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(2.7rem,6vw,4.8rem)",
+              // FIX: Smaller on phone so it doesn't look huge / break
+              fontSize: isMobile ? "clamp(2rem,9vw,2.8rem)" : "clamp(2.7rem,6vw,4.8rem)",
               marginBottom: "25px",
               color: colors.white,
+              lineHeight: "1.2",
+              textAlign: "center",
             }}
           >
             Transforming Nations Through
@@ -110,9 +128,10 @@ function About() {
             style={{
               maxWidth: "850px",
               margin: "0 auto",
-              fontSize: "1.15rem",
+              fontSize: isMobile ? "1rem" : "1.15rem",
               color: "#D9D9D9",
-              lineHeight: "2",
+              lineHeight: isMobile ? "1.8" : "2",
+              textAlign: "center",
             }}
           >
             ANAZAO is an apostolic and transformational movement committed to
@@ -127,9 +146,10 @@ function About() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(330px,1fr))",
+            // FIX: 260px instead of 330px so it fits phones
+            gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
             gap: "30px",
-            marginBottom: "70px",
+            marginBottom: isMobile ? "45px" : "70px",
           }}
         >
           <motion.div
@@ -148,6 +168,7 @@ function About() {
                 color: colors.gold,
                 marginBottom: "20px",
                 fontSize: "1.6rem",
+                textAlign: "center",
               }}
             >
               Our Vision
@@ -156,7 +177,10 @@ function About() {
             <p
               style={{
                 color: "#DDDDDD",
-                lineHeight: "2",
+                lineHeight: "1.9",
+                textAlign: "center",
+                maxWidth: "500px",
+                margin: "0 auto",
               }}
             >
               Transforming Nations Through a Generation of Truth.
@@ -178,6 +202,7 @@ function About() {
                 color: colors.gold,
                 marginBottom: "20px",
                 fontSize: "1.6rem",
+                textAlign: "center",
               }}
             >
               Our Mission
@@ -186,7 +211,10 @@ function About() {
             <p
               style={{
                 color: "#DDDDDD",
-                lineHeight: "2",
+                lineHeight: "1.9",
+                textAlign: "center",
+                maxWidth: "500px",
+                margin: "0 auto",
               }}
             >
               Bringing together diverse talents, gifts, skills, and abilities
@@ -202,7 +230,7 @@ function About() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
             gap: "30px",
-            marginBottom: "80px",
+            marginBottom: isMobile ? "50px" : "80px",
           }}
         >
           {[
@@ -253,6 +281,7 @@ function About() {
                 style={{
                   color: colors.white,
                   marginBottom: "15px",
+                  textAlign: "center",
                 }}
               >
                 {item.title}
@@ -262,6 +291,9 @@ function About() {
                 style={{
                   color: "#D6D6D6",
                   lineHeight: "1.9",
+                  textAlign: "center",
+                  maxWidth: "500px",
+                  margin: "0 auto",
                 }}
               >
                 {item.text}
@@ -280,7 +312,7 @@ function About() {
             background: "rgba(255,255,255,0.04)",
             border: "1px solid rgba(255,215,0,.15)",
             borderRadius: "24px",
-            padding: "40px",
+            padding: isMobile ? "28px 22px" : "40px",
             textAlign: "center",
             marginBottom: "60px",
           }}
@@ -291,6 +323,7 @@ function About() {
               fontSize: "2rem",
               marginBottom: "20px",
               fontFamily: "'Cormorant Garamond', serif",
+              textAlign: "center",
             }}
           >
             Governance Principle
@@ -299,10 +332,11 @@ function About() {
           <p
             style={{
               color: "#E5E5E5",
-              fontSize: "1.15rem",
-              lineHeight: "2",
+              fontSize: isMobile ? "1rem" : "1.15rem",
+              lineHeight: "1.9",
               maxWidth: "800px",
               margin: "0 auto",
+              textAlign: "center",
             }}
           >
             Spiritual Leadership, Shared Responsibility, and Collaborative

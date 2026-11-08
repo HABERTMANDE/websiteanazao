@@ -1,12 +1,23 @@
+import { useState, useEffect } from "react";
 import { colors } from "../data/colors";
 import { motion } from "framer-motion";
 import heroBg from "../assets/images/anazao-hero.jpeg";
 
 function Hero() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <section
       style={{
-        minHeight: "100vh",
+        // LAPTOP: stays exactly as before - 100vh
+        // PHONE: auto height - no more huge gaps
+        minHeight: isMobile ? "auto" : "100vh",
         backgroundImage: `
           linear-gradient(
             rgba(0,0,0,.72),
@@ -22,7 +33,8 @@ function Hero() {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        padding: "120px 1.2rem 70px",
+        // PHONE: 90px top / 50px bottom instead of 120px / 70px
+        padding: isMobile ? "90px 1.2rem 50px" : "120px 1.2rem 70px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -137,13 +149,10 @@ function Hero() {
             letterSpacing: "8px",
             marginBottom: "18px",
             lineHeight: "1",
-
             background:
               "linear-gradient(180deg,#FFFBE6 0%,#FFE873 15%,#FFD700 35%,#F5C542 60%,#D4AF37 80%,#B8860B 100%)",
-
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-
             filter: `
             drop-shadow(0 0 10px rgba(255,215,0,.8))
             drop-shadow(0 0 25px rgba(255,215,0,.5))
@@ -182,7 +191,8 @@ function Hero() {
             fontSize: "clamp(.95rem,3vw,1.12rem)",
             lineHeight: "2",
             maxWidth: "760px",
-            margin: "0 auto 60px",
+            // PHONE: 35px gap before buttons instead of 60px
+            margin: isMobile ? "0 auto 35px" : "0 auto 60px",
             textShadow: "0 0 12px rgba(0,0,0,.7)",
           }}
         >
@@ -257,27 +267,29 @@ function Hero() {
         </div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-        }}
-        style={{
-          position: "absolute",
-          bottom: "25px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          color: "#FFD700",
-          fontSize: "1.8rem",
-          zIndex: 5,
-        }}
-      >
-        ↓
-      </motion.div>
+      {/* Scroll Indicator - Hide on phone, it was adding to the bottom gap */}
+      {!isMobile && (
+        <motion.div
+          animate={{
+            y: [0, 10, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+          }}
+          style={{
+            position: "absolute",
+            bottom: "25px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            color: "#FFD700",
+            fontSize: "1.8rem",
+            zIndex: 5,
+          }}
+        >
+          ↓
+        </motion.div>
+      )}
     </section>
   );
 }
