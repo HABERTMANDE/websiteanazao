@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 
 import Home from "./pages/Home";
+import Membership from "./pages/Membership";
 import About from "./pages/About";
 import Leadership from "./pages/Leadership";
 import Departments from "./pages/Departments";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/leadership" element={<Leadership />} />
+        <Route path="/membership" element={<Membership />} />
         <Route path="/departments" element={<Departments />} />
         <Route path="/events" element={<Events />} />
         <Route path="/media" element={<Media />} />
