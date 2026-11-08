@@ -11,6 +11,10 @@ const TIERS = [
   { id: "custom", name: "CUSTOM PARTNERSHIP", kes: 0, usd: 0, desc: "Choose your own monthly amount outside the listed tiers." },
 ];
 
+// ✅ BIBLE MATH: 5000 Bibles x KSh 800 = KSh 4,000,000 / year
+const BIBLE_COST = 800;
+const BIBLE_COUNT = 5000;
+
 export default function Partner() {
   const [currency, setCurrency] = useState("KES");
 
@@ -96,7 +100,7 @@ export default function Partner() {
         </p>
       </div>
 
-      {/* ✅ MODIFIED: PROJECTS - 5000 BIBLES ANNUALLY */}
+      {/* ✅ MODIFIED: PROJECTS - Bible = 5000 x 800 = 4,000,000 */}
       <div id="projects" style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px 20px 80px" }}>
         <div style={{ textAlign: "center", marginBottom: "35px" }}>
           <p style={{ color: "#B9975B", letterSpacing: "4px", fontWeight: 800, fontSize: "0.8rem" }}>BUILDING THE VISION TOGETHER</p>
@@ -109,41 +113,32 @@ export default function Partner() {
         {[
           { slug: "land-acquisition", title: "SECURING THE FOUNDATION — 8 ACRES OF LAND", desc: "Eight acres to establish a lasting foundation for the ministry's vision, activities and future development.", target: 12000000, raised: 0, img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80" },
           { slug: "media-equipment", title: "ADVANCING THE MESSAGE — MEDIA INFRASTRUCTURE", desc: "Media and communication equipment to broadcast teachings, document ministry and extend reach through digital platforms.", target: 2000000, raised: 0, img: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=800&q=80" },
-          // ✅ MODIFIED: 5000 BIBLES ANNUALLY
-          { slug: "bible-distribution", title: "PUTTING THE WORD INTO HANDS — 5,000 BIBLES ANNUALLY", desc: "Acquire and distribute 5,000 Bibles every year for evangelism, discipleship, outreach and spiritual growth in communities.", target: 0, raised: 0, biblesTarget: 5000, biblesGiven: 0, img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&q=80", tbd: true },
+          // ✅ MODIFIED: Bible target now set - 5000 x 800 = 4,000,000
+          { slug: "bible-distribution", title: "PUTTING THE WORD INTO HANDS — 5,000 BIBLES ANNUALLY", desc: "Acquire and distribute 5,000 Bibles every year for evangelism, discipleship, outreach and spiritual growth in communities. Each Bible costs KSh 800.", target: BIBLE_COUNT * BIBLE_COST, raised: 0, biblesTarget: BIBLE_COUNT, biblesGiven: 0, bibleCost: BIBLE_COST, img: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=800&q=80" },
           { slug: "merchandise", title: "CARRYING THE MESSAGE — MERCHANDISE & PUBLICATIONS", desc: "Merchandise and publications to communicate identity, strengthen engagement and extend the message.", target: 2400000, raised: 0, img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80" },
         ].map(p => {
           const pct = p.target > 0 ? Math.round((p.raised / p.target) * 100) : 0;
           const remaining = p.target - p.raised;
+          const isBible = p.slug === "bible-distribution";
           return (
             <div key={p.slug} style={{ display: "flex", background: "#fff", border: "1px solid #E8E8E8", borderRadius: "20px", overflow: "hidden", marginBottom: "22px", flexWrap: "wrap", boxShadow: "0 8px 25px rgba(0,0,0,0.05)" }}>
               <img src={p.img} alt={p.title} style={{ width: "320px", minHeight: "220px", objectFit: "cover", flex: "1 1 280px" }} />
               <div style={{ flex: "2 1 400px", padding: "28px", textAlign: "left" }}>
                 <h3 style={{ fontSize: "1.15rem", lineHeight: 1.4, margin: "0 0 10px" }}>{p.title}</h3>
                 <p style={{ color: "#666", lineHeight: 1.8, margin: "0 0 16px" }}>{p.desc}</p>
-                {p.tbd ? (
-                  // ✅ MODIFIED: Bible card now shows 5000 Bibles progress
-                  <div>
-                    <p style={{ background: "#FFF8E1", padding: "12px 14px", borderRadius: "10px", fontWeight: 700, fontSize: "0.9rem", margin: "0 0 10px" }}>
-                      📖 Annual Goal: 5,000 Bibles • {(p.biblesGiven || 0).toLocaleString()} given • {(p.biblesTarget - (p.biblesGiven || 0)).toLocaleString()} remaining
-                    </p>
-                    <div style={{ background: "#EEE", height: "10px", borderRadius: "20px", overflow: "hidden" }}>
-                      <div style={{ width: `${Math.round(((p.biblesGiven || 0) / p.biblesTarget) * 100)}%`, background: "#D4AF37", height: "100%" }} />
-                    </div>
-                    <p style={{ fontSize: "0.9rem", color: "#666", margin: "10px 0 0" }}>Financial Target: To Be Determined — Set once cost per Bible is confirmed.</p>
-                  </div>
-                ) : (
-                  <>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", fontWeight: 700, marginBottom: "8px", flexWrap: "wrap", gap: "8px" }}>
-                      <span style={{ color: "#051224" }}>Raised: KSh {p.raised.toLocaleString()}</span>
-                      <span style={{ color: "#B9975B" }}>Target: KSh {p.target.toLocaleString()}</span>
-                    </div>
-                    <div style={{ background: "#EEE", height: "10px", borderRadius: "20px", overflow: "hidden" }}>
-                      <div style={{ width: `${pct}%`, background: "#D4AF37", height: "100%" }} />
-                    </div>
-                    <p style={{ fontSize: "0.9rem", color: "#666", margin: "10px 0 0" }}>{pct}% funded • Remaining: <b>KSh {remaining.toLocaleString()}</b></p>
-                  </>
+                {isBible && (
+                  <p style={{ background: "#FFF8E1", padding: "12px 14px", borderRadius: "10px", fontWeight: 700, fontSize: "0.9rem", margin: "0 0 14px" }}>
+                    📖 Annual Goal: {p.biblesTarget.toLocaleString()} Bibles • {(p.biblesGiven || 0).toLocaleString()} given • {(p.biblesTarget - (p.biblesGiven || 0)).toLocaleString()} remaining • KSh {p.bibleCost.toLocaleString()} per Bible
+                  </p>
                 )}
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", fontWeight: 700, marginBottom: "8px", flexWrap: "wrap", gap: "8px" }}>
+                  <span style={{ color: "#051224" }}>Raised: KSh {p.raised.toLocaleString()}</span>
+                  <span style={{ color: "#B9975B" }}>Target: KSh {p.target.toLocaleString()}</span>
+                </div>
+                <div style={{ background: "#EEE", height: "10px", borderRadius: "20px", overflow: "hidden" }}>
+                  <div style={{ width: `${pct}%`, background: "#D4AF37", height: "100%" }} />
+                </div>
+                <p style={{ fontSize: "0.9rem", color: "#666", margin: "10px 0 0" }}>{pct}% funded • Remaining: <b>KSh {remaining.toLocaleString()}</b>{isBible ? ` • ${((p.biblesTarget - (p.biblesGiven || 0))).toLocaleString()} Bibles to go` : ""}</p>
                 <Link to={`/partner/${p.slug}`} style={{ textDecoration: "none" }}>
                   <button style={{ marginTop: "18px", background: "#051224", color: "#fff", border: "none", padding: "13px 28px", borderRadius: "50px", fontWeight: 800, cursor: "pointer" }}>Support This Project →</button>
                 </Link>
@@ -153,7 +148,7 @@ export default function Partner() {
         })}
 
         <p style={{ textAlign: "center", color: "#888", fontSize: "0.9rem", marginTop: "10px" }}>
-          Known targets total <b>KSh 16,400,000</b> excluding Bible budget. Combined total will be shown once Bible budget is set.
+          Total Vision Target: <b>KSh 20,400,000</b> — Land 12M + Media 2M + Bibles 4M (5,000 × KSh 800 / year) + Merchandise 2.4M
         </p>
       </div>
 
