@@ -1,4 +1,4 @@
-// api/mpesa/stk-push.js - LIVE VERSION - DEBUG
+// api/mpesa/stk-push.js - SANDBOX VERSION - DEBUG
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ success: false, message: "Method not allowed" });
 
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     }
 
     const auth = Buffer.from(`${process.env.MPESA_CONSUMER_KEY}:${process.env.MPESA_CONSUMER_SECRET}`).toString("base64");
-    const tokenRes = await fetch("https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
+    const tokenRes = await fetch("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
       headers: { Authorization: `Basic ${auth}` },
     });
     const tokenText = await tokenRes.text();
@@ -34,14 +34,14 @@ export default async function handler(req, res) {
     const timestamp = new Date().toISOString().replace(/[-:TZ.]/g, "").slice(0, 14);
     const password = Buffer.from(`${shortcode}${passkey}${timestamp}`).toString("base64");
 
-    const stkRes = await fetch("https://api.safaricom.co.ke/mpesa/stkpush/v1/processrequest", {
+    const stkRes = await fetch("https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         BusinessShortCode: shortcode,
         Password: password,
         Timestamp: timestamp,
-        TransactionType: "CustomerBuyGoodsOnline",
+        TransactionType: "CustomerPayBillOnline",
         Amount: Number(amount),
         PartyA: phone,
         PartyB: shortcode,
