@@ -52,37 +52,28 @@ function Footer() {
         </div>
 
         {/* Quick Links */}
-        <div>
-          <h3
-            style={{
-              color: colors.gold,
-              marginBottom: "20px",
-            }}
-          >
-            Quick Links
-          </h3>
+<div>
+  <h3 style={{ color: colors.gold, marginBottom: "20px" }}>Quick Links</h3>
 
-          <Link to="/about" style={linkStyle}>
-            About
-          </Link>
-
-          <Link to="/leadership" style={linkStyle}>
-            Leadership
-          </Link>
-
-          <Link to="/events" style={linkStyle}>
-            Events
-          </Link>
-
-          <Link to="/give" style={linkStyle}>
-            Give
-          </Link>
-
-          <Link to="/contact" style={linkStyle}>
-            Contact
-          </Link>
-        </div>
-
+  {[
+    { name: "About", path: "/about" },
+    { name: "Leadership", path: "/leadership" },
+    { name: "Events", path: "/events" },
+    { name: "Give", path: "/give" },
+    { name: "Contact", path: "/contact" },
+    { name: "Join The Movement", path: "/membership" },
+  ].map((link) => (
+    <Link
+      key={link.path}
+      to={link.path}
+      style={linkStyle}
+      onMouseEnter={(e) => (e.target.style.color = colors.gold)}
+      onMouseLeave={(e) => (e.target.style.color = "#C5C5C5")}
+    >
+      {link.name} →
+    </Link>
+  ))}
+</div>
         {/* Contact */}
         <div>
           <h3
