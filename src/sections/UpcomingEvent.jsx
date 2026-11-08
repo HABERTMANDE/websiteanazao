@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { colors } from "../data/colors";
+import eventPoster from "../assets/events/alive-youth-2027.jpeg";
 
 function UpcomingEvent() {
   const event = {
@@ -10,7 +11,7 @@ function UpcomingEvent() {
     date: "13th - 16th January 2027",
     time: "All Day",
     venue: "Mityana, Uganda",
-    image: "/alive-youth-2027.jpg",
+    image: eventPoster,
     description:
       "Alive Youth Conference 2027 is a life-changing gathering for the youth — set apart for God's purpose. Four days of worship, prayer, the Word, discipleship and encounters that will mark a generation for Kingdom assignment. Come ready to be separated, sanctified and sent.",
   };
