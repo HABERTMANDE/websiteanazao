@@ -34,7 +34,7 @@ function About() {
           style={{
             color: "#FFD700",
             fontSize: "7rem",
-            marginBottom: "20px",
+            marginBottom: "10px",
             textShadow: `
               0 0 8px rgba(255,215,0,0.8),
               0 0 20px rgba(255,215,0,0.5)
@@ -43,6 +43,18 @@ function About() {
         >
           WHO WE ARE
         </h1>
+
+        {/* MODIFICATION 1: ANAZAO SUBTITLE ADDED */}
+        <h2
+          style={{
+            color: colors.white,
+            fontSize: "1.5rem",
+            letterSpacing: "8px",
+            marginBottom: "20px",
+          }}
+        >
+          ANAZAO
+        </h2>
 
         <p
           style={{
@@ -112,7 +124,7 @@ function About() {
       <motion.section
         {...sectionAnimation}
         style={{
-          padding: "80px 50px 120px",
+          padding: "80px 50px",
           maxWidth: "1100px",
           margin: "0 auto",
         }}
@@ -130,6 +142,44 @@ function About() {
           Spiritual Leadership, Shared Responsibility, and Collaborative
           Stewardship.
         </p>
+      </motion.section>
+
+      {/* MODIFICATION 2: WHAT WE DO + BUTTON ADDED */}
+      <motion.section
+        {...sectionAnimation}
+        style={{
+          padding: "60px 50px 120px",
+          maxWidth: "1100px",
+          margin: "0 auto",
+          textAlign: "center",
+        }}
+      >
+        <h2
+          style={{
+            color: colors.gold,
+            marginBottom: "20px",
+          }}
+        >
+          What We Do
+        </h2>
+        <p style={{ lineHeight: "1.8", marginBottom: "30px" }}>
+          Conferences, Youth Gatherings, Leadership Training, and Community
+          Outreach — raising young people to live set apart for God's purpose.
+        </p>
+        <a
+          href="/events"
+          style={{
+            backgroundColor: "#FFD700",
+            color: "#000",
+            padding: "14px 30px",
+            borderRadius: "30px",
+            fontWeight: "bold",
+            textDecoration: "none",
+            display: "inline-block",
+          }}
+        >
+          See Our Events →
+        </a>
       </motion.section>
     </motion.div>
   );
