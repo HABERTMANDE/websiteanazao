@@ -4,9 +4,9 @@ import { colors } from "../data/colors";
 import { motion } from "framer-motion";
 import heroBg from "../assets/images/anazao-hero.jpeg";
 
-// ✅ ADDED: Replace with your real links
-const FACEBOOK_URL = "https://facebook.com/ANAZAO";
-const INSTAGRAM_URL = "https://instagram.com/ANAZAO";
+// ✅ YOUR REAL LINKS - DONE
+const FACEBOOK_URL = "https://web.facebook.com/profile.php?id=61573461963343";
+const INSTAGRAM_URL = "https://www.instagram.com/anazao_thefamilyofgraceglobal";
 
 function Hero() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -226,7 +226,7 @@ function Hero() {
           </Link>
         </div>
 
-        {/* ✅ ADDED: Facebook + Instagram - In your green circled area */}
+        {/* ✅ Facebook + Instagram - Your real links */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
