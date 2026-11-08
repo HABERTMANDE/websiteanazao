@@ -24,6 +24,48 @@ function Give() {
   const [method, setMethod] = useState("mpesa");
   const [showDetails, setShowDetails] = useState(false);
 
+  // --- M-PESA STK PUSH STATES ---
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
+
+  // Format 0719... -> 254719...
+  const formatPhone = (p) => {
+    let cleaned = (p || "").replace(/\D/g, "");
+    if (cleaned.startsWith("0")) return "254" + cleaned.slice(1);
+    if (cleaned.startsWith("254")) return cleaned;
+    return cleaned;
+  };
+
+  const handleMpesaPush = async () => {
+    if (!finalAmount || finalAmount < 1) return alert("Enter a valid amount");
+    if (phone.length < 10) return alert("Enter a valid M-Pesa number e.g. 0719...");
+
+    setLoading(true);
+    setStatus("Sending M-Pesa prompt to " + phone + "... Check your phone");
+
+    try {
+      const res = await fetch("/api/mpesa/stk-push", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phone: formatPhone(phone),
+          amount: finalAmount,
+          accountReference: campaign,
+          transactionDesc: `Anazao Give - ${selected.title}`
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("✅ Prompt sent! Enter your M-Pesa PIN on your phone to complete. You will get an SMS confirmation.");
+      } else {
+        setStatus("❌ Failed: " + (data.message || "Try again"));
+      }
+    } catch (e) {
+      setStatus("❌ Network error. Check your backend is running.");
+    }
+    setLoading(false);
+  };
+
   const cardStyle = {
     backgroundColor: "#111111",
     border: `1px solid ${colors.gold}`,
@@ -66,7 +108,6 @@ function Give() {
   return (
     <div style={{ backgroundColor: colors.black, color: colors.white, minHeight: "100vh", padding: "120px 20px 80px" }}>
       
-      {/* YOUR ORIGINAL CARD - KEPT */}
       <div style={cardStyle}>
         <h1 style={{ color: colors.gold, fontSize: "4rem", marginBottom: "20px", marginTop: 0 }}>Give</h1>
         <p style={{ color: "#C5C5C5", lineHeight: "1.9", fontSize: "1.1rem", marginBottom: "30px" }}>
@@ -88,7 +129,6 @@ function Give() {
         </p>
       </div>
 
-      {/* NEW: CATEGORIES */}
       <div style={{ maxWidth: "1100px", margin: "60px auto 0", textAlign: "center" }}>
         <p style={{ color: colors.gold, letterSpacing: "3px", fontWeight: "800", fontSize: "12px" }}>WHERE YOUR GIVING GOES</p>
         <h2 style={{ fontSize: "30px", margin: "10px 0 30px" }}>Choose An Area To Support</h2>
@@ -104,7 +144,6 @@ function Give() {
         </div>
       </div>
 
-      {/* NEW: FORM */}
       <div id="give-form" style={{ ...cardStyle, marginTop: "50px", textAlign: "left" }}>
         <div style={{ textAlign: "center" }}>
           <h2 style={{ color: colors.gold, fontSize: "26px", margin: "0 0 6px" }}>Give To: {selected.title}</h2>
@@ -122,7 +161,7 @@ function Give() {
         </div>
         <input style={{ ...inputStyle, marginTop: "12px" }} placeholder="Or enter custom amount e.g. 2500" value={customAmount} onChange={(e) => setCustomAmount(e.target.value.replace(/[^0-9]/g, ""))} />
 
-        <p style={{ color: "#fff", fontWeight: "700", margin: "24px 0 12px" }}>2. Your Details (Optional)</p>
+        <p style={{ color: "#fff", fontWeight: "700", margin: "24px 0 12px" }}>2. Your Details</p>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
           <input style={inputStyle} placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
           <input style={inputStyle} placeholder="Phone / M-Pesa Number e.g. 0712..." value={phone} onChange={(e) => setPhone(e.target.value)} />
@@ -130,33 +169,41 @@ function Give() {
 
         <p style={{ color: "#fff", fontWeight: "700", margin: "24px 0 12px" }}>3. Payment Method</p>
         <div style={{ display: "flex", gap: "10px" }}>
-          <button onClick={() => setMethod("mpesa")} style={{ flex: 1, padding: "14px", borderRadius: "12px", border: method === "mpesa" ? `2px solid ${colors.gold}` : "1px solid #333", background: method === "mpesa" ? "#222" : "#000", color: "#fff", fontWeight: "700", cursor: "pointer" }}>M-PESA Till</button>
-          <button onClick={() => setMethod("bank")} style={{ flex: 1, padding: "14px", borderRadius: "12px", border: method === "bank" ? `2px solid ${colors.gold}` : "1px solid #333", background: method === "bank" ? "#222" : "#000", color: "#fff", fontWeight: "700", cursor: "pointer" }}>Bank Transfer</button>
+          <button onClick={() => { setMethod("mpesa"); setShowDetails(false); setStatus(""); }} style={{ flex: 1, padding: "14px", borderRadius: "12px", border: method === "mpesa" ? `2px solid ${colors.gold}` : "1px solid #333", background: method === "mpesa" ? "#222" : "#000", color: "#fff", fontWeight: "700", cursor: "pointer" }}>M-PESA (STK Prompt)</button>
+          <button onClick={() => { setMethod("bank"); setShowDetails(false); setStatus(""); }} style={{ flex: 1, padding: "14px", borderRadius: "12px", border: method === "bank" ? `2px solid ${colors.gold}` : "1px solid #333", background: method === "bank" ? "#222" : "#000", color: "#fff", fontWeight: "700", cursor: "pointer" }}>Bank Transfer</button>
         </div>
 
-        {!showDetails ? (
-          <button style={{ ...buttonStyle, width: "100%", marginTop: "28px" }} onClick={() => setShowDetails(true)}>
-            CONTINUE TO GIVE KES {finalAmount?.toLocaleString() || 0} →
-          </button>
+        {/* --- NEW: M-PESA STK BUTTON --- */}
+        {method === "mpesa" ? (
+          <>
+            <button 
+              onClick={handleMpesaPush} 
+              disabled={loading}
+              style={{ ...buttonStyle, width: "100%", marginTop: "28px", opacity: loading ? 0.6 : 1 }}
+            >
+              {loading ? "SENDING PROMPT..." : `GIVE KES ${finalAmount?.toLocaleString() || 0} VIA M-PESA →`}
+            </button>
+            {status && <p style={{ textAlign: "center", color: "#fff", marginTop: "14px", lineHeight: "1.6", background: "#000", border: `1px solid ${colors.gold}`, padding: "14px", borderRadius: "12px" }}>{status}</p>}
+            <p style={{ textAlign: "center", color: "#888", fontSize: "12px", marginTop: "10px" }}>
+              You will receive a prompt on {phone || "your phone"} to enter your M-Pesa PIN
+            </p>
+          </>
         ) : (
-          <div style={{ background: "#000", border: `1px dashed ${colors.gold}`, borderRadius: "14px", padding: "22px", marginTop: "22px", textAlign: "center" }}>
-            {method === "mpesa" ? (
-              <>
-                <p style={{ color: colors.gold, fontWeight: "800", margin: "0 0 8px" }}>M-PESA - BUY GOODS TILL</p>
-                <p style={{ fontSize: "28px", fontWeight: "800", letterSpacing: "2px", margin: "6px 0" }}>YOUR_TILL_NUMBER</p>
-                <p style={{ color: "#C5C5C5", fontSize: "14px", lineHeight: "1.6" }}>Go to M-Pesa → Buy Goods → Enter Till <b>YOUR_TILL_NUMBER</b><br />Amount: <b>KES {finalAmount?.toLocaleString()}</b><br />Account: <b>{selected.title}</b></p>
-                <p style={{ color: "#888", fontSize: "13px" }}>Replace YOUR_TILL_NUMBER with your real Till in the code.</p>
-              </>
+          <>
+            {!showDetails ? (
+              <button style={{ ...buttonStyle, width: "100%", marginTop: "28px" }} onClick={() => setShowDetails(true)}>
+                CONTINUE TO GIVE KES {finalAmount?.toLocaleString() || 0} →
+              </button>
             ) : (
-              <>
+              <div style={{ background: "#000", border: `1px dashed ${colors.gold}`, borderRadius: "14px", padding: "22px", marginTop: "22px", textAlign: "center" }}>
                 <p style={{ color: colors.gold, fontWeight: "800", margin: "0 0 8px" }}>BANK TRANSFER</p>
                 <p style={{ color: "#fff", lineHeight: "1.8" }}>Bank: <b>YOUR_BANK_NAME</b><br />Account Name: <b>YOUR_ACCOUNT_NAME</b><br />Account Number: <b>YOUR_ACCOUNT_NUMBER</b><br />Branch: <b>YOUR_BRANCH</b></p>
                 <p style={{ color: "#888", fontSize: "13px" }}>Replace the YOUR_... placeholders with your real bank details in the code.</p>
-              </>
+                <p style={{ color: "#999", fontSize: "13px", marginTop: "14px" }}>After sending, please keep your confirmation SMS. Thank you {name ? `, ${name}` : ""}!</p>
+                <button onClick={() => setShowDetails(false)} style={{ background: "transparent", color: "#999", border: "none", cursor: "pointer", textDecoration: "underline", marginTop: "8px" }}>← Back</button>
+              </div>
             )}
-            <p style={{ color: "#999", fontSize: "13px", marginTop: "14px" }}>After sending, please keep your confirmation SMS. Thank you {name ? `, ${name}` : ""}!</p>
-            <button onClick={() => setShowDetails(false)} style={{ background: "transparent", color: "#999", border: "none", cursor: "pointer", textDecoration: "underline", marginTop: "8px" }}>← Back</button>
-          </div>
+          </>
         )}
 
         <p style={{ textAlign: "center", color: "#777", fontSize: "12.5px", marginTop: "20px", lineHeight: "1.6" }}>
