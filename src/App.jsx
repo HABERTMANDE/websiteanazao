@@ -12,6 +12,8 @@ import Events from "./pages/Events";
 import Media from "./pages/Media";
 import Partnership from "./pages/Partnership";
 import Partner from "./pages/Partner";
+import PartnerRegister from "./pages/PartnerRegister";
+import ProjectDetail from "./pages/ProjectDetail";
 import Give from "./pages/Give";
 import Contact from "./pages/Contact";
 import Shop from "./pages/Shop";
@@ -42,6 +44,8 @@ function App() {
         <Route path="/media" element={<Media />} />
         <Route path="/partnership" element={<Partnership />} />
         <Route path="/partner" element={<Partner />} />
+        <Route path="/partner/register" element={<PartnerRegister />} />
+        <Route path="/partner/:slug" element={<ProjectDetail />} />
         <Route path="/give" element={<Give />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/shop" element={<Shop />} />
