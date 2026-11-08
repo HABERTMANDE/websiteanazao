@@ -13,6 +13,7 @@ import Media from "./pages/Media";
 import Partnership from "./pages/Partnership";
 import Partner from "./pages/Partner";
 import PartnerRegister from "./pages/PartnerRegister";
+import PartnerGive from "./pages/PartnerGive";
 import ProjectDetail from "./pages/ProjectDetail";
 import Give from "./pages/Give";
 import Contact from "./pages/Contact";
@@ -45,6 +46,8 @@ function App() {
         <Route path="/partnership" element={<Partnership />} />
         <Route path="/partner" element={<Partner />} />
         <Route path="/partner/register" element={<PartnerRegister />} />
+        {/* ✅ FIXED: /partner/give MUST be BEFORE /partner/:slug */}
+        <Route path="/partner/give" element={<PartnerGive />} />
         <Route path="/partner/:slug" element={<ProjectDetail />} />
         <Route path="/give" element={<Give />} />
         <Route path="/contact" element={<Contact />} />
