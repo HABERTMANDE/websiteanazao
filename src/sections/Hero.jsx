@@ -22,7 +22,7 @@ function Hero() {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        padding: isMobile ? "55px 1.2rem 25px" : "120px 1.2rem 70px",
+       padding: isMobile ? "55px 1.2rem 25px" : "140px 2rem 90px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -107,7 +107,7 @@ function Hero() {
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2 }}
-        style={{ maxWidth: "1100px", zIndex: 5 }}
+        style={{ maxWidth: "1300px", width: "100%", zIndex: 5 }}
       >
         <motion.p
           initial={{ opacity: 0 }}
@@ -130,7 +130,8 @@ function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
           style={{
-            fontSize: "clamp(3.6rem,12vw,8rem)",
+            fontSize: "clamp(3.6rem,14vw,11rem)",
+letterSpacing: "12px",
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: "800",
             letterSpacing: "8px",
@@ -151,7 +152,7 @@ function Hero() {
           transition={{ delay: 0.5 }}
           style={{
             color: colors.white,
-            fontSize: "clamp(1.3rem,5vw,2.5rem)",
+            fontSize: "clamp(1.3rem,4vw,3.4rem)",
             marginBottom: "25px",
             fontFamily: "Montserrat, sans-serif",
             fontWeight: "500",
@@ -168,9 +169,9 @@ function Hero() {
           transition={{ delay: 0.7 }}
           style={{
             color: "#ECECEC",
-            fontSize: "clamp(.95rem,3vw,1.12rem)",
-            lineHeight: "2",
-            maxWidth: "760px",
+            fontSize: "clamp(.95rem,2vw,1.35rem)",
+lineHeight: "1.9",
+maxWidth: "950px",
             margin: isMobile ? "0 auto 35px" : "0 auto 60px",
             textShadow: "0 0 12px rgba(0,0,0,.7)",
           }}
