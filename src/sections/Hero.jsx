@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { colors } from "../data/colors";
 import { motion } from "framer-motion";
 import heroBg from "../assets/images/anazao-hero.jpeg";
@@ -210,12 +211,10 @@ function Hero() {
             flexWrap: "wrap",
           }}
         >
-          <a
-            href="https://chat.whatsapp.com/D8HlNteiolD6xElC2S6A8C"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: "none" }}
-          >
+       <Link
+  to="/membership"
+  style={{ textDecoration: "none" }}
+>
             <motion.button
               whileHover={{
                 scale: 1.08,
