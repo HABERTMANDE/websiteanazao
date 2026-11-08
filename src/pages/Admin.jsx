@@ -8,8 +8,7 @@ export default function Admin() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [pin, setPin] = useState("");
 
-  // ⚠️ ADMIN: Change this PIN before going live
-  const ADMIN_PIN = "1234";
+  const ADMIN_PIN = "18071807";
 
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("anazao_partners") || "[]");
@@ -50,14 +49,14 @@ export default function Admin() {
     a.href = url; a.download = "anazao-partners.csv"; a.click();
   };
 
-  // PIN Gate
+  // PIN Gate - No hint shown
   if (!isAdmin) {
     return (
       <div style={{ maxWidth: "450px", margin: "0 auto", padding: "120px 20px", fontFamily: "Montserrat, sans-serif", textAlign: "center" }}>
         <p style={{ color: "#B9975B", letterSpacing: "4px", fontWeight: 800, fontSize: "0.8rem" }}>ANAZAO ADMIN</p>
         <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "2.4rem" }}>Admin Dashboard</h1>
-        <p style={{ color: "#666" }}>Enter Admin PIN to view partners.<br/>Default PIN is <b>1234</b> — change it in Admin.jsx</p>
-        <input type="password" value={pin} onChange={e => setPin(e.target.value)} placeholder="Enter PIN" style={{ width: "100%", padding: "16px", borderRadius: "12px", border: "1px solid #999", fontSize: "1.2rem", textAlign: "center", marginTop: "20px", boxSizing: "border-box" }} />
+        <p style={{ color: "#666" }}>Enter Admin PIN to view partners.</p>
+        <input type="password" value={pin} onChange={e => setPin(e.target.value)} onKeyDown={e => { if (e.key === "Enter") { pin === ADMIN_PIN ? setIsAdmin(true) : alert("Wrong PIN"); } }} placeholder="Enter PIN" style={{ width: "100%", padding: "16px", borderRadius: "12px", border: "1px solid #999", fontSize: "1.2rem", textAlign: "center", marginTop: "20px", boxSizing: "border-box" }} />
         <button onClick={() => pin === ADMIN_PIN ? setIsAdmin(true) : alert("Wrong PIN")} style={{ width: "100%", background: "#051224", color: "#fff", border: "none", padding: "16px", borderRadius: "50px", fontWeight: 800, marginTop: "15px", cursor: "pointer", fontSize: "1rem" }}>Enter Dashboard →</button>
         <Link to="/partner"><p style={{ marginTop: "15px", color: "#888" }}>← Back to Partner Page</p></Link>
         <p style={{ background: "#FFF8E1", padding: "12px", borderRadius: "10px", fontSize: "0.85rem", color: "#555", marginTop: "20px" }}>⚠️ This dashboard only shows partners registered on THIS browser. For real multi-device storage, we need Google Sheets next.</p>
@@ -89,7 +88,6 @@ export default function Admin() {
           </div>
         </div>
 
-        {/* STATS */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "16px", margin: "25px 0" }}>
           {[
             { label: "Total Partners", value: partners.length },
@@ -105,10 +103,9 @@ export default function Admin() {
         </div>
 
         <div style={{ background: "#FFF8E1", border: "1px solid #F0D98C", borderRadius: "12px", padding: "14px 16px", fontSize: "0.9rem", color: "#555", marginBottom: "20px" }}>
-          ⚠️ <b>Local Only:</b> This shows partners saved in THIS browser only. If someone registers on their phone, you won't see them here until we connect Google Sheets. Test: Register as Habert on this laptop → he should appear below.
+          ⚠️ <b>Local Only:</b> This shows partners saved in THIS browser only. If someone registers on their phone, you won't see them here until we connect Google Sheets.
         </div>
 
-        {/* SEARCH + FILTER */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "20px" }}>
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search name, phone, email, Partner ID..." style={{ flex: "2 1 250px", padding: "14px", borderRadius: "12px", border: "1px solid #999", fontSize: "1rem" }} />
           <select value={filterTier} onChange={e => setFilterTier(e.target.value)} style={{ flex: "1 1 150px", padding: "14px", borderRadius: "12px", border: "1px solid #999" }}>
