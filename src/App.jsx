@@ -3,19 +3,19 @@ import { useEffect } from "react";
 
 import Navbar from "./components/Navbar";
 
-import Home from "./sections/src/pages/Home";
-import Membership from "./sections/src/pages/Membership";
-import About from "./sections/src/pages/About";
-import Leadership from "./sections/src/pages/Leadership";
-import Departments from "./sections/src/pages/Departments";
-import Events from "./sections/src/pages/Events";
-import Media from "./sections/src/pages/Media";
-import Partnership from "./sections/src/pages/Partnership";
-import Give from "./sections/src/pages/Give";
-import Contact from "./sections/src/pages/Contact";
+import Home from "./pages/Home";
+import Membership from "./pages/Membership";
+import About from "./pages/About";
+import Leadership from "./pages/Leadership";
+import Departments from "./pages/Departments";
+import Events from "./pages/Events";
+import Media from "./pages/Media";
+import Partnership from "./pages/Partnership";
+import Give from "./pages/Give";
+import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 
-// THIS FIXES QUICK LINKS - Auto scroll to top on every page change
+// FIXES QUICK LINKS - Auto scroll to top on every page change
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
