@@ -16,21 +16,17 @@ function Hero() {
   return (
     <section
       style={{
-        // LAPTOP: stays exactly as before - 100vh
-        // PHONE: auto height - no more huge gaps
         minHeight: isMobile ? "auto" : "100vh",
         backgroundColor: "#000",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        // PHONE: 90px top / 50px bottom instead of 120px / 70px
         padding: isMobile ? "90px 1.2rem 50px" : "120px 1.2rem 70px",
         position: "relative",
         overflow: "hidden",
       }}
     >
-   {/* ✅ ADDED: EAGLE VIDEO BACKGROUND - replaces heroBg image */}
       <video
         autoPlay
         muted
@@ -51,7 +47,6 @@ function Hero() {
         <source src="/videos/hero.mp4" type="video/mp4" />
       </video>
 
-      {/* ✅ MODIFIED: LIGHT overlay - was .72/.84/.92, now .35/.35/.60 so video shows */}
       <div
         style={{
           position: "absolute",
@@ -61,16 +56,9 @@ function Hero() {
         }}
       />
 
-      {/* Animated Background Zoom - KEPT, now subtle glow pulse over video */}
       <motion.div
-        animate={{
-          scale: [1, 1.08, 1],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ scale: [1, 1.08, 1] }}
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: "absolute",
           inset: 0,
@@ -80,15 +68,13 @@ function Hero() {
         }}
       />
 
-      {/* Golden Glow */}
       <div
         style={{
           position: "absolute",
           width: "700px",
           height: "700px",
           borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(255,215,0,.14) 0%, rgba(255,215,0,.05) 35%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(255,215,0,.14) 0%, rgba(255,215,0,.05) 35%, transparent 70%)",
           filter: "blur(35px)",
           top: "50%",
           left: "50%",
@@ -98,18 +84,11 @@ function Hero() {
         }}
       />
 
-      {/* Floating Gold Orbs */}
       {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}
-          animate={{
-            y: [0, -35, 0],
-            opacity: [0.2, 0.8, 0.2],
-          }}
-          transition={{
-            duration: 6 + i,
-            repeat: Infinity,
-          }}
+          animate={{ y: [0, -35, 0], opacity: [0.2, 0.8, 0.2] }}
+          transition={{ duration: 6 + i, repeat: Infinity }}
           style={{
             position: "absolute",
             width: 6 + i,
@@ -124,17 +103,12 @@ function Hero() {
         />
       ))}
 
-      {/* Content */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2 }}
-        style={{
-          maxWidth: "1100px",
-          zIndex: 5,
-        }}
+        style={{ maxWidth: "1100px", zIndex: 5 }}
       >
-        {/* Identity */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -151,7 +125,6 @@ function Hero() {
           Apostolic • Prophetic • Discipleship • Transformational
         </motion.p>
 
-        {/* Title */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -163,21 +136,15 @@ function Hero() {
             letterSpacing: "8px",
             marginBottom: "18px",
             lineHeight: "1",
-            background:
-              "linear-gradient(180deg,#FFFBE6 0%,#FFE873 15%,#FFD700 35%,#F5C542 60%,#D4AF37 80%,#B8860B 100%)",
+            background: "linear-gradient(180deg,#FFFBE6 0%,#FFE873 15%,#FFD700 35%,#F5C542 60%,#D4AF37 80%,#B8860B 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            filter: `
-            drop-shadow(0 0 10px rgba(255,215,0,.8))
-            drop-shadow(0 0 25px rgba(255,215,0,.5))
-            drop-shadow(0 0 60px rgba(255,215,0,.35))
-          `,
+            filter: `drop-shadow(0 0 10px rgba(255,215,0,.8)) drop-shadow(0 0 25px rgba(255,215,0,.5)) drop-shadow(0 0 60px rgba(255,215,0,.35))`,
           }}
         >
           ANAZAO
         </motion.h1>
 
-        {/* Vision */}
         <motion.h2
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -195,7 +162,6 @@ function Hero() {
           Transforming Nations Through a Generation of Truth
         </motion.h2>
 
-        {/* Description */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -205,38 +171,20 @@ function Hero() {
             fontSize: "clamp(.95rem,3vw,1.12rem)",
             lineHeight: "2",
             maxWidth: "760px",
-            // PHONE: 35px gap before buttons instead of 60px
             margin: isMobile ? "0 auto 35px" : "0 auto 60px",
             textShadow: "0 0 12px rgba(0,0,0,.7)",
           }}
         >
-          ANAZAO exists to raise disciples, equip leaders, and establish
-          truth-centered communities that transform generations, cities,
-          and nations through the power of God's Word and Kingdom principles.
+          ANAZAO exists to raise disciples, equip leaders, and establish truth-centered communities that transform generations, cities, and nations through the power of God&apos;s Word and Kingdom principles.
         </motion.p>
 
-        {/* Buttons */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "22px",
-            flexWrap: "wrap",
-          }}
-        >
-       <Link
-  to="/membership"
-  style={{ textDecoration: "none" }}
->
+        <div style={{ display: "flex", justifyContent: "center", gap: "22px", flexWrap: "wrap" }}>
+          <Link to="/membership" style={{ textDecoration: "none" }}>
             <motion.button
-              whileHover={{
-                scale: 1.08,
-                y: -6,
-              }}
+              whileHover={{ scale: 1.08, y: -6 }}
               whileTap={{ scale: 0.95 }}
               style={{
-                background:
-                  "linear-gradient(135deg,#FFD700,#F5C542,#D4AF37)",
+                background: "linear-gradient(135deg,#FFD700,#F5C542,#D4AF37)",
                 color: "#000",
                 padding: "18px 42px",
                 borderRadius: "50px",
@@ -244,23 +192,18 @@ function Hero() {
                 cursor: "pointer",
                 fontWeight: "700",
                 fontSize: "1.05rem",
-                boxShadow:
-                  "0 15px 40px rgba(255,215,0,.45)",
+                boxShadow: "0 15px 40px rgba(255,215,0,.45)",
                 fontFamily: "Montserrat, sans-serif",
               }}
             >
               Join The Movement
-           </motion.button>
-</Link>
+            </motion.button>
+          </Link>
           <motion.button
-            whileHover={{
-              scale: 1.08,
-              y: -6,
-            }}
+            whileHover={{ scale: 1.08, y: -6 }}
             whileTap={{ scale: 0.95 }}
             style={{
-              background:
-                "linear-gradient(135deg,#7A0000,#B11226,#D7263D)",
+              background: "linear-gradient(135deg,#7A0000,#B11226,#D7263D)",
               color: "#FFF",
               padding: "18px 42px",
               borderRadius: "50px",
@@ -268,8 +211,7 @@ function Hero() {
               cursor: "pointer",
               fontWeight: "700",
               fontSize: "1.05rem",
-              boxShadow:
-                "0 15px 40px rgba(193,18,31,.45)",
+              boxShadow: "0 15px 40px rgba(193,18,31,.45)",
               fontFamily: "Montserrat, sans-serif",
             }}
           >
@@ -277,35 +219,15 @@ function Hero() {
           </motion.button>
         </div>
 
-        {/* ✅ MODIFIED: Weekly Sessions + Word of the Season - REPLACES Sunday Card, no big box */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          style={{
-            margin: isMobile ? "28px auto 0" : "40px auto 0",
-            maxWidth: "640px",
-            textAlign: "center",
-          }}
-        >
-          <p style={{ color: colors.gold, fontSize: "11px", letterSpacing: "3px", fontWeight: "800", margin: 0 }}>JOIN US MON - FRI • 10:00 PM - MIDNIGHT</p>
-          <p style={{ color: "#fff", margin: "8px 0 0", fontWeight: "700", fontSize: isMobile ? "15px" : "17px" }}>Weekly Sessions on Google Meet</p>
-          <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "13px", margin: "10px 0 0", lineHeight: "1.6", fontStyle: "italic", textShadow: "0 0 10px rgba(0,0,0,.8)" }}>
-            The Word of the Season — The Days of Jacob&apos;s Trouble <span style={{ fontStyle: "normal", color: colors.gold, fontWeight: "700" }}>(Jeremiah 30:7)</span>
-          </p>
-        </motion.div>
+        {/* ✅ REMOVED: Weekly Sessions block - was duplicate of next section */}
+        {/* Now Hero ends cleanly with buttons only, next section is the ONLY Weekly 10PM card */}
+
       </motion.div>
 
-      {/* Scroll Indicator - Hide on phone, it was adding to the bottom gap */}
       {!isMobile && (
         <motion.div
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-          }}
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
           style={{
             position: "absolute",
             bottom: "25px",
