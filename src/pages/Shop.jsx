@@ -1,5 +1,5 @@
 export default function Shop() {
-  const whatsapp = "254700000000"; // <-- PUT YOUR REAL NUMBER HERE AGAIN
+  const whatsapp = "254782233163"; // <-- PUT YOUR REAL NUMBER HERE AGAIN
 
   const products = [
     { name: "ANAZAO T-Shirt", desc: "Black premium tee • Gold & White logo • Unisex", price: "KSh 1,000", tag: "BEST SELLER", img: "/merch/tee.jpg" },
