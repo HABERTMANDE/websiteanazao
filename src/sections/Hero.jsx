@@ -122,7 +122,7 @@ function Hero() {
             fontWeight: "700",
           }}
         >
-          Apostolic • Prophetic • Transformational
+          Apostolic • Prophetic • Discipleship • Transformational
         </motion.p>
 
         {/* Title */}

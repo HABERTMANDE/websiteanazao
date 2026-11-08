@@ -1,4 +1,4 @@
-import { colors } from "../data/colors";
+﻿import { colors } from "../data/colors";
 
 function Give() {
   const cardStyle = {
@@ -82,7 +82,7 @@ function Give() {
           }}
         >
           "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."
-— 2 Corinthians 9:7."
+â€” 2 Corinthians 9:7."
         </p>
       </div>
     </div>

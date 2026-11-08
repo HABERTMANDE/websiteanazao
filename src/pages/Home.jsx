@@ -1,7 +1,7 @@
 import Hero from "../sections/Hero";
 import Statistics from "../sections/Statistics";
 import About from "../sections/About";
-import LeadershipPreview from "../sections/LeadershipPreview";
+import LeadershipPreview from "../sections/LeadershipPreview.jsx";
 import UpcomingEvent from "../sections/UpcomingEvent";
 
 function Home() {

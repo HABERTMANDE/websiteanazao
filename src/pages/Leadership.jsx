@@ -19,6 +19,21 @@ function LeadershipPreview() {
       name: "Min. Grace Ngari",
       desc: "Coordinates ministry operations, administration, communication, and organizational excellence.",
     },
+    {
+      role: "Counselor and Administrator",
+      name: "Counselor Esther Kevin",
+      desc: "Supports the ministry through counseling, administration, and the care of its members.",
+    },
+    {
+      role: "Treasurer",
+      name: "Minister Lavendar Otieno",
+      desc: "Oversees financial stewardship, accountability, and responsible management of ministry resources.",
+    },
+    {
+      role: "Secretary General",
+      name: "Minister Eunice Wambale",
+      desc: "Coordinates records, official communications, documentation, and organizational follow-up.",
+    },
   ];
 
   return (

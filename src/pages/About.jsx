@@ -1,4 +1,4 @@
-import { colors } from "../data/colors";
+﻿import { colors } from "../data/colors";
 import { motion } from "framer-motion";
 
 function About() {

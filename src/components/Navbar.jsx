@@ -101,7 +101,7 @@ function Navbar() {
                 whiteSpace: "nowrap",
               }}
             >
-              The Family of Grace
+              The Family of Grace Global
             </p>
           </div>
         </Link>

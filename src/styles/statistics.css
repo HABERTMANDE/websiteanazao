@@ -1,0 +1,314 @@
+/* =========================================
+   ANAZAO STATISTICS
+   Responsive Black & Gold Layout
+========================================= */
+
+.anazao-statistics {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding: 100px 6%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #050505;
+  color: #ffffff;
+}
+
+.anazao-statistics *,
+.anazao-statistics *::before,
+.anazao-statistics *::after {
+  box-sizing: border-box;
+}
+
+/* Main container */
+
+.statistics-container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* Section heading */
+
+.statistics-header {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto 60px;
+  text-align: center;
+}
+
+.statistics-eyebrow {
+  display: block;
+  margin-bottom: 18px;
+  color: #d4af37;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.statistics-header h2 {
+  margin: 0 0 20px;
+  color: #ffffff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.statistics-header h2 span {
+  color: #d4af37;
+}
+
+.statistics-header > p {
+  max-width: 650px;
+  margin: 0 auto;
+  color: #b5b5b5;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+/* =========================================
+   FOUR-COLUMN GRID
+========================================= */
+
+.statistics-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: stretch;
+  gap: 22px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Individual card */
+
+.statistics-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  min-height: 285px;
+  margin: 0;
+  padding: 30px 25px;
+
+  background: #101010;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 5px;
+
+  overflow: hidden;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.statistics-card:hover {
+  background: #15130e;
+  border-color: #d4af37;
+  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.08);
+}
+
+/* Number and index */
+
+.statistics-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+  margin: 0 0 24px;
+}
+
+.statistics-number {
+  display: block;
+  color: #d4af37;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.statistics-index {
+  color: #666666;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+/* Divider */
+
+.statistics-divider {
+  display: block;
+  width: 42px;
+  height: 2px;
+  flex-shrink: 0;
+  margin: 0 0 22px;
+  background: #d4af37;
+}
+
+/* Card title */
+
+.statistics-card h3 {
+  margin: 0 0 14px;
+  padding: 0;
+  color: #f5f2e9;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+/* Card description */
+
+.statistics-card > p {
+  margin: 0;
+  padding: 0;
+  color: #a7a7a7;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* Bottom gold accent */
+
+.statistics-card-accent {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: #d4af37;
+  opacity: 0.45;
+  transition: opacity 0.3s ease;
+}
+
+.statistics-card:hover .statistics-card-accent {
+  opacity: 1;
+}
+
+/* =========================================
+   CLOSING STATEMENT
+========================================= */
+
+.statistics-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  width: 100%;
+  margin: 50px auto 0;
+}
+
+.statistics-footer p {
+  margin: 0;
+  color: #c4a94e;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.8;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.statistics-footer-line {
+  display: block;
+  width: 50px;
+  height: 1px;
+  flex-shrink: 0;
+  background: rgba(212, 175, 55, 0.55);
+}
+
+/* =========================================
+   TABLETS
+========================================= */
+
+@media (max-width: 1000px) {
+  .anazao-statistics {
+    padding: 80px 5%;
+  }
+
+  .statistics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px;
+  }
+
+  .statistics-card {
+    min-height: 250px;
+    padding: 28px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .anazao-statistics {
+    padding: 65px 20px;
+  }
+
+  .statistics-header {
+    margin-bottom: 35px;
+  }
+
+  .statistics-eyebrow {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  .statistics-header h2 {
+    font-size: 33px;
+  }
+
+  .statistics-header > p {
+    font-size: 14px;
+  }
+
+  .statistics-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px;
+  }
+
+  .statistics-card {
+    min-height: 220px;
+    padding: 25px;
+  }
+
+  .statistics-number {
+    font-size: 46px;
+  }
+
+  .statistics-card h3 {
+    font-size: 23px;
+  }
+
+  .statistics-footer {
+    gap: 10px;
+    margin-top: 35px;
+  }
+
+  .statistics-footer p {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .statistics-footer-line {
+    width: 18px;
+  }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .statistics-card,
+  .statistics-card-accent {
+    transition: none;
+  }
+}
