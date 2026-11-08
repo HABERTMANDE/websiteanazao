@@ -4,6 +4,10 @@ import { colors } from "../data/colors";
 import { motion } from "framer-motion";
 import heroBg from "../assets/images/anazao-hero.jpeg";
 
+// ✅ ADDED: Replace with your real links
+const FACEBOOK_URL = "https://facebook.com/ANAZAO";
+const INSTAGRAM_URL = "https://instagram.com/ANAZAO";
+
 function Hero() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
@@ -200,7 +204,6 @@ function Hero() {
             </motion.button>
           </Link>
 
-          {/* ✅ MODIFIED: Partner With Us now links to /partner */}
           <Link to="/partner" style={{ textDecoration: "none" }}>
             <motion.button
               whileHover={{ scale: 1.08, y: -6 }}
@@ -223,8 +226,45 @@ function Hero() {
           </Link>
         </div>
 
-        {/* ✅ REMOVED: Weekly Sessions block - was duplicate of next section */}
-        {/* Now Hero ends cleanly with buttons only, next section is the ONLY Weekly 10PM card */}
+        {/* ✅ ADDED: Facebook + Instagram - In your green circled area */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9 }}
+          style={{ display: "flex", justifyContent: "center", gap: "14px", flexWrap: "wrap", marginTop: isMobile ? "35px" : "55px" }}
+        >
+          <motion.a
+            href={FACEBOOK_URL}
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ scale: 1.06, y: -3 }}
+            whileTap={{ scale: 0.96 }}
+            style={{ display: "flex", alignItems: "center", gap: "10px", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,215,0,0.5)", backdropFilter: "blur(6px)", color: "#fff", padding: "12px 22px", borderRadius: "50px", fontWeight: 700, fontSize: "0.95rem", textDecoration: "none", fontFamily: "Montserrat, sans-serif" }}
+          >
+            <span style={{ background: "#1877F2", color: "#fff", width: "28px", height: "28px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900, fontSize: "1.1rem" }}>f</span>
+            Facebook
+          </motion.a>
+
+          <motion.a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ scale: 1.06, y: -3 }}
+            whileTap={{ scale: 0.96 }}
+            style={{ display: "flex", alignItems: "center", gap: "10px", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,215,0,0.5)", backdropFilter: "blur(6px)", color: "#fff", padding: "12px 22px", borderRadius: "50px", fontWeight: 700, fontSize: "0.95rem", textDecoration: "none", fontFamily: "Montserrat, sans-serif" }}
+          >
+            <span style={{ background: "linear-gradient(45deg, #F58529, #DD2A7B, #8134AF)", color: "#fff", width: "28px", height: "28px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem" }}>◎</span>
+            Instagram
+          </motion.a>
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.1 }}
+          style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.75rem", marginTop: "12px", letterSpacing: "2px", fontWeight: 600 }}
+        >
+          FOLLOW ANAZAO FOR DAILY TRUTH & UPDATES
+        </motion.p>
 
       </motion.div>
 
