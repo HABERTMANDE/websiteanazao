@@ -1,4 +1,4 @@
-// api/mpesa/stk-push.js - LIVE VERSION
+// api/mpesa/stk-push.js - LIVE VERSION - DEBUG
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ success: false, message: "Method not allowed" });
 
@@ -6,13 +6,28 @@ export default async function handler(req, res) {
   if (!phone || !amount) return res.status(400).json({ success: false, message: "Phone and amount required" });
 
   try {
+    console.log("ENV CHECK:", {
+      hasKey: !!process.env.MPESA_CONSUMER_KEY,
+      hasSecret: !!process.env.MPESA_CONSUMER_SECRET,
+      shortcode: process.env.MPESA_SHORTCODE,
+      hasPasskey: !!process.env.MPESA_PASSKEY,
+    });
+
+    if (!process.env.MPESA_CONSUMER_KEY || !process.env.MPESA_CONSUMER_SECRET) {
+      return res.status(500).json({ success: false, message: "Missing MPESA keys in Vercel - check Environment Variables" });
+    }
+
     const auth = Buffer.from(`${process.env.MPESA_CONSUMER_KEY}:${process.env.MPESA_CONSUMER_SECRET}`).toString("base64");
     const tokenRes = await fetch("https://api.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials", {
       headers: { Authorization: `Basic ${auth}` },
     });
-    const tokenData = await tokenRes.json();
+    const tokenText = await tokenRes.text();
+    console.log("TOKEN STATUS:", tokenRes.status, "BODY:", tokenText);
+    let tokenData;
+    try { tokenData = JSON.parse(tokenText); } catch { return res.status(500).json({ success: false, message: `Token failed - Status ${tokenRes.status}: ${tokenText.slice(0,200) || "Empty response from Safaricom - check keys"}` }); }
+    
     const token = tokenData.access_token;
-    if (!token) return res.status(500).json({ success: false, message: "Failed to get M-Pesa token - check your keys in Vercel" });
+    if (!token) return res.status(500).json({ success: false, message: "Failed to get token: " + JSON.stringify(tokenData) });
 
     const shortcode = process.env.MPESA_SHORTCODE;
     const passkey = process.env.MPESA_PASSKEY;
@@ -37,8 +52,10 @@ export default async function handler(req, res) {
       }),
     });
 
-    const stkData = await stkRes.json();
-    console.log("STK:", stkData);
+    const stkText = await stkRes.text();
+    console.log("STK STATUS:", stkRes.status, "BODY:", stkText);
+    let stkData;
+    try { stkData = JSON.parse(stkText); } catch { return res.status(500).json({ success: false, message: `STK failed - Status ${stkRes.status}: ${stkText.slice(0,200)}` }); }
 
     if (stkData.ResponseCode === "0") {
       return res.status(200).json({ success: true, message: "Prompt sent" });
@@ -46,6 +63,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ success: false, message: stkData.ResponseDescription || stkData.errorMessage || "Failed" });
     }
   } catch (e) {
+    console.log("SERVER ERROR:", e);
     return res.status(500).json({ success: false, message: "Server error: " + e.message });
   }
 }
