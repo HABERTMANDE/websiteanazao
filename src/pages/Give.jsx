@@ -4,10 +4,10 @@ import { colors } from "../data/colors";
 
 // === FILL LOCALLY IN VS CODE ONLY ===
 const TILL_NUMBER = "8192090"; // ✅ PUBLIC - OK to show
-const DIRECT_MPESA_NUMBER = "YOUR_DIRECT_MPESA"; // ✅ OK to show - fill your Direct M-Pesa 07xx... here
-const WHATSAPP_NUMBER = "YOUR_WHATSAPP_NUMBER"; // ✅ OK to show - fill your Contact in 2547xxxxxxxx format
-const BANK_ACCOUNT_LAST4 = "YOUR_LAST_4"; // ✅ ONLY last 4 shown
-const BANK_ACCOUNT_FULL = "YOUR_FULL_ACCOUNT"; // 🔒 HIDDEN - only shown when user taps SHOW
+const DIRECT_MPESA_NUMBER = "254795155158"; // ✅ OK to show - fill your Direct M-Pesa 07xx... here
+const WHATSAPP_NUMBER = "254782233163"; // ✅ OK to show - fill your Contact in 2547xxxxxxxx format
+const BANK_ACCOUNT_LAST4 = "8013"; // ✅ ONLY last 4 shown
+const BANK_ACCOUNT_FULL = "1318238013"; // 🔒 HIDDEN - only shown when user taps SHOW
 
 const categories = [
   { id: "missions", title: "MISSIONS & EVANGELISM", desc: "Gospel outreach, evangelistic missions, discipleship and advancement of the Christian faith." },
@@ -66,7 +66,7 @@ function Give() {
   const selected = categories.find(c => c.id === campaign) || categories[4];
 
   const whatsappMessage = `Hello Anazao, I want to give KES ${finalAmount?.toLocaleString()} for ${selected.title}${name ? ` - My name is ${name}` : ""}. Please send me the bank account details. Thank you!`;
-  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+  const whatsappLink = `https://wa.me/${254782233163}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
     <div style={{ backgroundColor: colors.black, color: colors.white, minHeight: "100vh", padding: "120px 20px 80px" }}>
