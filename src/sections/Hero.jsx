@@ -22,7 +22,7 @@ function Hero() {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        padding: isMobile ? "90px 1.2rem 50px" : "120px 1.2rem 70px",
+        padding: isMobile ? "55px 1.2rem 25px" : "120px 1.2rem 70px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -115,10 +115,10 @@ function Hero() {
           transition={{ delay: 0.3 }}
           style={{
             color: "#FFD700",
-            fontSize: "1rem",
-            letterSpacing: "8px",
+            fontSize: "1.15rem",
+            letterSpacing: "5px",
             textTransform: "uppercase",
-            marginBottom: "18px",
+            marginBottom: "22px",
             fontWeight: "700",
           }}
         >
