@@ -7,8 +7,6 @@ import heroBg from "../assets/images/anazao-hero.jpeg";
 // ✅ YOUR REAL LINKS - DONE
 const FACEBOOK_URL = "https://web.facebook.com/profile.php?id=61573461963343";
 const INSTAGRAM_URL = "https://www.instagram.com/anazao_thefamilyofgraceglobal";
-
-function Hero() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
