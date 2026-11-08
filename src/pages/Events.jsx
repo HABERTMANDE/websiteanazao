@@ -121,7 +121,7 @@ function Events() {
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center" }}>
             <Link to="/contact" onClick={() => window.scrollTo(0, 0)} style={goldBtn}>
-              VIEW EVENT →
+              MORE →
             </Link>
             <Link to="/contact" onClick={() => window.scrollTo(0, 0)} style={outlineBtn}>
               REGISTER INTEREST
