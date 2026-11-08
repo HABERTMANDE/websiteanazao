@@ -57,7 +57,8 @@ export default function PartnerRegister() {
     window.scrollTo(0, 0);
   };
 
-  const input = { width: "100%", padding: "14px", borderRadius: "12px", border: "1px solid #ddd", fontSize: "1rem", fontFamily: "inherit", boxSizing: "border-box" };
+  // ✅ FIXED: Darker borders + dark text so nothing looks washed out
+  const input = { width: "100%", padding: "14px", borderRadius: "12px", border: "1px solid #999", fontSize: "1rem", fontFamily: "inherit", boxSizing: "border-box", color: "#1A1A1A", background: "#fff" };
   const label = { display: "block", fontWeight: 700, fontSize: "0.85rem", marginBottom: "6px", color: "#051224" };
 
   if (done) {
@@ -140,7 +141,7 @@ export default function PartnerRegister() {
             <div>
               <label style={label}>Monthly Contribution Amount * {form.currency === "KES" ? "(KSh)" : "(USD)"}</label>
               <input style={input} type="number" min="1" value={form.amount} onChange={e => update("amount", e.target.value)} placeholder={form.currency === "KES" ? "e.g. 1000" : "e.g. 10"} required />
-              {form.tier === "custom" && <p style={{ fontSize: "0.85rem", color: "#888", marginTop: "6px" }}>Custom tier — enter any amount you wish to commit monthly.</p>}
+              {form.tier === "custom" && <p style={{ fontSize: "0.85rem", color: "#555", marginTop: "6px" }}>Custom tier — enter any amount you wish to commit monthly.</p>}
             </div>
           </div>
 
@@ -159,20 +160,36 @@ export default function PartnerRegister() {
             </div>
           </div>
 
+          {/* ✅ MODIFIED: Circled region - now high contrast */}
           <div>
             <label style={label}>Additional Information (Optional)</label>
-            <textarea style={{ ...input, minHeight: "90px" }} value={form.notes} onChange={e => update("notes", e.target.value)} placeholder="Anything you would like us to know? Prayer request? Church name?" />
+            <textarea
+              style={{ ...input, minHeight: "90px", resize: "vertical" }}
+              value={form.notes}
+              onChange={e => update("notes", e.target.value)}
+              placeholder="Anything you would like us to know? Prayer request? Church name?"
+            />
           </div>
 
-          <label style={{ display: "flex", gap: "10px", alignItems: "flex-start", background: "#F2F2F2", padding: "16px", borderRadius: "12px", cursor: "pointer", fontSize: "0.92rem", lineHeight: 1.7 }}>
-            <input type="checkbox" checked={form.consent} onChange={e => update("consent", e.target.checked)} style={{ marginTop: "4px", width: "18px", height: "18px" }} required />
-            <span><b>I consent</b> to receive partnership-related WhatsApp reminders and updates. My contact info will only be used for partnership communication, reminders, receipts and ministry updates. I can unsubscribe at any time. *</span>
+          {/* ✅ MODIFIED: Was #F2F2F2 grey + faint text - now white box + dark border + dark text + big checkbox */}
+          <label style={{ display: "flex", gap: "12px", alignItems: "flex-start", background: "#fff", border: "2px solid #051224", padding: "18px", borderRadius: "12px", cursor: "pointer", fontSize: "0.95rem", lineHeight: 1.7, color: "#1A1A1A" }}>
+            <input
+              type="checkbox"
+              checked={form.consent}
+              onChange={e => update("consent", e.target.checked)}
+              required
+              style={{ marginTop: "3px", width: "22px", height: "22px", flexShrink: 0, accentColor: "#051224", cursor: "pointer" }}
+            />
+            <span>
+              <b style={{ color: "#051224" }}>I consent</b> to receive partnership-related WhatsApp reminders and updates. My contact info will only be used for partnership communication, reminders, receipts and ministry updates. I can unsubscribe at any time. *
+            </span>
           </label>
 
-          <button type="submit" style={{ background: "#051224", color: "#fff", border: "none", padding: "18px", borderRadius: "50px", fontWeight: 800, fontSize: "1.05rem", cursor: "pointer" }}>
+          {/* ✅ MODIFIED: Button + note made bolder / darker */}
+          <button type="submit" style={{ background: "#051224", color: "#fff", border: "none", padding: "18px", borderRadius: "50px", fontWeight: 800, fontSize: "1.1rem", cursor: "pointer", boxShadow: "0 6px 20px rgba(5,18,36,0.25)" }}>
             Complete Registration →
           </button>
-          <p style={{ textAlign: "center", color: "#888", fontSize: "0.85rem" }}>No money will be taken now. You will get a payment link in your monthly reminder.</p>
+          <p style={{ textAlign: "center", color: "#333", fontSize: "0.9rem", fontWeight: 600, margin: 0 }}>No money will be taken now. You will get a payment link in your monthly reminder.</p>
         </form>
       </div>
     </div>
