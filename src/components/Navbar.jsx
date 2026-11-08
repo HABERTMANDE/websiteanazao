@@ -12,9 +12,10 @@ function Navbar() {
     color: colors.white,
     textDecoration: "none",
     fontWeight: "600",
-    fontSize: "1rem",
+    fontSize: "0.95rem",
     letterSpacing: ".5px",
     transition: "0.3s ease",
+    whiteSpace: "nowrap",
   };
 
   const shopLinkStyle = {
@@ -22,9 +23,9 @@ function Navbar() {
     background: "#FFD700",
     textDecoration: "none",
     fontWeight: "800",
-    fontSize: "1rem",
+    fontSize: "0.95rem",
     letterSpacing: ".5px",
-    padding: "8px 18px",
+    padding: "8px 16px",
     borderRadius: "999px",
     transition: "0.3s ease",
     whiteSpace: "nowrap",
@@ -40,20 +41,21 @@ function Navbar() {
         zIndex: 9999,
         width: "100%",
         boxShadow: "0 4px 18px rgba(0,0,0,.55)",
-    transition: "all .35s ease",
+        transition: "all .35s ease",
       }}
     >
       <div
         style={{
           maxWidth: "1400px",
           margin: "0 auto",
-          padding: "16px 20px",
+          padding: "10px 32px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           flexWrap: "nowrap",
           width: "100%",
           boxSizing: "border-box",
+          gap: "40px",
         }}
       >
         {/* ================= LOGO ================= */}
@@ -63,7 +65,7 @@ function Navbar() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "18px",
+            gap: "12px",
             textDecoration: "none",
             flexShrink: 0,
             overflow: "hidden",
@@ -74,8 +76,8 @@ function Navbar() {
             src={logo}
             alt="ANAZAO Logo"
             style={{
-              width: "72px",
-              height: "72px",
+              width: "58px",
+              height: "58px",
               objectFit: "contain",
               flexShrink: 0,
             }}
@@ -87,12 +89,11 @@ function Navbar() {
                 margin: 0,
                 fontFamily: "'Cormorant Garamond', serif",
                 fontWeight: "700",
-                fontSize: "clamp(2.3rem,4vw,3.2rem)",
-                letterSpacing: "4px",
+                fontSize: "clamp(2rem,3.2vw,2.6rem)",
+                letterSpacing: "3px",
                 lineHeight: 1,
                 color: "#FFD700",
                 whiteSpace: "nowrap",
-
                 textShadow: `
                   0 0 6px rgba(255,215,0,.95),
                   0 0 15px rgba(255,215,0,.75),
@@ -108,8 +109,8 @@ function Navbar() {
               style={{
                 margin: "4px 0 0",
                 color: colors.white,
-                fontSize: "0.85rem",
-                letterSpacing: "3px",
+                fontSize: "0.68rem",
+                letterSpacing: "2px",
                 textTransform: "uppercase",
                 whiteSpace: "nowrap",
               }}
@@ -125,11 +126,13 @@ function Navbar() {
           className="desktop-menu"
           style={{
             display: "flex",
-            gap: "40px",
+            gap: "28px",
             listStyle: "none",
             margin: 0,
             padding: 0,
             alignItems: "center",
+            justifyContent: "flex-end",
+            flex: 1,
           }}
         >
           <li>
