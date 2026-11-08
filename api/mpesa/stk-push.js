@@ -1,4 +1,4 @@
-// api/mpesa/stk-push.js - SANDBOX VERSION - DEBUG
+// api/mpesa/stk-push.js - SANDBOX VERSION - HARDCODED SHORTCODE + PASSKEY
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ success: false, message: "Method not allowed" });
 
@@ -6,13 +6,6 @@ export default async function handler(req, res) {
   if (!phone || !amount) return res.status(400).json({ success: false, message: "Phone and amount required" });
 
   try {
-    console.log("ENV CHECK:", {
-      hasKey: !!process.env.MPESA_CONSUMER_KEY,
-      hasSecret: !!process.env.MPESA_CONSUMER_SECRET,
-      shortcode: process.env.MPESA_SHORTCODE,
-      hasPasskey: !!process.env.MPESA_PASSKEY,
-    });
-
     if (!process.env.MPESA_CONSUMER_KEY || !process.env.MPESA_CONSUMER_SECRET) {
       return res.status(500).json({ success: false, message: "Missing MPESA keys in Vercel - check Environment Variables" });
     }
@@ -29,8 +22,9 @@ export default async function handler(req, res) {
     const token = tokenData.access_token;
     if (!token) return res.status(500).json({ success: false, message: "Failed to get token: " + JSON.stringify(tokenData) });
 
-    const shortcode = process.env.MPESA_SHORTCODE;
-    const passkey = process.env.MPESA_PASSKEY;
+    // HARDCODED FOR SANDBOX - NO MORE VERCEL PROBLEM FOR THESE TWO
+    const shortcode = "174379";
+    const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
     const timestamp = new Date().toISOString().replace(/[-:TZ.]/g, "").slice(0, 14);
     const password = Buffer.from(`${shortcode}${passkey}${timestamp}`).toString("base64");
 
