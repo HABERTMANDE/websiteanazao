@@ -13,6 +13,7 @@ import Media from "./pages/Media";
 import Partnership from "./pages/Partnership";
 import Give from "./pages/Give";
 import Contact from "./pages/Contact";
+import Shop from "./pages/Shop";
 import Footer from "./components/Footer";
 
 // FIXES QUICK LINKS - Auto scroll to top on every page change
@@ -41,6 +42,7 @@ function App() {
         <Route path="/partnership" element={<Partnership />} />
         <Route path="/give" element={<Give />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/shop" element={<Shop />} />
       </Routes>
 
       <Footer />
