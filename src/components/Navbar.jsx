@@ -17,6 +17,19 @@ function Navbar() {
     transition: "0.3s ease",
   };
 
+  const shopLinkStyle = {
+    color: "#000000",
+    background: "#FFD700",
+    textDecoration: "none",
+    fontWeight: "800",
+    fontSize: "1rem",
+    letterSpacing: ".5px",
+    padding: "8px 18px",
+    borderRadius: "999px",
+    transition: "0.3s ease",
+    whiteSpace: "nowrap",
+  };
+
   return (
     <nav
       style={{
@@ -160,6 +173,12 @@ function Navbar() {
               Contact
             </Link>
           </li>
+
+          <li>
+            <Link to="/shop" style={shopLinkStyle}>
+              SHOP 🛍️
+            </Link>
+          </li>
         </ul>
 
         {/* ================= MOBILE MENU BUTTON ================= */}
@@ -250,6 +269,14 @@ function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             Contact
+          </Link>
+
+          <Link
+            to="/shop"
+            style={shopLinkStyle}
+            onClick={() => setMenuOpen(false)}
+          >
+            SHOP 🛍️
           </Link>
         </div>
       )}
