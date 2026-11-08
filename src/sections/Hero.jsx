@@ -45,7 +45,7 @@ function Hero() {
           height: "100%",
           objectFit: "cover",
           zIndex: 0,
-          opacity: 0.35,
+          opacity: 0.30,
         }}
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
