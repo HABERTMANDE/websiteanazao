@@ -18,11 +18,27 @@ function Membership() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-    window.scrollTo(0, 0);
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  const myWhatsAppNumber = "254782233163";
+
+  const message = `🔥 NEW ANAZAO MEMBERSHIP REGISTRATION 🔥
+
+1. Full Name: ${form.fullName}
+2. Phone: ${form.phone}
+3. Email: ${form.email || "Not provided"}
+4. Location: ${form.location}
+5. Department: ${form.interest}
+6. Category: ${form.category}
+7. How did you hear: ${form.hearAbout || "Not provided"}
+8. Born Again: ${form.bornAgain || "Not provided"}`;
+
+  window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`, "_blank");
+
+  setSubmitted(true);
+  window.scrollTo(0, 0);
+};
 
   const inputStyle = {
     width: "100%",
