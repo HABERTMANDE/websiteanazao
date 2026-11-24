@@ -87,7 +87,7 @@ export default function FoundationSchool() {
     <div style={{ backgroundColor: "#000", color: "#fff", minHeight: "100vh" }}>
       {/* HERO */}
       <section style={{ textAlign: "center", padding: isMobile ? "110px 1.2rem 60px" : "140px 2rem 90px", position: "relative", overflow: "hidden" }}>
-        <p style={{ letterSpacing: "4px", fontSize: "11px", color: GOLD, fontWeight: "700" }}>C ANAZAO THE FAMILY OF GRACE GLOBAL</p>
+        <p style={{ letterSpacing: "4px", fontSize: "11px", color: GOLD, fontWeight: "700" }}>ANAZAO THE FAMILY OF GRACE GLOBAL</p>
         <h1 style={{ fontSize: isMobile ? "42px" : "72px", lineHeight: "1", margin: "16px 0", color: GOLD, textShadow: "0 0 30px rgba(212,175,55,0.4)" }}>FOUNDATION<br />SCHOOL</h1>
         <p style={{ letterSpacing: "3px", fontSize: isMobile ? "13px" : "16px", fontWeight: "700" }}>ESTABLISHED IN TRUTH. EQUIPPED FOR PURPOSE.</p>
         <p style={{ maxWidth: "720px", margin: "24px auto", lineHeight: "1.7", color: "#ddd" }}>
