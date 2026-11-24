@@ -61,8 +61,8 @@ const courses = [
     num: "05",
     title: "DGC CULTURES",
     subtitle: "The Foundation of Church Identity and Community",
-    theme: "Understanding the values, practices, and shared responsibilities of the Davidic Generation Church family.",
-    overview: "Every spiritual community is strengthened by shared convictions, values, relationships, and practices rooted in biblical truth. DGC Cultures introduces participants to the distinctive values and family lifestyle of Davidic Generation Church. It establishes an understanding of honour, discipline, unity, teamwork, fellowship, accountability, and mutual responsibility.",
+    theme: "Understanding the values, practices, and shared responsibilities of the Anazao the Family of Grace Global.",
+    overview: "Every spiritual community is strengthened by shared convictions, values, relationships, and practices rooted in biblical truth. DGC Cultures introduces participants to the distinctive values and family lifestyle of ANAZAO THE FAMILY OF GRACE GLOBAL. It establishes an understanding of honour, discipline, unity, teamwork, fellowship, accountability, and mutual responsibility.",
     primary: ["Acts 2:42-47", "Hebrews 10:24-25", "Psalm 133:1-3", "1 Corinthians 12:12-27", "Ephesians 4:11-16"],
     supporting: ["1 Corinthians 14:40", "Romans 12:4-11", "Philippians 2:1-5", "Hebrews 13:7,17", "1 Thessalonians 5:12-13", "1 Peter 5:5-6", "2 Timothy 2:2"],
     notes: ["Spiritual Family: Understanding the Church as the Body of Christ.", "Fellowship: Building relationships through shared faith and mutual encouragement.", "Honour: Demonstrating biblical respect and appreciation for others.", "Unity: Recognising the importance of shared purpose despite different gifts and functions.", "Discipline and Order: Maintaining a healthy community governed by biblical principles.", "Teamwork: Working together towards the mission of the Church.", "Spiritual Growth: Equipping believers to serve and strengthen the Body of Christ.", "Generational Continuity: Entrusting biblical truth to faithful people who can teach others."],
@@ -87,7 +87,7 @@ export default function FoundationSchool() {
     <div style={{ backgroundColor: "#000", color: "#fff", minHeight: "100vh" }}>
       {/* HERO */}
       <section style={{ textAlign: "center", padding: isMobile ? "110px 1.2rem 60px" : "140px 2rem 90px", position: "relative", overflow: "hidden" }}>
-        <p style={{ letterSpacing: "4px", fontSize: "11px", color: GOLD, fontWeight: "700" }}>DAVIDIC GENERATION CHURCH</p>
+        <p style={{ letterSpacing: "4px", fontSize: "11px", color: GOLD, fontWeight: "700" }}>C ANAZAO THE FAMILY OF GRACE GLOBAL</p>
         <h1 style={{ fontSize: isMobile ? "42px" : "72px", lineHeight: "1", margin: "16px 0", color: GOLD, textShadow: "0 0 30px rgba(212,175,55,0.4)" }}>FOUNDATION<br />SCHOOL</h1>
         <p style={{ letterSpacing: "3px", fontSize: isMobile ? "13px" : "16px", fontWeight: "700" }}>ESTABLISHED IN TRUTH. EQUIPPED FOR PURPOSE.</p>
         <p style={{ maxWidth: "720px", margin: "24px auto", lineHeight: "1.7", color: "#ddd" }}>
