@@ -75,10 +75,16 @@ const courses = [
 export default function FoundationSchool() {
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(0);
-  // For Student Portal - will connect real login later
+
+  // Student Login - for Full Outline
   const [studentId, setStudentId] = useState("");
   const [password, setPassword] = useState("");
   const [loginMsg, setLoginMsg] = useState("");
+
+  // ===== NEW: ENROLLMENT + AUTO ADMISSION =====
+  const [form, setForm] = useState({ firstName: "", lastName: "", phone: "", email: "", location: "" });
+  const [admission, setAdmission] = useState(null); // { id, password, name }
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -89,13 +95,61 @@ export default function FoundationSchool() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setLoginMsg("Student Portal is coming soon. Your login details will be issued after enrollment. Please enroll below to receive your Student ID.");
+    // Later: check against real database. For now check localStorage
+    const saved = JSON.parse(localStorage.getItem("anazao_students") || "[]");
+    const found = saved.find(s => s.id === studentId.trim().toUpperCase() && s.password === password);
+    if (found) {
+      setLoginMsg(`Welcome back, ${found.name}! ✅ Login successful. Full outline unlocked (coming soon - we will show your dashboard here).`);
+    } else {
+      setLoginMsg("Student ID not found. If you just enrolled, use the Admission Number shown after registration. Or enroll below to get one.");
+    }
   };
+
+  const handleEnroll = (e) => {
+    e.preventDefault();
+    if (!form.firstName.trim() || !form.phone.trim()) return;
+
+    // AUTO GENERATE ADMISSION: FIRSTNAME-2027-001
+    const cleanFirst = form.firstName.trim().toUpperCase().replace(/[^A-Z]/g, "");
+    const saved = JSON.parse(localStorage.getItem("anazao_students") || "[]");
+    const nextNum = String(saved.length + 1).padStart(3, "0");
+    const admissionId = `${cleanFirst}-2027-${nextNum}`;
+    // Auto password: first name + last 4 digits of phone (easy to remember)
+    const autoPassword = `${cleanFirst.toLowerCase()}${form.phone.slice(-4)}`;
+
+    const newStudent = {
+      id: admissionId,
+      password: autoPassword,
+      name: `${form.firstName.trim()} ${form.lastName.trim()}`,
+      firstName: form.firstName.trim(),
+      phone: form.phone.trim(),
+      email: form.email.trim(),
+      location: form.location.trim(),
+      enrolledAt: new Date().toISOString(),
+    };
+
+    saved.push(newStudent);
+    localStorage.setItem("anazao_students", JSON.stringify(saved));
+    // Also save as current logged-in student
+    localStorage.setItem("anazao_current_student", JSON.stringify(newStudent));
+
+    setAdmission(newStudent);
+    window.scrollTo({ top: document.getElementById("enroll").offsetTop - 80, behavior: "smooth" });
+  };
+
+  const copyAdmission = () => {
+    navigator.clipboard.writeText(`My ANAZAO Foundation School Admission: ${admission.id} | Password: ${admission.password}`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const inputStyle = { width: "100%", boxSizing: "border-box", padding: "13px 14px", borderRadius: "10px", border: "1px solid #333", background: "#000", color: "#fff", margin: "8px 0 14px", outline: "none" };
+  const labelStyle = { fontSize: "12px", letterSpacing: "1px", color: GOLD, fontWeight: "700" };
 
   return (
     <div style={{ backgroundColor: "#000", color: "#fff", minHeight: "100vh" }}>
       {/* HERO - ORIGINAL */}
-      <section style={{ textAlign: "center", padding: isMobile ? "110px 1.2rem 60px" : "140px 2rem 90px", position: "relative", overflow: "hidden" }}>
+      <section style={{ textAlign: "center", padding: isMobile ? "110px 1.2rem 60px" : "140px 2rem 90px" }}>
         <p style={{ letterSpacing: "4px", fontSize: "11px", color: GOLD, fontWeight: "700" }}>ANAZAO THE FAMILY OF GRACE GLOBAL</p>
         <h1 style={{ fontSize: isMobile ? "42px" : "72px", lineHeight: "1", margin: "16px 0", color: GOLD, textShadow: "0 0 30px rgba(212,175,55,0.4)" }}>FOUNDATION<br />SCHOOL</h1>
         <p style={{ letterSpacing: "3px", fontSize: isMobile ? "13px" : "16px", fontWeight: "700" }}>ESTABLISHED IN TRUTH. EQUIPPED FOR PURPOSE.</p>
@@ -104,13 +158,14 @@ export default function FoundationSchool() {
         </p>
         <p style={{ fontStyle: "italic", color: GOLD_LIGHT, marginTop: "20px" }}>“A believer must be established in truth before being entrusted with responsibility.”</p>
         <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", marginTop: "30px" }}>
-          <a href="/membership" style={{ background: GOLD, color: "#000", padding: "14px 28px", borderRadius: "30px", fontWeight: "800", textDecoration: "none" }}>ENROLL NOW</a>
+          <a href="#enroll" style={{ background: GOLD, color: "#000", padding: "14px 28px", borderRadius: "30px", fontWeight: "800", textDecoration: "none" }}>ENROLL NOW — GET ADMISSION INSTANTLY</a>
           <a href="#courses" style={{ border: `1px solid ${GOLD}`, color: GOLD, padding: "14px 28px", borderRadius: "30px", fontWeight: "800", textDecoration: "none" }}>VIEW THE 5 COURSES ↓</a>
         </div>
-        <p style={{ marginTop: "30px", fontSize: "11px", letterSpacing: "3px", color: "#aaa" }}>APOSTOLIC • PROPHETIC • DISCIPLESHIP • TRANSFORMATIONAL</p>
+        <p style={{ marginTop: "16px", fontSize: "13px", color: "#25D366", fontWeight: "700" }}>✅ Admission Number Auto-Generated • Example: HABERT-2027-001</p>
+        <p style={{ marginTop: "14px", fontSize: "11px", letterSpacing: "3px", color: "#aaa" }}>APOSTOLIC • PROPHETIC • DISCIPLESHIP • TRANSFORMATIONAL</p>
       </section>
 
-      {/* JOURNEY STRIP - ORIGINAL */}
+      {/* JOURNEY STRIP */}
       <section style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 1.2rem 60px", textAlign: "center" }}>
         <h2 style={{ color: GOLD, fontSize: "28px" }}>THE FOUNDATION SCHOOL JOURNEY</h2>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(5, 1fr)", gap: "12px", marginTop: "24px" }}>
@@ -122,7 +177,7 @@ export default function FoundationSchool() {
         </div>
       </section>
 
-      {/* COURSES - ORIGINAL */}
+      {/* COURSES */}
       <section id="courses" style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 1.2rem 80px" }}>
         <h2 style={{ textAlign: "center", color: GOLD, fontSize: "32px", marginBottom: "8px" }}>THE FIVE-COURSE TRAINING PATH</h2>
         <p style={{ textAlign: "center", color: "#bbb", marginBottom: "30px" }}>Click a course to expand full teaching, scriptures, and objectives.</p>
@@ -151,19 +206,59 @@ export default function FoundationSchool() {
         ))}
       </section>
 
-      {/* ===== NEW SEGMENT: FULL COURSE OUTLINE - STUDENT LOGIN ===== */}
+      {/* ===== NEW: ENROLL + AUTO ADMISSION ===== */}
+      <section id="enroll" style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 1.2rem 80px" }}>
+        <div style={{ border: `1px solid ${GOLD}`, borderRadius: "20px", overflow: "hidden", background: "#0a0a0a" }}>
+          <div style={{ textAlign: "center", padding: "36px 24px 20px" }}>
+            <h2 style={{ color: GOLD, fontSize: isMobile ? "26px" : "32px", margin: "0 0 8px" }}>ENROLL IN FOUNDATION SCHOOL</h2>
+            <p style={{ color: "#bbb", maxWidth: "600px", margin: "0 auto", lineHeight: "1.7" }}>Fill this form. Your Admission Number is generated instantly from your first name + 2027. Save it — you will use it to log in to the Student Portal.</p>
+          </div>
+
+          {!admission ? (
+            <form onSubmit={handleEnroll} style={{ padding: "10px 26px 28px", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "0 18px" }}>
+              <div><label style={labelStyle}>FIRST NAME *</label><input required value={form.firstName} onChange={e => setForm({...form, firstName: e.target.value})} placeholder="e.g. Habert" style={inputStyle} /></div>
+              <div><label style={labelStyle}>LAST NAME</label><input value={form.lastName} onChange={e => setForm({...form, lastName: e.target.value})} placeholder="e.g. Mande" style={inputStyle} /></div>
+              <div><label style={labelStyle}>PHONE / WHATSAPP *</label><input required value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} placeholder="e.g. 0722123456" style={inputStyle} /></div>
+              <div><label style={labelStyle}>EMAIL</label><input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} placeholder="you@gmail.com" style={inputStyle} /></div>
+              <div style={{ gridColumn: isMobile ? "auto" : "1 / -1" }}><label style={labelStyle}>LOCATION / BRANCH</label><input value={form.location} onChange={e => setForm({...form, location: e.target.value})} placeholder="e.g. Eldoret" style={inputStyle} /></div>
+              <div style={{ gridColumn: "1 / -1", background: "#111", borderRadius: "12px", padding: "14px 16px", fontSize: "13px", color: "#bbb", lineHeight: "1.6", textAlign: "center" }}>
+                Your Admission will look like: <strong style={{ color: GOLD }}>{form.firstName ? form.firstName.toUpperCase().replace(/[^A-Z]/g, "") : "YOURNAME"}-2027-001</strong> • Your password will be your first name + last 4 digits of your phone.
+              </div>
+              <button type="submit" style={{ gridColumn: "1 / -1", background: GOLD, color: "#000", border: "none", padding: "15px", borderRadius: "30px", fontWeight: "800", cursor: "pointer", fontSize: "16px", marginTop: "10px" }}>GENERATE MY ADMISSION →</button>
+            </form>
+          ) : (
+            <div style={{ padding: "10px 26px 30px", textAlign: "center" }}>
+              <div style={{ background: "#111", border: `2px solid ${GOLD}`, borderRadius: "16px", padding: "24px 18px" }}>
+                <p style={{ fontSize: "40px", margin: "0" }}>🎉</p>
+                <h3 style={{ margin: "10px 0 4px" }}>Welcome to Foundation School, {admission.firstName}!</h3>
+                <p style={{ color: "#bbb", margin: "0 0 16px" }}>Your enrollment is successful. Save your details below:</p>
+                <p style={{ fontSize: "12px", letterSpacing: "2px", color: GOLD, fontWeight: "700", margin: 0 }}>YOUR ADMISSION NUMBER</p>
+                <p style={{ fontSize: isMobile ? "26px" : "34px", fontWeight: "900", color: GOLD, margin: "8px 0", letterSpacing: "1px" }}>{admission.id}</p>
+                <p style={{ color: "#ddd", margin: "0" }}>Password: <strong style={{ color: GOLD_LIGHT }}>{admission.password}</strong> <span style={{ color: "#888", fontSize: "13px" }}>(Keep this safe — use it to log in below)</span></p>
+                <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap", marginTop: "20px" }}>
+                  <button onClick={copyAdmission} style={{ background: "#fff", color: "#000", border: "none", padding: "12px 20px", borderRadius: "30px", fontWeight: "800", cursor: "pointer" }}>{copied ? "✓ Copied!" : "📋 Copy Admission"}</button>
+                  <a href={`https://wa.me/${admission.phone.replace(/\D/g,"")}?text=${encodeURIComponent(`Hello ANAZAO, I just enrolled in Foundation School. My Admission is ${admission.id} and my name is ${admission.name}`)}`} target="_blank" rel="noreferrer" style={{ background: "#25D366", color: "#fff", padding: "12px 20px", borderRadius: "30px", fontWeight: "800", textDecoration: "none" }}>Send to WhatsApp 💬</a>
+                  <a href={`mailto:${admission.email}?subject=My ANAZAO Foundation School Admission&body=Hello ${admission.name},%0D%0A%0D%0AWelcome to ANAZAO Foundation School!%0D%0AYour Admission Number is: ${admission.id}%0D%0AYour Password is: ${admission.password}%0D%0A%0D%0AKeep it safe and use it to log in to the Student Portal.`} style={{ background: "transparent", border: `1px solid ${GOLD}`, color: GOLD, padding: "12px 20px", borderRadius: "30px", fontWeight: "800", textDecoration: "none" }}>Send to Email ✉️</a>
+                </div>
+                <p style={{ color: "#888", fontSize: "12px", marginTop: "16px" }}>Screenshot this page too. Your Admission is also saved on this device.</p>
+              </div>
+              <button onClick={() => { setAdmission(null); setForm({ firstName: "", lastName: "", phone: "", email: "", location: "" }); }} style={{ background: "none", border: "none", color: "#888", cursor: "pointer", marginTop: "14px", textDecoration: "underline" }}>Enroll another student</button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* FULL COURSE OUTLINE - STUDENT LOGIN */}
       <section id="student-portal" style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 1.2rem 80px" }}>
         <div style={{ border: `1px solid ${GOLD}`, borderRadius: "20px", overflow: "hidden", background: "#0a0a0a" }}>
           <div style={{ textAlign: "center", padding: isMobile ? "30px 20px 20px" : "40px 30px 24px" }}>
             <p style={{ letterSpacing: "4px", fontSize: "11px", color: GOLD, fontWeight: "700", margin: 0 }}>ENROLLED STUDENTS ONLY</p>
             <h2 style={{ color: GOLD, fontSize: isMobile ? "26px" : "32px", margin: "12px 0 8px" }}>🔒 FULL COURSE OUTLINE</h2>
             <p style={{ color: "#bbb", maxWidth: "640px", margin: "0 auto", lineHeight: "1.7" }}>
-              The complete week-by-week outline, detailed lessons, assignments, and assessments are available inside the Student Portal. Log in with the Student ID issued to you after enrollment.
+              The complete week-by-week outline, detailed lessons, assignments, and assessments are available inside the Student Portal. Log in with the Admission Number issued to you after enrollment.
             </p>
           </div>
-
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.1fr 1fr", gap: "0", borderTop: `1px solid #222` }}>
-            {/* LEFT: What is inside - Preview (blurred/locked) */}
             <div style={{ padding: "26px", borderRight: isMobile ? "none" : "1px solid #222" }}>
               <h3 style={{ color: GOLD_LIGHT, margin: "0 0 16px", fontSize: "18px" }}>WHAT'S INSIDE THE PORTAL</h3>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, lineHeight: "2.1", color: "#ddd", fontSize: "15px" }}>
@@ -177,42 +272,26 @@ export default function FoundationSchool() {
                 Includes: Weekly assignments • Memory verse tests • Progress tracking • Certificate upon completion
               </div>
             </div>
-
-            {/* RIGHT: Login Form - Placeholder for later */}
             <div style={{ padding: "26px", background: "#111" }}>
               <h3 style={{ color: "#fff", margin: "0 0 6px", fontSize: "18px" }}>STUDENT LOGIN</h3>
-              <p style={{ color: "#999", fontSize: "13px", margin: "0 0 18px" }}>Enter your Student ID and password to access your full outline.</p>
+              <p style={{ color: "#999", fontSize: "13px", margin: "0 0 18px" }}>Enter your Admission Number and password to access your full outline.</p>
               <form onSubmit={handleLogin}>
-                <label style={{ fontSize: "12px", letterSpacing: "1px", color: GOLD, fontWeight: "700" }}>STUDENT ID</label>
-                <input
-                  type="text"
-                  value={studentId}
-                  onChange={(e) => setStudentId(e.target.value)}
-                  placeholder="e.g. ANAZAO-FS-001"
-                  style={{ width: "100%", boxSizing: "border-box", padding: "13px 14px", borderRadius: "10px", border: "1px solid #333", background: "#000", color: "#fff", margin: "8px 0 16px", outline: "none" }}
-                />
-                <label style={{ fontSize: "12px", letterSpacing: "1px", color: GOLD, fontWeight: "700" }}>PASSWORD</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  style={{ width: "100%", boxSizing: "border-box", padding: "13px 14px", borderRadius: "10px", border: "1px solid #333", background: "#000", color: "#fff", margin: "8px 0 18px", outline: "none" }}
-                />
-                <button type="submit" style={{ width: "100%", background: GOLD, color: "#000", border: "none", padding: "14px", borderRadius: "30px", fontWeight: "800", cursor: "pointer", fontSize: "15px" }}>
-                  LOGIN TO PORTAL →
-                </button>
+                <label style={labelStyle}>ADMISSION NUMBER</label>
+                <input type="text" value={studentId} onChange={(e) => setStudentId(e.target.value)} placeholder="e.g. HABERT-2027-001" style={inputStyle} />
+                <label style={labelStyle}>PASSWORD</label>
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="firstname + last 4 digits of phone" style={inputStyle} />
+                <button type="submit" style={{ width: "100%", background: GOLD, color: "#000", border: "none", padding: "14px", borderRadius: "30px", fontWeight: "800", cursor: "pointer", fontSize: "15px" }}>LOGIN TO PORTAL →</button>
                 {loginMsg && <p style={{ background: "#1a1400", border: `1px solid ${GOLD}`, color: GOLD_LIGHT, padding: "12px", borderRadius: "10px", fontSize: "13px", lineHeight: "1.6", marginTop: "16px" }}>{loginMsg}</p>}
               </form>
               <p style={{ textAlign: "center", color: "#888", fontSize: "13px", marginTop: "16px" }}>
-                Don't have login details? <a href="/membership" style={{ color: GOLD, fontWeight: "700" }}>Enroll Now</a> — you will receive your Student ID after enrollment.
+                Don't have admission yet? <a href="#enroll" style={{ color: GOLD, fontWeight: "700" }}>Enroll Above</a> — you will get it instantly.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* OUTCOME - ORIGINAL */}
+      {/* OUTCOME */}
       <section style={{ maxWidth: "900px", margin: "0 auto", padding: "0 1.2rem 80px", textAlign: "center" }}>
         <h2 style={{ color: GOLD, fontSize: "30px" }}>FROM FOUNDATION TO MATURITY</h2>
         <p style={{ color: "#ccc", lineHeight: "1.7" }}>Upon completing the five-course pathway, participants should demonstrate:</p>
@@ -222,7 +301,7 @@ export default function FoundationSchool() {
         <div style={{ border: `1px solid ${GOLD}`, borderRadius: "16px", padding: "30px 20px", marginTop: "30px" }}>
           <h3 style={{ color: GOLD, fontSize: "22px", margin: "0" }}>ROOTED IN CHRIST. ESTABLISHED IN TRUTH. BUILT TO SERVE.</h3>
           <p style={{ fontStyle: "italic", marginTop: "14px" }}>“For other foundation can no man lay than that is laid, which is Jesus Christ.” — 1 Corinthians 3:11</p>
-          <a href="/membership" style={{ display: "inline-block", background: RED, color: "#fff", padding: "14px 30px", borderRadius: "30px", fontWeight: "800", textDecoration: "none", marginTop: "10px" }}>ENROLL IN FOUNDATION SCHOOL</a>
+          <a href="#enroll" style={{ display: "inline-block", background: RED, color: "#fff", padding: "14px 30px", borderRadius: "30px", fontWeight: "800", textDecoration: "none", marginTop: "10px" }}>ENROLL IN FOUNDATION SCHOOL</a>
         </div>
       </section>
     </div>
