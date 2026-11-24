@@ -8,6 +8,7 @@ import Membership from "./pages/Membership";
 import About from "./pages/About";
 import Leadership from "./pages/Leadership";
 import Departments from "./pages/Departments";
+import FoundationSchool from "./pages/FoundationSchool";
 import Events from "./pages/Events";
 import Media from "./pages/Media";
 import Partnership from "./pages/Partnership";
@@ -42,6 +43,8 @@ function App() {
         <Route path="/leadership" element={<Leadership />} />
         <Route path="/membership" element={<Membership />} />
         <Route path="/departments" element={<Departments />} />
+        {/* ✅ ADDED: Foundation School */}
+        <Route path="/foundation-school" element={<FoundationSchool />} />
         <Route path="/events" element={<Events />} />
         <Route path="/media" element={<Media />} />
         <Route path="/partnership" element={<Partnership />} />

@@ -31,6 +31,20 @@ function Navbar() {
     whiteSpace: "nowrap",
   };
 
+  // ✅ ADDED: Foundation School - Gold Pill Style
+  const foundationLinkStyle = {
+    color: "#000000",
+    background: "#FFD700",
+    textDecoration: "none",
+    fontWeight: "800",
+    fontSize: "0.85rem",
+    letterSpacing: ".5px",
+    padding: "8px 14px",
+    borderRadius: "999px",
+    transition: "0.3s ease",
+    whiteSpace: "nowrap",
+  };
+
   return (
     <nav
       style={{
@@ -126,7 +140,7 @@ function Navbar() {
           className="desktop-menu"
           style={{
             display: "flex",
-            gap: "28px",
+            gap: "22px",
             listStyle: "none",
             margin: 0,
             padding: 0,
@@ -150,6 +164,13 @@ function Navbar() {
           <li>
             <Link to="/departments" style={navLinkStyle}>
               Departments
+            </Link>
+          </li>
+
+          {/* ✅ ADDED: Foundation School - Desktop */}
+          <li>
+            <Link to="/foundation-school" style={foundationLinkStyle}>
+              Foundation School
             </Link>
           </li>
 
@@ -240,6 +261,15 @@ function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             Departments
+          </Link>
+
+          {/* ✅ ADDED: Foundation School - Mobile */}
+          <Link
+            to="/foundation-school"
+            style={foundationLinkStyle}
+            onClick={() => setMenuOpen(false)}
+          >
+            Foundation School
           </Link>
 
           <Link

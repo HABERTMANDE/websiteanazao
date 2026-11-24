@@ -40,11 +40,11 @@ export default function PartnerGive() {
   const PAY = {
     mpesaPaybill: "YOUR PAYBILL",
     mpesaAccount: "ANAZAO",
-    mpesaTill: "YOUR TILL NUMBER",
-    bankName: "YOUR BANK",
-    bankAccount: "YOUR ACCOUNT NUMBER",
-    bankBranch: "YOUR BRANCH",
-    bankAccountName: "ANAZAO MINISTRIES",
+    mpesaTill: "8192090",
+    bankName: "KCB BANK",
+    bankAccount: "131823013",
+    bankBranch: "KENCOM BRANCH",
+    bankAccountName: "HABERT MANDE MURUNGA",
   };
 
   const submit = (e) => {
@@ -100,7 +100,7 @@ export default function PartnerGive() {
         <div style={{ background: "#F8F8F8", borderRadius: "16px", padding: "22px" }}>
           <h3 style={{ marginTop: 0 }}>Step 2 — Confirm Your Gift (Important)</h3>
           <p style={{ color: "#666", lineHeight: 1.8 }}>After sending, send your M-Pesa code / Bank receipt on WhatsApp so admin can verify and record it. Only verified payments show in project progress.</p>
-          <a href={`https://wa.me/254700000000?text=${encodeURIComponent(`Hello ANAZAO, I just gave KSh ${amount.toLocaleString()} to ${PROJECTS[form.project]?.name}. Name: ${form.fullName}. Partner ID: ${form.partnerId || "New Donor"}. M-Pesa Code: `)}`} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
+          <a href={`https://wa.me/254782233163?text=${encodeURIComponent(`Hello ANAZAO, I just gave KSh ${amount.toLocaleString()} to ${PROJECTS[form.project]?.name}. Name: ${form.fullName}. Partner ID: ${form.partnerId || "New Donor"}. M-Pesa Code: `)}`} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>
             <button style={{ background: "#25D366", color: "#fff", border: "none", padding: "16px 28px", borderRadius: "50px", fontWeight: 800, cursor: "pointer", width: "100%", fontSize: "1rem" }}>Send Receipt on WhatsApp →</button>
           </a>
           <p style={{ textAlign: "center", color: "#888", fontSize: "0.85rem", marginTop: "10px" }}>⚠️ Replace 254700000000 with your real WhatsApp number in PartnerGive.jsx</p>
