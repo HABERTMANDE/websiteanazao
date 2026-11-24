@@ -177,7 +177,6 @@ export default function FoundationSchool() {
           <a href="#enroll" style={{ background: GOLD, color: "#000", padding: "14px 28px", borderRadius: "30px", fontWeight: "800", textDecoration: "none" }}>ENROLL NOW — GET ADMISSION INSTANTLY</a>
           <a href="#courses" style={{ border: `1px solid ${GOLD}`, color: GOLD, padding: "14px 28px", borderRadius: "30px", fontWeight: "800", textDecoration: "none" }}>VIEW THE 5 COURSES ↓</a>
         </div>
-        <p style={{ marginTop: "16px", fontSize: "13px", color: "#25D366", fontWeight: "700" }}>{IC.dove} 52 Weeks • Daily Work • Exam To Unlock Next Week • Admission: HABERT-2027-001</p>
         <p style={{ marginTop: "14px", fontSize: "11px", letterSpacing: "3px", color: "#aaa" }}>APOSTOLIC • PROPHETIC • DISCIPLESHIP • TRANSFORMATIONAL</p>
       </section>
 
