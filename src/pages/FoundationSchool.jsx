@@ -59,14 +59,14 @@ const courses = [
   },
   {
     num: "05",
-    title: "DGC CULTURES",
+    title: "ANAZAO CULTURES",
     subtitle: "The Foundation of Church Identity and Community",
     theme: "Understanding the values, practices, and shared responsibilities of the Anazao the Family of Grace Global.",
-    overview: "Every spiritual community is strengthened by shared convictions, values, relationships, and practices rooted in biblical truth. DGC Cultures introduces participants to the distinctive values and family lifestyle of ANAZAO THE FAMILY OF GRACE GLOBAL. It establishes an understanding of honour, discipline, unity, teamwork, fellowship, accountability, and mutual responsibility.",
+    overview: "Every spiritual community is strengthened by shared convictions, values, relationships, and practices rooted in biblical truth. ANAZAO Cultures introduces participants to the distinctive values and family lifestyle of ANAZAO THE FAMILY OF GRACE GLOBAL. It establishes an understanding of honour, discipline, unity, teamwork, fellowship, accountability, and mutual responsibility.",
     primary: ["Acts 2:42-47", "Hebrews 10:24-25", "Psalm 133:1-3", "1 Corinthians 12:12-27", "Ephesians 4:11-16"],
     supporting: ["1 Corinthians 14:40", "Romans 12:4-11", "Philippians 2:1-5", "Hebrews 13:7,17", "1 Thessalonians 5:12-13", "1 Peter 5:5-6", "2 Timothy 2:2"],
     notes: ["Spiritual Family: Understanding the Church as the Body of Christ.", "Fellowship: Building relationships through shared faith and mutual encouragement.", "Honour: Demonstrating biblical respect and appreciation for others.", "Unity: Recognising the importance of shared purpose despite different gifts and functions.", "Discipline and Order: Maintaining a healthy community governed by biblical principles.", "Teamwork: Working together towards the mission of the Church.", "Spiritual Growth: Equipping believers to serve and strengthen the Body of Christ.", "Generational Continuity: Entrusting biblical truth to faithful people who can teach others."],
-    objectives: ["Explain the biblical understanding of the Church as a spiritual family.", "Understand the values and culture of DGC.", "Recognise the importance of honour and unity.", "Participate responsibly in fellowship and service.", "Understand biblical discipline and order.", "Appreciate teamwork and mutual accountability.", "Contribute positively to the spiritual life of the community."],
+    objectives: ["Explain the biblical understanding of the Church as a spiritual family.", "Understand the values and culture of ANAZAO.", "Recognise the importance of honour and unity.", "Participate responsibly in fellowship and service.", "Understand biblical discipline and order.", "Appreciate teamwork and mutual accountability.", "Contribute positively to the spiritual life of the community."],
     application: "Participants should demonstrate active participation in fellowship, responsible teamwork, respect, mutual care, and commitment to the shared mission of the Church.",
     memory: "Acts 2:42"
   },
@@ -75,6 +75,10 @@ const courses = [
 export default function FoundationSchool() {
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(0);
+  // For Student Portal - will connect real login later
+  const [studentId, setStudentId] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginMsg, setLoginMsg] = useState("");
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
@@ -83,9 +87,14 @@ export default function FoundationSchool() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setLoginMsg("Student Portal is coming soon. Your login details will be issued after enrollment. Please enroll below to receive your Student ID.");
+  };
+
   return (
     <div style={{ backgroundColor: "#000", color: "#fff", minHeight: "100vh" }}>
-      {/* HERO */}
+      {/* HERO - ORIGINAL */}
       <section style={{ textAlign: "center", padding: isMobile ? "110px 1.2rem 60px" : "140px 2rem 90px", position: "relative", overflow: "hidden" }}>
         <p style={{ letterSpacing: "4px", fontSize: "11px", color: GOLD, fontWeight: "700" }}>ANAZAO THE FAMILY OF GRACE GLOBAL</p>
         <h1 style={{ fontSize: isMobile ? "42px" : "72px", lineHeight: "1", margin: "16px 0", color: GOLD, textShadow: "0 0 30px rgba(212,175,55,0.4)" }}>FOUNDATION<br />SCHOOL</h1>
@@ -101,11 +110,11 @@ export default function FoundationSchool() {
         <p style={{ marginTop: "30px", fontSize: "11px", letterSpacing: "3px", color: "#aaa" }}>APOSTOLIC • PROPHETIC • DISCIPLESHIP • TRANSFORMATIONAL</p>
       </section>
 
-      {/* JOURNEY STRIP */}
+      {/* JOURNEY STRIP - ORIGINAL */}
       <section style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 1.2rem 60px", textAlign: "center" }}>
         <h2 style={{ color: GOLD, fontSize: "28px" }}>THE FOUNDATION SCHOOL JOURNEY</h2>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(5, 1fr)", gap: "12px", marginTop: "24px" }}>
-          {["NEW BIRTH\nIdentity", "SPIRITUAL MILK\nDoctrine", "GROWING IN LOVE\nCharacter", "STEWARDSHIP\nResponsibility", "DGC CULTURES\nFamily & Mission"].map((t, i) => (
+          {["NEW BIRTH\nIdentity", "SPIRITUAL MILK\nDoctrine", "GROWING IN LOVE\nCharacter", "STEWARDSHIP\nResponsibility", "ANAZAO CULTURES\nFamily & Mission"].map((t, i) => (
             <div key={i} style={{ border: `1px solid ${GOLD}`, borderRadius: "14px", padding: "18px 10px", background: "#0a0a0a", whiteSpace: "pre-line", fontWeight: "700", fontSize: "14px", lineHeight: "1.5" }}>
               <span style={{ color: GOLD, fontSize: "22px" }}>{String(i+1).padStart(2,"0")}</span><br/>{t}
             </div>
@@ -113,7 +122,7 @@ export default function FoundationSchool() {
         </div>
       </section>
 
-      {/* COURSES */}
+      {/* COURSES - ORIGINAL */}
       <section id="courses" style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 1.2rem 80px" }}>
         <h2 style={{ textAlign: "center", color: GOLD, fontSize: "32px", marginBottom: "8px" }}>THE FIVE-COURSE TRAINING PATH</h2>
         <p style={{ textAlign: "center", color: "#bbb", marginBottom: "30px" }}>Click a course to expand full teaching, scriptures, and objectives.</p>
@@ -142,12 +151,73 @@ export default function FoundationSchool() {
         ))}
       </section>
 
-      {/* OUTCOME */}
+      {/* ===== NEW SEGMENT: FULL COURSE OUTLINE - STUDENT LOGIN ===== */}
+      <section id="student-portal" style={{ maxWidth: "1000px", margin: "0 auto", padding: "0 1.2rem 80px" }}>
+        <div style={{ border: `1px solid ${GOLD}`, borderRadius: "20px", overflow: "hidden", background: "#0a0a0a" }}>
+          <div style={{ textAlign: "center", padding: isMobile ? "30px 20px 20px" : "40px 30px 24px" }}>
+            <p style={{ letterSpacing: "4px", fontSize: "11px", color: GOLD, fontWeight: "700", margin: 0 }}>ENROLLED STUDENTS ONLY</p>
+            <h2 style={{ color: GOLD, fontSize: isMobile ? "26px" : "32px", margin: "12px 0 8px" }}>🔒 FULL COURSE OUTLINE</h2>
+            <p style={{ color: "#bbb", maxWidth: "640px", margin: "0 auto", lineHeight: "1.7" }}>
+              The complete week-by-week outline, detailed lessons, assignments, and assessments are available inside the Student Portal. Log in with the Student ID issued to you after enrollment.
+            </p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.1fr 1fr", gap: "0", borderTop: `1px solid #222` }}>
+            {/* LEFT: What is inside - Preview (blurred/locked) */}
+            <div style={{ padding: "26px", borderRight: isMobile ? "none" : "1px solid #222" }}>
+              <h3 style={{ color: GOLD_LIGHT, margin: "0 0 16px", fontSize: "18px" }}>WHAT'S INSIDE THE PORTAL</h3>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, lineHeight: "2.1", color: "#ddd", fontSize: "15px" }}>
+                <li>🔒 Course 01 — New Birth • 6 Weeks • 12 Lessons</li>
+                <li>🔒 Course 02 — Spiritual Milk • 6 Weeks • 12 Lessons</li>
+                <li>🔒 Course 03 — Growing In Love • 6 Weeks • 12 Lessons</li>
+                <li>🔒 Course 04 — Stewardship & Leadership • 6 Weeks • 12 Lessons</li>
+                <li>🔒 Course 05 — Anazao Cultures • 4 Weeks • 8 Lessons</li>
+              </ul>
+              <div style={{ background: "#111", borderRadius: "12px", padding: "14px 16px", marginTop: "18px", fontSize: "14px", color: "#bbb", lineHeight: "1.6" }}>
+                Includes: Weekly assignments • Memory verse tests • Progress tracking • Certificate upon completion
+              </div>
+            </div>
+
+            {/* RIGHT: Login Form - Placeholder for later */}
+            <div style={{ padding: "26px", background: "#111" }}>
+              <h3 style={{ color: "#fff", margin: "0 0 6px", fontSize: "18px" }}>STUDENT LOGIN</h3>
+              <p style={{ color: "#999", fontSize: "13px", margin: "0 0 18px" }}>Enter your Student ID and password to access your full outline.</p>
+              <form onSubmit={handleLogin}>
+                <label style={{ fontSize: "12px", letterSpacing: "1px", color: GOLD, fontWeight: "700" }}>STUDENT ID</label>
+                <input
+                  type="text"
+                  value={studentId}
+                  onChange={(e) => setStudentId(e.target.value)}
+                  placeholder="e.g. ANAZAO-FS-001"
+                  style={{ width: "100%", boxSizing: "border-box", padding: "13px 14px", borderRadius: "10px", border: "1px solid #333", background: "#000", color: "#fff", margin: "8px 0 16px", outline: "none" }}
+                />
+                <label style={{ fontSize: "12px", letterSpacing: "1px", color: GOLD, fontWeight: "700" }}>PASSWORD</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  style={{ width: "100%", boxSizing: "border-box", padding: "13px 14px", borderRadius: "10px", border: "1px solid #333", background: "#000", color: "#fff", margin: "8px 0 18px", outline: "none" }}
+                />
+                <button type="submit" style={{ width: "100%", background: GOLD, color: "#000", border: "none", padding: "14px", borderRadius: "30px", fontWeight: "800", cursor: "pointer", fontSize: "15px" }}>
+                  LOGIN TO PORTAL →
+                </button>
+                {loginMsg && <p style={{ background: "#1a1400", border: `1px solid ${GOLD}`, color: GOLD_LIGHT, padding: "12px", borderRadius: "10px", fontSize: "13px", lineHeight: "1.6", marginTop: "16px" }}>{loginMsg}</p>}
+              </form>
+              <p style={{ textAlign: "center", color: "#888", fontSize: "13px", marginTop: "16px" }}>
+                Don't have login details? <a href="/membership" style={{ color: GOLD, fontWeight: "700" }}>Enroll Now</a> — you will receive your Student ID after enrollment.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* OUTCOME - ORIGINAL */}
       <section style={{ maxWidth: "900px", margin: "0 auto", padding: "0 1.2rem 80px", textAlign: "center" }}>
         <h2 style={{ color: GOLD, fontSize: "30px" }}>FROM FOUNDATION TO MATURITY</h2>
         <p style={{ color: "#ccc", lineHeight: "1.7" }}>Upon completing the five-course pathway, participants should demonstrate:</p>
         <div style={{ textAlign: "left", maxWidth: "600px", margin: "20px auto", lineHeight: "2", color: "#eee" }}>
-          ✓ A clear understanding of their identity in Christ<br/>✓ Sound knowledge of foundational Christian doctrine<br/>✓ A growing expression of Christlike character<br/>✓ Responsible stewardship and servant leadership<br/>✓ An understanding of the values and culture of DGC<br/>✓ Readiness to participate meaningfully in fellowship and service
+          ✓ A clear understanding of their identity in Christ<br/>✓ Sound knowledge of foundational Christian doctrine<br/>✓ A growing expression of Christlike character<br/>✓ Responsible stewardship and servant leadership<br/>✓ An understanding of the values and culture of ANAZAO<br/>✓ Readiness to participate meaningfully in fellowship and service
         </div>
         <div style={{ border: `1px solid ${GOLD}`, borderRadius: "16px", padding: "30px 20px", marginTop: "30px" }}>
           <h3 style={{ color: GOLD, fontSize: "22px", margin: "0" }}>ROOTED IN CHRIST. ESTABLISHED IN TRUTH. BUILT TO SERVE.</h3>
